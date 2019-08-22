@@ -22,7 +22,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 
-import { generateAction, LOGOUT } from '../redux/actions';
+import { generateAction, LOGOUT } from '../../redux/actions';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Header(props) {
+const Header = props => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -130,13 +130,22 @@ function Header(props) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <div className={classes.menuIcon}><PersonIcon /></div>Profile
+        <div className={classes.menuIcon}>
+          <PersonIcon />
+        </div>
+        Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <div className={classes.menuIcon}><SettingsIcon /></div>Settings
+        <div className={classes.menuIcon}>
+          <SettingsIcon />
+        </div>
+        Settings
       </MenuItem>
       <MenuItem onClick={props.logout}>
-        <div className={classes.menuIcon}><ExitToAppIcon /></div>Sign out
+        <div className={classes.menuIcon}>
+          <ExitToAppIcon />
+        </div>
+        Sign out
       </MenuItem>
     </Menu>
   );
@@ -186,12 +195,7 @@ function Header(props) {
     <React.Fragment>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Open drawer"
-          >
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Open drawer">
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
@@ -250,14 +254,15 @@ function Header(props) {
       {renderMenu}
     </React.Fragment>
   );
-}
+};
 
-const mapStateToProps = state => ({
-
-});
+const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(generateAction(LOGOUT)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
