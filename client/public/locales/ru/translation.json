@@ -1,5 +1,5 @@
 {
-  "brand": "Ленивая Жопа",
+  "brand": "СПРУД",
   "navigation": {
     "switchLanguage": "Сменить язык",
     "search": "Найти...",
@@ -7,9 +7,9 @@
       "profile": "Профиль",
       "settings": "Настройки",
       "logout": "Выйти"
+    },
+    "sidebar": {
+      "inbox": "Входящие"
     }
-  },
-  "sidebar": {
-    "Inbox": "Входящие"
   }
 }

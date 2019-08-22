@@ -1,27 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import AppBar from '@material-ui/core/AppBar';
-import Badge from '@material-ui/core/Badge';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import PersonIcon from '@material-ui/icons/Person';
 import SearchIcon from '@material-ui/icons/Search';
-import SettingsIcon from '@material-ui/icons/Settings';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 
-import Sidebar from './Sidebar';
-import { generateAction, LOGOUT } from '../../redux/actions';
+import Sidebar from '../Sidebar';
+import MainMenu from '../MainMenu';
+import MobileMenu from '../MobileMenu';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -71,13 +66,6 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
   },
-  menuIcon: {
-    paddingRight: theme.spacing(2),
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -92,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = ({ logout, i18n, t }) => {
+const Header = ({ t }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -100,8 +88,6 @@ const Header = ({ logout, i18n, t }) => {
 
   const hideSidebar = () => setSidebarOpen(false);
   const showSidebar = () => setSidebarOpen(true);
-
-  const changeLanguage = lng => i18n.changeLanguage(lng);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -114,63 +100,6 @@ const Header = ({ logout, i18n, t }) => {
   };
 
   const handleMobileMenuOpen = event => setMobileMoreAnchorEl(event.currentTarget);
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <div className={classes.menuIcon}>
-          <PersonIcon />
-        </div>
-        {t('navigation.menu.profile')}
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <div className={classes.menuIcon}>
-          <SettingsIcon />
-        </div>
-        {t('navigation.menu.settings')}
-      </MenuItem>
-      <MenuItem onClick={logout}>
-        <div className={classes.menuIcon}>
-          <ExitToAppIcon />
-        </div>
-        Sign out
-      </MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="Account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <React.Fragment>
@@ -206,7 +135,7 @@ const Header = ({ logout, i18n, t }) => {
             <IconButton
               edge="end"
               aria-label="Account of current user"
-              aria-controls={menuId}
+              aria-controls="main-menu"
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
@@ -217,7 +146,7 @@ const Header = ({ logout, i18n, t }) => {
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="Show more"
-              aria-controls={mobileMenuId}
+              aria-controls="mobile-menu"
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
@@ -227,20 +156,16 @@ const Header = ({ logout, i18n, t }) => {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
+      <MobileMenu
+        anchorEl={mobileMoreAnchorEl}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
+        openMainMenu={handleProfileMenuOpen}
+      />
+      <MainMenu anchorEl={anchorEl} open={isMenuOpen} onClose={handleMenuClose} />
       <Sidebar open={isSidebarOpen} requestHide={hideSidebar} requestShow={showSidebar} />
     </React.Fragment>
   );
 };
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(generateAction(LOGOUT)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header);
+export default Header;

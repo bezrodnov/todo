@@ -1,5 +1,5 @@
 {
-  "brand": "Lazy Ass",
+  "brand": "SPRUD",
   "navigation": {
     "switchLanguage": "Switch language",
     "search": "Search...",
@@ -9,7 +9,7 @@
       "logout": "Sign Out"
     },
     "sidebar": {
-      "Inbox": "Inbox"
+      "inbox": "Inbox"
     }
   }
 }
