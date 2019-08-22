@@ -21,8 +21,9 @@ ReactDOM.render(
       <CssBaseline />
       <BrowserRouter>
         <Switch>
-          <PrivateRoute exact path="/" component={App} />
+          <PrivateRoute exact path="/home" component={App} />
           <PublicRoute exact path="/auth" component={Auth} />
+          <PrivateRoute component={App} />
         </Switch>
       </BrowserRouter>
     </Provider>

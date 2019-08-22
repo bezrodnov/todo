@@ -11,7 +11,7 @@ export const putError = (action, error) => {
 };
 export const callApi = (method, ...args) => call(api[method], ...args);
 
-
+// TODO: update token
 const AUTH_TOKEN_STORAGE_KEY = 'ABEZRODNOV_BLOG_AUTH_TOKEN';
 
 export const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);

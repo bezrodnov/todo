@@ -9,6 +9,7 @@ const schema = new Schema({
   registerDate: { type: Date, default: Date.now },
   gender: { type: Boolean },
   phone: { type: String },
+  language: { type: String },
 });
 
 schema.virtual('name').get(function() {
