@@ -7,6 +7,10 @@
       "male": "Male",
       "female": "Female",
       "other": "Other"
+    },
+    "language": {
+      "en": "English",
+      "ru": "Русский"
     }
   },
   "navigation": {
@@ -24,10 +28,16 @@
   "profileDialog": {
     "title": "User Profile"
   },
+  "settingsDialog": {
+    "title": "Settings"
+  },
   "user": {
     "firstName": "First Name",
     "lastName": "Last Name",
     "birthDate": "Birth Date",
     "gender": "Gender"
+  },
+  "settings": {
+    "language": "Language"
   }
 }

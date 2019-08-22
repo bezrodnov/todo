@@ -13,6 +13,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import { makeStyles } from '@material-ui/core/styles';
 
 import ProfileDialog from './ProfileDialog';
+import SettingsDialog from './SettingsDialog';
 
 import { generateAction, LOGOUT } from '../redux/actions';
 
@@ -31,12 +32,15 @@ const MainMenu = ({ logout, anchorEl, open, onClose }) => {
   const { t } = useTranslation();
 
   const [isProfileDialogOpen, setProfileDialogOpen] = React.useState(false);
-  const openProfileDialog = () => {
-    setProfileDialogOpen(true);
+  const [isSettingsDialogOpen, setSettingsDialogOpen] = React.useState(false);
+
+  const openDialogHandler = stateMutator => () => {
+    stateMutator(true);
     onClose();
   };
-  const closeProfileDialog = () => {
-    setProfileDialogOpen(false);
+
+  const closeDialogHandler = stateMutator => () => {
+    stateMutator(false);
     onClose();
   };
 
@@ -51,13 +55,13 @@ const MainMenu = ({ logout, anchorEl, open, onClose }) => {
         open={open}
         onClose={onClose}
       >
-        <MenuItem onClick={openProfileDialog}>
+        <MenuItem onClick={openDialogHandler(setProfileDialogOpen)}>
           <div className={classes.menuIcon}>
             <PersonIcon />
           </div>
           {t('navigation.menu.profile')}
         </MenuItem>
-        <MenuItem onClick={onClose}>
+        <MenuItem onClick={openDialogHandler(setSettingsDialogOpen)}>
           <div className={classes.menuIcon}>
             <SettingsIcon />
           </div>
@@ -70,7 +74,8 @@ const MainMenu = ({ logout, anchorEl, open, onClose }) => {
           {t('navigation.menu.logout')}
         </MenuItem>
       </Menu>
-      <ProfileDialog open={isProfileDialogOpen} onClose={closeProfileDialog} />
+      <ProfileDialog open={isProfileDialogOpen} onClose={closeDialogHandler(setProfileDialogOpen)} />
+      <SettingsDialog open={isSettingsDialogOpen} onClose={closeDialogHandler(setSettingsDialogOpen)} />
     </>
   );
 };
