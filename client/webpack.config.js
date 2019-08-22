@@ -1,7 +1,7 @@
 const path = require('path');
 const FlowWebpackPlugin = require('flow-webpack-plugin');
 
-const BUILD_DIR = path.resolve(__dirname, 'dist');
+const BUILD_DIR = path.resolve(__dirname, 'public');
 const SOURCE_DIR = path.resolve(__dirname, 'src');
 
 module.exports = {

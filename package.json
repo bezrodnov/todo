@@ -1,61 +1,36 @@
 {
-  "name": "sprud",
+  "name": "sprud-server",
   "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "main": "src/index.js",
+  "description": "sprud-server",
+  "main": "server.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "start:dev": "webpack-dev-server",
-    "start": "npm run start:dev",
-    "flow": "flow",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client-install": "npm install --prefix client",
+    "server-debug": "node --inspect-brk server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "browserslist": {
-    "development": [
-      "last 2 chrome versions",
-      "last 2 firefox versions",
-      "last 2 edge versions"
-    ],
-    "production": [
-      ">1%",
-      "last 4 versions",
-      "Firefox ESR",
-      "not ie < 11"
-    ]
-  },
+  "keywords": [
+    "react",
+    "node",
+    "express",
+    "monbo",
+    "MERN"
+  ],
+  "author": "Aleksey Bezrodnov",
+  "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5",
-    "@babel/preset-flow": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
-    "css-loader": "^3.2.0",
-    "flow-bin": "^0.105.2",
-    "flow-webpack-plugin": "^1.2.0",
-    "sass": "*",
-    "sass-loader": "^7.2.0",
-    "style-loader": "^1.0.0",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7",
-    "require": "^2.4.20",
-    "webpack-dev-server": "^3.8.0"
+    "nodemon": "^1.19.1"
   },
   "dependencies": {
-    "@material-ui/core": "^4.3.3",
-    "@material-ui/icons": "^4.2.1",
-    "i18next": "^17.0.11",
-    "i18next-browser-languagedetector": "^3.0.3",
-    "i18next-xhr-backend": "^3.1.2",
-    "prop-types": "^15.7.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-i18next": "^10.12.2",
-    "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "redux-saga": "^1.0.5"
-  },
-  "author": "Aleksey Bezrodnov & Roman Lysenko",
-  "license": "ISC"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "config": "^3.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.14"
+  }
 }
