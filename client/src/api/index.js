@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import { BASE_URL } from '../app.constants';
-const url = path => `${BASE_URL}/api/${path}`;
+// import { BASE_URL } from '../app.constants';
+const url = path => `/api/${path}`;
 
 const loadUser = () => axios.get(url('auth/user'));
 
