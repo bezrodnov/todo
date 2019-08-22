@@ -1,5 +1,15 @@
 {
+  "brand": "Lazy Ass",
   "navigation": {
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "search": "Search...",
+    "menu": {
+      "profile": "Profile",
+      "settings": "Settings",
+      "logout": "Sign Out"
+    },
+    "sidebar": {
+      "Inbox": "Inbox"
+    }
   }
 }

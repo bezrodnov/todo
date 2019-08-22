@@ -1,5 +1,15 @@
 {
+  "brand": "Ленивая Жопа",
   "navigation": {
-    "switchLanguage": "Сменить язык"
+    "switchLanguage": "Сменить язык",
+    "search": "Найти...",
+    "menu": {
+      "profile": "Профиль",
+      "settings": "Настройки",
+      "logout": "Выйти"
+    }
+  },
+  "sidebar": {
+    "Inbox": "Входящие"
   }
 }

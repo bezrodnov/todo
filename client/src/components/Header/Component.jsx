@@ -12,16 +12,15 @@ import Typography from '@material-ui/core/Typography';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import PersonIcon from '@material-ui/icons/Person';
 import SearchIcon from '@material-ui/icons/Search';
 import SettingsIcon from '@material-ui/icons/Settings';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 
+import Sidebar from './Sidebar';
 import { generateAction, LOGOUT } from '../../redux/actions';
 
 const useStyles = makeStyles(theme => ({
@@ -93,30 +92,28 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = props => {
+const Header = ({ logout, i18n, t }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [isSidebarOpen, setSidebarOpen] = React.useState(false);
+
+  const hideSidebar = () => setSidebarOpen(false);
+  const showSidebar = () => setSidebarOpen(true);
+
+  const changeLanguage = lng => i18n.changeLanguage(lng);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  function handleProfileMenuOpen(event) {
-    setAnchorEl(event.currentTarget);
-  }
-
-  function handleMobileMenuClose() {
-    setMobileMoreAnchorEl(null);
-  }
-
-  function handleMenuClose() {
+  const handleProfileMenuOpen = event => setAnchorEl(event.currentTarget);
+  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
+  const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
-  }
+  };
 
-  function handleMobileMenuOpen(event) {
-    setMobileMoreAnchorEl(event.currentTarget);
-  }
+  const handleMobileMenuOpen = event => setMobileMoreAnchorEl(event.currentTarget);
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -133,15 +130,15 @@ const Header = props => {
         <div className={classes.menuIcon}>
           <PersonIcon />
         </div>
-        Profile
+        {t('navigation.menu.profile')}
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <div className={classes.menuIcon}>
           <SettingsIcon />
         </div>
-        Settings
+        {t('navigation.menu.settings')}
       </MenuItem>
-      <MenuItem onClick={props.logout}>
+      <MenuItem onClick={logout}>
         <div className={classes.menuIcon}>
           <ExitToAppIcon />
         </div>
@@ -161,22 +158,6 @@ const Header = props => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="Show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="Show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="Account of current user"
@@ -195,18 +176,24 @@ const Header = props => {
     <React.Fragment>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Open drawer">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={showSidebar}
+          >
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            My Blog
+            {t('brand')}
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder={t('navigation.search')}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -216,16 +203,6 @@ const Header = props => {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="Show 4 new mails" color="inherit">
-              <Badge badgeContent={1} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="Show 17 new notifications" color="inherit">
-              <Badge badgeContent={1} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
             <IconButton
               edge="end"
               aria-label="Account of current user"
@@ -252,6 +229,7 @@ const Header = props => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Sidebar open={isSidebarOpen} requestHide={hideSidebar} requestShow={showSidebar} />
     </React.Fragment>
   );
 };
