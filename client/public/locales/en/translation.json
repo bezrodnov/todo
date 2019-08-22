@@ -1,5 +1,14 @@
 {
   "brand": "SPRUD",
+  "global": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    }
+  },
   "navigation": {
     "switchLanguage": "Switch language",
     "search": "Search...",
@@ -11,5 +20,14 @@
     "sidebar": {
       "inbox": "Inbox"
     }
+  },
+  "profileDialog": {
+    "title": "User Profile"
+  },
+  "user": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "birthDate": "Birth Date",
+    "gender": "Gender"
   }
 }

@@ -1,5 +1,14 @@
 {
   "brand": "СПРУД",
+  "global": {
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "gender": {
+      "male": "Мужчина",
+      "female": "Женщина",
+      "other": "Не скажу"
+    }
+  },
   "navigation": {
     "switchLanguage": "Сменить язык",
     "search": "Найти...",
@@ -11,5 +20,14 @@
     "sidebar": {
       "inbox": "Входящие"
     }
+  },
+  "profileDialog": {
+    "title": "Профиль Пользователя"
+  },
+  "user": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "birthDate": "Дата рождения",
+    "gender": "Пол"
   }
 }

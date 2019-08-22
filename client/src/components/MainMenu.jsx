@@ -12,6 +12,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import ProfileDialog from './ProfileDialog';
+
 import { generateAction, LOGOUT } from '../redux/actions';
 
 const useStyles = makeStyles(theme => ({
@@ -28,35 +30,48 @@ const MainMenu = ({ logout, anchorEl, open, onClose }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
+  const [isProfileDialogOpen, setProfileDialogOpen] = React.useState(false);
+  const openProfileDialog = () => {
+    setProfileDialogOpen(true);
+    onClose();
+  };
+  const closeProfileDialog = () => {
+    setProfileDialogOpen(false);
+    onClose();
+  };
+
   return (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id="main-menu"
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={open}
-      onClose={onClose}
-    >
-      <MenuItem onClick={onClose}>
-        <div className={classes.menuIcon}>
-          <PersonIcon />
-        </div>
-        {t('navigation.menu.profile')}
-      </MenuItem>
-      <MenuItem onClick={onClose}>
-        <div className={classes.menuIcon}>
-          <SettingsIcon />
-        </div>
-        {t('navigation.menu.settings')}
-      </MenuItem>
-      <MenuItem onClick={logout}>
-        <div className={classes.menuIcon}>
-          <ExitToAppIcon />
-        </div>
-        {t('navigation.menu.logout')}
-      </MenuItem>
-    </Menu>
+    <>
+      <Menu
+        anchorEl={anchorEl}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        id="main-menu"
+        keepMounted
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={open}
+        onClose={onClose}
+      >
+        <MenuItem onClick={openProfileDialog}>
+          <div className={classes.menuIcon}>
+            <PersonIcon />
+          </div>
+          {t('navigation.menu.profile')}
+        </MenuItem>
+        <MenuItem onClick={onClose}>
+          <div className={classes.menuIcon}>
+            <SettingsIcon />
+          </div>
+          {t('navigation.menu.settings')}
+        </MenuItem>
+        <MenuItem onClick={logout}>
+          <div className={classes.menuIcon}>
+            <ExitToAppIcon />
+          </div>
+          {t('navigation.menu.logout')}
+        </MenuItem>
+      </Menu>
+      <ProfileDialog open={isProfileDialogOpen} onClose={closeProfileDialog} />
+    </>
   );
 };
 
