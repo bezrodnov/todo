@@ -30,7 +30,7 @@ const DialogBody = ({ user, updateUser, onClose }) => {
   const [values, setValues] = React.useState({
     firstName: user.firstName || '',
     lastName: user.lastName || '',
-    gender: user.gender,
+    gender: user.gender || 'other',
     phone: user.phone || '',
   });
 
@@ -69,9 +69,9 @@ const DialogBody = ({ user, updateUser, onClose }) => {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="user-gender">{t('user.gender')}</InputLabel>
             <Select value={values.gender} onChange={handleChange('gender')} inputProps={{ id: 'user-gender' }}>
-              <MenuItem value={true}>{t('global.gender.male')}</MenuItem>
-              <MenuItem value={false}>{t('global.gender.female')}</MenuItem>
-              <MenuItem value={null}>{t('global.gender.other')}</MenuItem>
+              <MenuItem value="male">{t('global.gender.male')}</MenuItem>
+              <MenuItem value="female">{t('global.gender.female')}</MenuItem>
+              <MenuItem value="other">{t('global.gender.other')}</MenuItem>
             </Select>
           </FormControl>
         </form>
@@ -110,7 +110,7 @@ ProfileDialog.propTypes = {
     lastName: PropTypes.string,
     phone: PropTypes.string,
     birthDate: PropTypes.object,
-    gender: PropTypes.bool,
+    gender: PropTypes.oneOf(['male', 'female', 'other']),
   }),
   updateUser: PropTypes.func.isRequired,
 };

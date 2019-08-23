@@ -8,7 +8,7 @@ const schema = new Schema({
   password: { type: String, required: true },
   registerDate: { type: Date, default: Date.now },
   birthDate: { type: Date },
-  gender: { type: Boolean },
+  gender: { type: String },
   phone: { type: String },
   language: { type: String },
 });

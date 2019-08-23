@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import AppBar from '@material-ui/core/AppBar';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,6 +18,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import Sidebar from '../Sidebar';
 import MainMenu from '../MainMenu';
 import MobileMenu from '../MobileMenu';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -25,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
+  brand: {
+    cursor: 'pointer',
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
@@ -80,8 +83,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Header = ({ t }) => {
+const Header = ({ history }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [isSidebarOpen, setSidebarOpen] = React.useState(false);
@@ -101,6 +106,8 @@ const Header = ({ t }) => {
 
   const handleMobileMenuOpen = event => setMobileMoreAnchorEl(event.currentTarget);
 
+  const goHome = () => history.push('/home');
+
   return (
     <React.Fragment>
       <AppBar position="static" className={classes.appBar}>
@@ -114,7 +121,7 @@ const Header = ({ t }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.brand} variant="h6" noWrap onClick={goHome}>
             {t('brand')}
           </Typography>
           <div className={classes.search}>
@@ -166,6 +173,10 @@ const Header = ({ t }) => {
       <Sidebar open={isSidebarOpen} requestHide={hideSidebar} requestShow={showSidebar} />
     </React.Fragment>
   );
+};
+
+Header.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default Header;

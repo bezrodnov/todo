@@ -7,7 +7,7 @@ const PublicRoute = ({ isAuthenticated, component: Component, ...other }) => (
     {...other}
     component={props =>
       isAuthenticated ? (
-        <Redirect to="/" />
+        <Redirect to="/home" />
       ) : (
         <Suspense fallback="...loading">
           <Component {...props} />

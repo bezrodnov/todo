@@ -8,6 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles({
   list: {
@@ -15,14 +16,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Sidebar({ open, requestHide, requestShow }) {
+const Sidebar = ({ open, requestHide, requestShow, history }) => {
   const classes = useStyles();
   const { t } = useTranslation();
+
+  const showIncoming = () => {
+    history.push('/incoming');
+  };
 
   const sideList = () => (
     <div className={classes.list} role="presentation" onClick={requestHide} onKeyDown={requestHide}>
       <List>
-        <ListItem button>
+        <ListItem button onClick={showIncoming}>
           <ListItemIcon>
             <MailIcon />
           </ListItemIcon>
@@ -38,4 +43,6 @@ export default function Sidebar({ open, requestHide, requestShow }) {
       {sideList()}
     </SwipeableDrawer>
   );
-}
+};
+
+export default withRouter(Sidebar);

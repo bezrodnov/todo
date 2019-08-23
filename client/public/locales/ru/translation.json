@@ -4,8 +4,8 @@
     "save": "Сохранить",
     "cancel": "Отмена",
     "gender": {
-      "male": "Мужчина",
-      "female": "Женщина",
+      "male": "Мужской",
+      "female": "Женский",
       "other": "Не скажу"
     },
     "language": {
@@ -13,6 +13,11 @@
       "ru": "Русский"
     }
   },
+  "auth": {
+    "noToken": "No token, authorization denied",
+    "tokenInvalid": "Token is invalid"
+  },
+
   "navigation": {
     "switchLanguage": "Сменить язык",
     "search": "Найти...",

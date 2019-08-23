@@ -13,6 +13,11 @@
       "ru": "Русский"
     }
   },
+  "auth": {
+    "noToken": "No token, authorization denied",
+    "tokenInvalid": "Token is invalid"
+  },
+
   "navigation": {
     "switchLanguage": "Switch language",
     "search": "Search...",
