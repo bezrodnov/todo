@@ -18,6 +18,8 @@ export function* loadUserSaga() {
       yield putAction(USER_LOADED, { ...user, token });
     } catch (error) {
       // failed to load user - which means authentication is required
+      // perform sign out to clear token and force user to sign in
+      yield putAction(LOGOUT);
     }
   });
 }

@@ -2,11 +2,11 @@ import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 
-const PublicRoute = ({ isAuthenticated, component: Component, ...other }) => (
+const PublicRoute = ({ hasToken, component: Component, ...other }) => (
   <Route
     {...other}
     component={props =>
-      isAuthenticated ? (
+      hasToken ? (
         <Redirect to="/home" />
       ) : (
         <Suspense fallback="...loading">
@@ -18,7 +18,7 @@ const PublicRoute = ({ isAuthenticated, component: Component, ...other }) => (
 );
 
 const mapStateToProps = state => ({
-  isAuthenticated: !!state.auth.token,
+  hasToken: !!state.auth.token,
 });
 
 export default connect(mapStateToProps)(PublicRoute);

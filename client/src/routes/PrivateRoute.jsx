@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 
-const PrivateRoute = ({ isAuthenticated, component: Component, ...other }) => (
+const PrivateRoute = ({ hasToken, component: Component, ...other }) => (
   <Route
     {...other}
     component={props =>
-      !isAuthenticated ? (
+      !hasToken ? (
         <Redirect to="/auth" />
       ) : (
         <Suspense fallback="...loading">
@@ -22,7 +22,7 @@ const PrivateRoute = ({ isAuthenticated, component: Component, ...other }) => (
 );
 
 const mapStateToProps = state => ({
-  isAuthenticated: !!state.auth.token,
+  hasToken: !!state.auth.token,
 });
 
 export default connect(mapStateToProps)(PrivateRoute);
