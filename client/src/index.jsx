@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch } from 'react-router-dom';
@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
+import Notifications from './components/Notifications';
 import Auth from './routes/Auth';
 import App from './routes/App';
 import Incoming from './routes/Incoming';
@@ -23,14 +24,17 @@ ReactDOM.render(
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Provider store={store}>
         <CssBaseline />
-        <BrowserRouter>
-          <Switch>
-            <PrivateRoute exact path="/incoming" component={Incoming} />
-            <PrivateRoute exact path="/home" component={App} />
-            <PublicRoute exact path="/auth" component={Auth} />
-            <PrivateRoute component={App} />
-          </Switch>
-        </BrowserRouter>
+        <Suspense fallback="...loading">
+          <Notifications />
+          <BrowserRouter>
+            <Switch>
+              <PrivateRoute exact path="/incoming" component={Incoming} />
+              <PrivateRoute exact path="/home" component={App} />
+              <PublicRoute exact path="/auth" component={Auth} />
+              <PrivateRoute component={App} />
+            </Switch>
+          </BrowserRouter>
+        </Suspense>
       </Provider>
     </MuiPickersUtilsProvider>
   </ThemeProvider>,

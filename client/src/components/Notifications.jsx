@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import MessageBox from './MessageBox';
 
 import { generateAction, CLEAR_ERROR } from '../redux/actions';
 
-const Notifications = props => {
+const Notifications = ({ error, clearError }) => {
+  const { t } = useTranslation();
   return (
     <React.Fragment>
-      <MessageBox variant="error" open={!!props.error} onClose={props.clearError} message={props.error} />
+      <MessageBox variant="error" open={!!error} onClose={clearError} message={t(error)} />
     </React.Fragment>
   );
 };

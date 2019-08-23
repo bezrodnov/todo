@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import Header from '../components/Header';
@@ -10,12 +10,10 @@ const PrivateRoute = ({ hasToken, component: Component, ...other }) => (
       !hasToken ? (
         <Redirect to="/auth" />
       ) : (
-        <Suspense fallback="...loading">
-          <>
-            <Header />
-            <Component {...props} />
-          </>
-        </Suspense>
+        <>
+          <Header />
+          <Component {...props} />
+        </>
       )
     }
   />
