@@ -1,5 +1,6 @@
 {
   "brand": "SPRUD",
+
   "global": {
     "save": "Save",
     "cancel": "Cancel",
@@ -13,9 +14,12 @@
       "ru": "Русский"
     }
   },
+
   "auth": {
     "noToken": "No token, authorization denied",
-    "tokenInvalid": "Token is invalid"
+    "tokenInvalid": "Token is invalid",
+    "userDoesNotExist": "Invalid Credentials",
+    "invalidCredentials": "Invalid Credentials"
   },
 
   "navigation": {
@@ -30,19 +34,40 @@
       "inbox": "Inbox"
     }
   },
+
   "profileDialog": {
     "title": "User Profile"
   },
-  "settingsDialog": {
-    "title": "Settings"
-  },
+
   "user": {
     "firstName": "First Name",
     "lastName": "Last Name",
     "birthDate": "Birth Date",
     "gender": "Gender"
   },
+
+  "settingsDialog": {
+    "title": "Settings"
+  },
+
   "settings": {
     "language": "Language"
+  },
+
+  "createTaskButton": "New Task",
+
+  "createTaskDialog": {
+    "title": "New Task"
+  },
+
+  "task": {
+    "name": "Task",
+    "description": "Description",
+    "estimatedDate": "Estimated Date",
+    "notes": "Notes",
+    "errors": {
+      "emptyName": "Task name is required",
+      "emptyType": "Task type is required"
+    }
   }
 }

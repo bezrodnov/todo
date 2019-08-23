@@ -1,5 +1,6 @@
 {
   "brand": "СПРУД",
+
   "global": {
     "save": "Сохранить",
     "cancel": "Отмена",
@@ -13,9 +14,12 @@
       "ru": "Русский"
     }
   },
+
   "auth": {
     "noToken": "No token, authorization denied",
-    "tokenInvalid": "Token is invalid"
+    "tokenInvalid": "Token is invalid",
+    "userDoesNotExist": "Неверное сочетание логина и пароля",
+    "invalidCredentials": "Неверное сочетание логина и пароля"
   },
 
   "navigation": {
@@ -30,19 +34,40 @@
       "inbox": "Входящие"
     }
   },
+
   "profileDialog": {
     "title": "Профиль Пользователя"
   },
-  "settingsDialog": {
-    "title": "Настройки"
-  },
+
   "user": {
     "firstName": "Имя",
     "lastName": "Фамилия",
     "birthDate": "Дата рождения",
     "gender": "Пол"
   },
+
+  "settingsDialog": {
+    "title": "Настройки"
+  },
+
   "settings": {
     "language": "Язык"
+  },
+
+  "createTaskButton": "Добавить Задачу",
+
+  "createTaskDialog": {
+    "title": "Новая Задача"
+  },
+
+  "task": {
+    "name": "Задача",
+    "description": "Описание",
+    "estimatedDate": "Выполнить до",
+    "notes": "Примечания",
+    "errors": {
+      "emptyName": "Название задачи - обязательное поле",
+      "emptyType": "Отсутствует тип задачи"
+    }
   }
 }

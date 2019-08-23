@@ -2,26 +2,31 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../../middleware/auth');
-const Task = require('../../models/Task').default;
+const Task = require('../../models/Task');
 
 /**
  * @route POST api/tasks
- * @desc Submit a task
+ * @desc Create Task
  * @access Private
  */
 router.post('/', auth, (req, res) => {
-  const { name, type, description, estimatedDate } = req.body;
+  const { name, type, description, estimatedDate, notes } = req.body;
 
   // simple validation
   if (!name) {
-    return res.status(400).json({ message: 'task.error.emptyName' });
+    return res.status(400).json({ message: 'task.errors.emptyName' });
   }
   if (!type) {
-    return res.status(400).json({ message: 'task.error.emptyType' });
+    return res.status(400).json({ message: 'task.errors.emptyType' });
   }
 
-  const task = new Task({ name, type, description, estimatedDate, userId: req.user.id });
-  task.save().then(task => res.status(200).json({ success: true }));
+  const task = new Task({ name, type, description, estimatedDate, notes, userId: req.user.id });
+  task.save().then(task =>
+    res.status(200).json({
+      success: true,
+      task: task.toJSON(),
+    })
+  );
 });
 
 /**
@@ -34,7 +39,7 @@ router.get('/', auth, (req, res) => {
     .select('-userId')
     .sort({ creationDate: 'desc' })
     .then(tasks => {
-      res.status(200).json(tasks.toJSON({ virtuals: true }));
+      res.status(200).json(tasks.map(task => task.toJSON()));
     });
 });
 

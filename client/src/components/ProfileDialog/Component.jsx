@@ -47,12 +47,15 @@ const DialogBody = ({ user, updateUser, onClose }) => {
     //onClose();
   };
 
+  // TODO: add loading mask
   return (
     <>
       <DialogTitle id="profile-dialog-title">{t('profileDialog.title')}</DialogTitle>
       <DialogContent>
         <form className={classes.root} autoComplete="off">
           <TextField
+            autoFocus
+            required
             label={t('user.firstName')}
             className={classes.formControl}
             placeholder={t('user.firstName')}
@@ -60,6 +63,7 @@ const DialogBody = ({ user, updateUser, onClose }) => {
             onChange={handleChange('firstName')}
           />
           <TextField
+            required
             label={t('user.lastName')}
             className={classes.formControl}
             placeholder={t('user.lastName')}
@@ -80,7 +84,7 @@ const DialogBody = ({ user, updateUser, onClose }) => {
         <Button onClick={onClose} color="primary">
           {t('global.cancel')}
         </Button>
-        <Button onClick={saveChanges} color="primary" autoFocus>
+        <Button onClick={saveChanges} color="primary">
           {t('global.save')}
         </Button>
       </DialogActions>

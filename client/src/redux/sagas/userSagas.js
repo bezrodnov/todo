@@ -22,7 +22,7 @@ export function* updateUserSaga() {
   });
 }
 
-export function* updateFailSaga() {
+export function* updateUserFailSaga() {
   yield takeLatest(UPDATE_USER_FAIL, function*(action) {
     const { message } = action.payload;
     if (message) {

@@ -5,18 +5,13 @@ import MessageBox from './MessageBox';
 
 import { generateAction, CLEAR_ERROR } from '../redux/actions';
 
-function Notifications(props) {
+const Notifications = props => {
   return (
     <React.Fragment>
-      <MessageBox
-        variant="error"
-        open={!!props.error}
-        onClose={props.clearError}
-        message={props.error}
-      />
+      <MessageBox variant="error" open={!!props.error} onClose={props.clearError} message={props.error} />
     </React.Fragment>
   );
-}
+};
 
 const mapStateToProps = state => ({
   error: state.error.message,
@@ -26,4 +21,7 @@ const mapDispatchToProps = dispatch => ({
   clearError: () => dispatch(generateAction(CLEAR_ERROR)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notifications);

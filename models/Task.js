@@ -7,7 +7,7 @@ const schema = new Schema({
   notes: { type: String },
   creationDate: { type: Date, default: Date.now },
   estimatedDate: { type: Date },
-  userId: { type: Number, required: true },
+  userId: { type: String, required: true },
   type: { type: String, required: true },
 });
 

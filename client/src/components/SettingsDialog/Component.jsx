@@ -49,7 +49,9 @@ const SettingsDialog = ({ open, onClose, t, i18n }) => {
       <DialogContent>
         <form className={classes.root} autoComplete="off">
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="language">{t('settings.language')}</InputLabel>
+            <InputLabel autoFocus htmlFor="language">
+              {t('settings.language')}
+            </InputLabel>
             <Select value={values.language} onChange={handleChange('language')} inputProps={{ id: 'language' }}>
               <MenuItem value="en">{t('global.language.en')}</MenuItem>
               <MenuItem value="ru">{t('global.language.ru')}</MenuItem>
@@ -61,7 +63,7 @@ const SettingsDialog = ({ open, onClose, t, i18n }) => {
         <Button onClick={onClose} color="primary">
           {t('global.cancel')}
         </Button>
-        <Button onClick={onClose} color="primary" autoFocus>
+        <Button onClick={onClose} color="primary">
           {t('global.save')}
         </Button>
       </DialogActions>
