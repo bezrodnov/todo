@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,13 +23,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ProfileDialog = ({ open, onClose, t }) => {
+const DialogBody = ({ user, updateUser, onClose }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
+
   const [values, setValues] = React.useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    gender: true,
-    phone: null,
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    gender: user.gender,
+    phone: user.phone || '',
   });
 
   const handleChange = name => ({ target: { value } }) => {
@@ -38,13 +41,14 @@ const ProfileDialog = ({ open, onClose, t }) => {
     }));
   };
 
+  const saveChanges = () => {
+    updateUser(values);
+    // TODO: verify results and close
+    //onClose();
+  };
+
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      aria-labelledby="profile-dialog-title"
-      aria-describedby="profile-dialog-description"
-    >
+    <>
       <DialogTitle id="profile-dialog-title">{t('profileDialog.title')}</DialogTitle>
       <DialogContent>
         <form className={classes.root} autoComplete="off">
@@ -76,10 +80,23 @@ const ProfileDialog = ({ open, onClose, t }) => {
         <Button onClick={onClose} color="primary">
           {t('global.cancel')}
         </Button>
-        <Button onClick={onClose} color="primary" autoFocus>
+        <Button onClick={saveChanges} color="primary" autoFocus>
           {t('global.save')}
         </Button>
       </DialogActions>
+    </>
+  );
+};
+
+const ProfileDialog = ({ open, onClose, user, updateUser }) => {
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="profile-dialog-title"
+      aria-describedby="profile-dialog-description"
+    >
+      <DialogBody user={user} updateUser={updateUser} onClose={onClose} />
     </Dialog>
   );
 };
@@ -87,6 +104,15 @@ const ProfileDialog = ({ open, onClose, t }) => {
 ProfileDialog.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
+  user: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    phone: PropTypes.string,
+    birthDate: PropTypes.object,
+    gender: PropTypes.bool,
+  }),
+  updateUser: PropTypes.func.isRequired,
 };
 
 export default ProfileDialog;

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import Menu from '@material-ui/core/Menu';
@@ -12,10 +11,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import ProfileDialog from './ProfileDialog';
-import SettingsDialog from './SettingsDialog';
-
-import { generateAction, LOGOUT } from '../redux/actions';
+import ProfileDialog from '../ProfileDialog';
+import SettingsDialog from '../SettingsDialog';
 
 const useStyles = makeStyles(theme => ({
   menuIcon: {
@@ -87,13 +84,4 @@ MainMenu.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(generateAction(LOGOUT)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainMenu);
+export default MainMenu;

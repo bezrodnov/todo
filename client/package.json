@@ -40,7 +40,7 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "author": "Aleksey Bezrodnov & Roman Lysenko",
+  "author": "Aleksey Bezrodnov",
   "devDependencies": {
     "cross-env": "^5.2.0"
   }

@@ -17,33 +17,26 @@ router.post('/', (req, res) => {
 
   // simple validation
   if (!email || !password) {
-    return res.status(400).json({ message: 'Please enter all fields' });
+    return res.status(400).json({ message: 'global.form.enterAllMandatoryFields' });
   }
 
   // Check existing user
   User.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(400).json({ message: 'User does not exist' });
+      return res.status(400).json({ message: 'auth.error.userDoesNotExist' });
     }
 
     // validate password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (!isMatch) {
-        return res.status(400).json({ message: 'Invalid credentials' });
+        return res.status(400).json({ message: 'auth.error.invalidCredentials' });
       }
 
       jwt.sign({ id: user._id }, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
-        if (err) {
-          throw err;
-        }
-        res.json({
-          token,
-          user: {
-            id: user._id,
-            name: user.name,
-            email: user.email,
-          },
-        });
+        if (err) throw err;
+
+        const { password, ...other } = user.toJSON();
+        res.json({ token, user: other });
       });
     });
   });

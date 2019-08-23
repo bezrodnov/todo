@@ -1,8 +1,6 @@
 import { all } from 'redux-saga/effects';
-import {
-  loadUserSaga, loginSaga, authErrorSaga,
-  registerSaga, registerFailSaga, logoutSaga,
-} from './authSagas';
+import { loadUserSaga, loginSaga, authErrorSaga, logoutSaga } from './authSagas';
+import { updateUserSaga, updateFailSaga, registerSaga, registerFailSaga } from './userSagas';
 
 export default function* saga() {
   yield all([
@@ -12,5 +10,7 @@ export default function* saga() {
     registerSaga(),
     registerFailSaga(),
     logoutSaga(),
+    updateUserSaga(),
+    updateFailSaga(),
   ]);
 }

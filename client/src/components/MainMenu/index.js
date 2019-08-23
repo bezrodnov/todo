@@ -1,7 +1,7 @@
 import Component from './Component';
 import { connect } from 'react-redux';
 
-import { generateAction, UPDATE_USER } from '../../redux/actions';
+import { generateAction, LOGOUT } from '../../redux/actions';
 
 const mapStateToProps = state => ({
   user: state.user.user,
@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: user => dispatch(generateAction(UPDATE_USER, user)),
+  logout: () => dispatch(generateAction(LOGOUT)),
 });
 
 export default connect(

@@ -14,7 +14,7 @@ const schema = new Schema({
 });
 
 schema.virtual('name').get(function() {
-  return `${this.firstName}${this.lastName ? ' ' : ''}${this.lastName}`;
+  return `${this.firstName}${this.lastName ? ' ' + this.lastName : ''}`;
 });
 
 const model = mongoose.model('user', schema);

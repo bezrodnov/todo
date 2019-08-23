@@ -9,11 +9,8 @@ import {
   REGISTER_FAIL,
 } from '../actions';
 
-import { getAuthToken } from '../utils';
-
 const initialState = {
-  token: getAuthToken(),
-  isAuthenticated: null,
+  user: null,
   isLoading: false,
 };
 
@@ -26,21 +23,24 @@ export default (state = initialState, action) => {
         isLoading: true,
       };
     case USER_LOADED:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false,
+      };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        user: action.payload,
         isLoading: false,
-        isAuthenticated: true,
       };
     case AUTH_ERROR:
     case LOGOUT:
     case REGISTER_FAIL:
       return {
-        token: null,
+        user: null,
         isLoading: false,
-        isAuthenticated: false,
       };
     default:
       return state;
