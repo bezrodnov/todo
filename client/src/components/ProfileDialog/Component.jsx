@@ -73,9 +73,9 @@ const DialogBody = ({ user, updateUser, onClose }) => {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="user-gender">{t('user.gender')}</InputLabel>
             <Select value={values.gender} onChange={handleChange('gender')} inputProps={{ id: 'user-gender' }}>
-              <MenuItem value="male">{t('global.gender.male')}</MenuItem>
-              <MenuItem value="female">{t('global.gender.female')}</MenuItem>
-              <MenuItem value="other">{t('global.gender.other')}</MenuItem>
+              <MenuItem value="male">{t('gender.male')}</MenuItem>
+              <MenuItem value="female">{t('gender.female')}</MenuItem>
+              <MenuItem value="other">{t('gender.other')}</MenuItem>
             </Select>
           </FormControl>
         </form>

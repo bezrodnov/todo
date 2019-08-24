@@ -4,15 +4,24 @@
   "global": {
     "save": "Сохранить",
     "cancel": "Отмена",
-    "gender": {
-      "male": "Мужской",
-      "female": "Женский",
-      "other": "Не скажу"
-    },
-    "language": {
-      "en": "English",
-      "ru": "Русский"
-    }
+    "ok": "ОК"
+  },
+
+  "gender": {
+    "male": "Мужской",
+    "female": "Женский",
+    "other": "Не скажу"
+  },
+
+  "language": {
+    "en": "English",
+    "ru": "Русский"
+  },
+
+  "theme": {
+    "green": "Зеленая",
+    "dark": "Тёмная",
+    "light": "Светлая"
   },
 
   "auth": {
@@ -52,7 +61,8 @@
   },
 
   "settings": {
-    "language": "Язык"
+    "language": "Язык",
+    "theme": "Тема"
   },
 
   "createTaskButton": "Добавить Задачу",

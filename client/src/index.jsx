@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -13,18 +12,18 @@ import Auth from './routes/Auth';
 import Trash from './routes/Trash';
 import Incoming from './routes/Incoming';
 
+import ThemeProvider from './components/ThemeProvider';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 
-import theme from './theme';
 import store from './redux/store';
 
 import './i18n';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Provider store={store}>
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <Provider store={store}>
+      <ThemeProvider>
         <CssBaseline />
         <Suspense fallback="...loading">
           <Notifications />
@@ -38,8 +37,8 @@ ReactDOM.render(
             </Switch>
           </BrowserRouter>
         </Suspense>
-      </Provider>
-    </MuiPickersUtilsProvider>
-  </ThemeProvider>,
+      </ThemeProvider>
+    </Provider>
+  </MuiPickersUtilsProvider>,
   document.querySelector('#app')
 );

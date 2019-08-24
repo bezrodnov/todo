@@ -18,6 +18,8 @@ export const REGISTER_FAIL = 'REGISTER_FAIL';
 export const SET_ERROR = 'SET_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 
+export const SET_THEME = 'SET_THEME';
+
 export const LOAD_TASKS = 'LOAD_TASKS';
 export const LOAD_TASKS_SUCCESS = 'LOAD_TASKS_SUCCESS';
 export const LOAD_TASKS_FAIL = 'LOAD_TASKS_FAIL';
