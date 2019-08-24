@@ -17,13 +17,12 @@ const useStyles = makeStyles({
   },
 });
 
-const Sidebar = ({ open, requestHide, requestShow, history, incomingTaskCount }) => {
+const Sidebar = ({ open, requestHide, requestShow, history, incomingTaskCount, trashTaskCount }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const goToIncoming = () => {
-    history.push('/incoming');
-  };
+  const goToIncoming = () => history.push('/incoming');
+  const goToTrash = () => history.push('/trash');
 
   const sideList = () => (
     <div className={classes.list} role="presentation" onClick={requestHide} onKeyDown={requestHide}>
@@ -35,6 +34,14 @@ const Sidebar = ({ open, requestHide, requestShow, history, incomingTaskCount })
             </Badge>
           </ListItemIcon>
           <ListItemText primary={t('navigation.sidebar.inbox')} />
+        </ListItem>
+        <ListItem button onClick={goToTrash}>
+          <ListItemIcon>
+            <Badge badgeContent={trashTaskCount} color="primary">
+              <MailIcon />
+            </Badge>
+          </ListItemIcon>
+          <ListItemText primary={t('navigation.sidebar.trash')} />
         </ListItem>
       </List>
       <Divider />
@@ -56,6 +63,7 @@ Sidebar.propTypes = {
     push: PropTypes.func.isRequired,
   }),
   incomingTaskCount: PropTypes.number,
+  trashTaskCount: PropTypes.number,
 };
 
 export default Sidebar;

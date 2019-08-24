@@ -31,7 +31,8 @@
       "logout": "Sign Out"
     },
     "sidebar": {
-      "inbox": "Inbox"
+      "inbox": "Inbox",
+      "trash": "Trash"
     }
   },
 
