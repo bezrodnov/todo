@@ -10,18 +10,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-
-import CreateTaskDialog from '../../components/CreateTaskDialog';
+import DeleteIcon from '@material-ui/icons/Clear';
 
 import './styles.scss';
 
 const Trash = ({ tasks, deleteTask }) => {
-  const [isCreateTaskDialogOpen, setCreateTaskDialogOpen] = useState(false);
   const { t } = useTranslation();
-
-  const openCreateTaskDialog = () => setCreateTaskDialogOpen(true);
-  const closeCreateTaskDialog = () => setCreateTaskDialogOpen(false);
 
   const getDeleteTaskHandler = task => e => {
     e.stopPropagation();
@@ -30,9 +24,6 @@ const Trash = ({ tasks, deleteTask }) => {
 
   return (
     <Container>
-      <Button color="primary" onClick={openCreateTaskDialog}>
-        {t('createTaskButton')}
-      </Button>
       <List className="trash-task-list">
         {tasks.map(task => (
           <ListItem key={task._id} button className="trash-task-list-item">
@@ -45,7 +36,6 @@ const Trash = ({ tasks, deleteTask }) => {
           </ListItem>
         ))}
       </List>
-      <CreateTaskDialog open={isCreateTaskDialogOpen} onClose={closeCreateTaskDialog} />
     </Container>
   );
 };
