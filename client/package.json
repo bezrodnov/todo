@@ -13,6 +13,7 @@
     "i18next": "^17.0.11",
     "i18next-browser-languagedetector": "^3.0.3",
     "i18next-xhr-backend": "^3.1.2",
+    "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -43,8 +44,5 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "author": "Aleksey Bezrodnov",
-  "devDependencies": {
-    "cross-env": "^5.2.0"
-  }
+  "author": "Aleksey Bezrodnov"
 }

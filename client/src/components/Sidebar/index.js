@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
-  taskCount: state.task.tasks.length,
+  incomingTaskCount: state.task.tasks.filter(task => task.type === 'incoming').length,
 });
 
 const mapDispatchToProps = () => ({});

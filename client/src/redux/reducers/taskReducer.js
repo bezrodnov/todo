@@ -7,6 +7,9 @@ import {
   LOAD_TASKS,
   LOAD_TASKS_SUCCESS,
   LOAD_TASKS_FAIL,
+  MARK_TASK_AS_TRASH,
+  MARK_TASK_AS_TRASH_SUCCESS,
+  MARK_TASK_AS_TRASH_FAIL,
 } from '../actions';
 
 const initialState = {
@@ -26,11 +29,13 @@ export default (state = initialState, action) => {
         isCreatingTask: false,
       };
     case LOAD_TASKS:
+    case MARK_TASK_AS_TRASH:
       return {
         ...state,
         isLoading: true,
       };
     case LOAD_TASKS_FAIL:
+    case MARK_TASK_AS_TRASH_FAIL:
       return {
         ...state,
         isLoading: false,
@@ -56,6 +61,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isCreatingTask: false,
+      };
+    case MARK_TASK_AS_TRASH_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        tasks: state.tasks.map(task => (task._id === action.payload ? { ...task, type: 'trash' } : task)),
       };
     default:
       return state;

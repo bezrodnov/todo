@@ -55,6 +55,7 @@
   },
 
   "createTaskButton": "New Task",
+  "moveTaskToTrash": "Move Task to Trash",
 
   "createTaskDialog": {
     "title": "New Task"

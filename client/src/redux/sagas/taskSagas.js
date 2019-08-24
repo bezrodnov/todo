@@ -7,6 +7,9 @@ import {
   LOAD_TASKS,
   LOAD_TASKS_SUCCESS,
   LOAD_TASKS_FAIL,
+  MARK_TASK_AS_TRASH,
+  MARK_TASK_AS_TRASH_SUCCESS,
+  MARK_TASK_AS_TRASH_FAIL,
   USER_LOADED,
   SET_ERROR,
 } from '../actions';
@@ -56,5 +59,16 @@ export function* loadTasksFailSaga() {
 export function* loadTasksOnUserLoadSaga() {
   yield takeLatest(USER_LOADED, function*() {
     yield putAction(LOAD_TASKS);
+  });
+}
+
+export function* markTaskAsTrashSaga() {
+  yield takeLatest(MARK_TASK_AS_TRASH, function*(action) {
+    try {
+      yield callApi('markTaskAsTrash', action.payload);
+      yield putAction(MARK_TASK_AS_TRASH_SUCCESS, action.payload);
+    } catch (error) {
+      yield putError(MARK_TASK_AS_TRASH_FAIL, error);
+    }
   });
 }

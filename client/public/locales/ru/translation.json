@@ -55,6 +55,7 @@
   },
 
   "createTaskButton": "Добавить Задачу",
+  "moveTaskToTrash": "Переместить Задачу в Корзину",
 
   "createTaskDialog": {
     "title": "Новая Задача"

@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Sidebar = ({ open, requestHide, requestShow, history, taskCount }) => {
+const Sidebar = ({ open, requestHide, requestShow, history, incomingTaskCount }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -30,7 +30,7 @@ const Sidebar = ({ open, requestHide, requestShow, history, taskCount }) => {
       <List>
         <ListItem button onClick={goToIncoming}>
           <ListItemIcon>
-            <Badge badgeContent={taskCount} color="primary" max={999}>
+            <Badge badgeContent={incomingTaskCount} color="primary">
               <MailIcon />
             </Badge>
           </ListItemIcon>
@@ -55,7 +55,7 @@ Sidebar.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
-  taskCount: PropTypes.number,
+  incomingTaskCount: PropTypes.number,
 };
 
 export default Sidebar;

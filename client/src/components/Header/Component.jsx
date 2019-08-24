@@ -81,6 +81,9 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
+  spacer: {
+    height: theme.spacing(10),
+  },
 }));
 
 const Header = ({ history }) => {
@@ -110,7 +113,7 @@ const Header = ({ history }) => {
 
   return (
     <React.Fragment>
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -163,6 +166,7 @@ const Header = ({ history }) => {
           </div>
         </Toolbar>
       </AppBar>
+      <div className={classes.spacer} />
       <MobileMenu
         anchorEl={mobileMoreAnchorEl}
         open={isMobileMenuOpen}

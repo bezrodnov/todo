@@ -1,5 +1,5 @@
 import { registerUser, updateUser } from './users';
-import { loadTasks, createTask } from './tasks';
+import { loadTasks, createTask, markTaskAsTrash, deleteTask } from './tasks';
 import { loadUser, login } from './auth';
 
-export default { loadUser, login, registerUser, updateUser, loadTasks, createTask };
+export default { loadUser, login, registerUser, updateUser, loadTasks, createTask, markTaskAsTrash, deleteTask };

@@ -26,4 +26,8 @@ export const CREATE_TASK = 'CREATE_TASK';
 export const CREATE_TASK_SUCCESS = 'CREATE_TASK_SUCCESS';
 export const CREATE_TASK_FAIL = 'CREATE_TASK_FAIL';
 
+export const MARK_TASK_AS_TRASH = 'MARK_TASK_AS_TRASH';
+export const MARK_TASK_AS_TRASH_SUCCESS = 'MARK_TASK_AS_TRASH_SUCCESS';
+export const MARK_TASK_AS_TRASH_FAIL = 'MARK_TASK_AS_TRASH_FAIL';
+
 export const generateAction = (type, payload = {}) => ({ type, payload });

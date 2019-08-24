@@ -13,5 +13,7 @@ const sendJSON = (payload, path) => {
 
 const createTask = task => sendJSON(task, '');
 const loadTasks = () => axios.get(`/api/tasks`);
+const markTaskAsTrash = id => sendJSON({ id }, '/trash');
+const deleteTask = id => axios.delete(`/api/tasks/${id}`);
 
-export { createTask, loadTasks };
+export { createTask, loadTasks, markTaskAsTrash, deleteTask };
