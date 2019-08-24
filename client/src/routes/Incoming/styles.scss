@@ -1,26 +1,62 @@
-.incoming-task-list {
-  background: repeating-linear-gradient(150deg, rgba(0, 0, 0, 0.15), transparent 100px);
-  border-radius: 25px;
-  padding: 8px !important;
-  margin-bottom: 24px !important;
-
-  .incoming-task-list-item {
-    border-radius: 15px;
-
-    .trash-icon {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease-in-out;
+.incoming-tasks {
+  .create-task-icon {
+    position: fixed;
+    top: 68px;
+    right: 12px;
+    z-index: 1;
+    svg {
+      font-size: 4rem;
     }
+  }
 
-    &:focus,
-    &:hover {
-      background-color: rgba(130, 212, 104, 0.75);
-      box-shadow: rgb(25, 90, 5) 0 0 15px 0px;
+  .incoming-task-list {
+    background: repeating-linear-gradient(150deg, rgba(0, 0, 0, 0.15), transparent 100px);
+    border-radius: 25px;
+    padding: 8px !important;
+    margin-bottom: 24px !important;
+
+    .incoming-task-list-item {
+      border-radius: 15px;
+
       .trash-icon {
-        opacity: 1;
-        pointer-events: all;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease-in-out;
       }
+
+      &:focus,
+      &:hover {
+        background-color: rgba(130, 212, 104, 0.75);
+        box-shadow: rgb(25, 90, 5) 0 0 15px 0px;
+        .trash-icon {
+          opacity: 1;
+          pointer-events: all;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .incoming-tasks {
+    .create-task-icon {
+      right: 4px;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .incoming-tasks {
+    .create-task-icon {
+      right: 20px;
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .incoming-tasks {
+    .create-task-icon {
+      right: calc((100% - 1240px) / 2);
     }
   }
 }
