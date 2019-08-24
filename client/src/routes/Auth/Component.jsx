@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,8 +13,6 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
-import { generateAction, LOGIN } from '../redux/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,6 +45,7 @@ const useStyles = makeStyles(theme => ({
 
 const Auth = ({ login }) => {
   const classes = useStyles();
+  const { t } = useTranslation('auth');
 
   const onSubmit = e => {
     e.preventDefault();
@@ -64,7 +63,7 @@ const Auth = ({ login }) => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {t('SignIn')}
           </Typography>
           <form className={classes.form} onSubmit={onSubmit}>
             <TextField
@@ -73,7 +72,7 @@ const Auth = ({ login }) => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label={t('Email')}
               name="email"
               autoComplete="email"
               autoFocus
@@ -84,24 +83,24 @@ const Auth = ({ login }) => {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={t('Password')}
               type="password"
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
+            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label={t('RememberMe')} />
             <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>
-              Sign In
+              {t('SignIn')}
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  {t('ForgotPassword')}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {t('Signup.prompt')}
                 </Link>
               </Grid>
             </Grid>
@@ -112,13 +111,4 @@ const Auth = ({ login }) => {
   );
 };
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  login: payload => dispatch(generateAction(LOGIN, payload)),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Auth);
+export default Auth;
