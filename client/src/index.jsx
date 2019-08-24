@@ -10,7 +10,6 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Notifications from './components/Notifications';
 
 import Auth from './routes/Auth';
-import App from './routes/App';
 import Trash from './routes/Trash';
 import Incoming from './routes/Incoming';
 
@@ -33,7 +32,7 @@ ReactDOM.render(
             <Switch>
               <PrivateRoute exact path="/trash" component={Trash} />
               <PrivateRoute exact path="/incoming" component={Incoming} />
-              <PrivateRoute exact path="/home" component={App} />
+              <PrivateRoute exact path="/home" component={Incoming} />
               <PublicRoute exact path="/auth" component={Auth} />
               <Redirect to="/home" />
             </Switch>

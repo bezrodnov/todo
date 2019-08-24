@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import Header from '../components/Header';
+import Header from '../../components/Header';
+
+import './styles.scss';
 
 const PrivateRoute = ({ hasToken, component: Component, ...other }) => (
   <Route
@@ -10,10 +12,10 @@ const PrivateRoute = ({ hasToken, component: Component, ...other }) => (
       !hasToken ? (
         <Redirect to="/auth" />
       ) : (
-        <>
+        <div className="app">
           <Header />
           <Component {...props} />
-        </>
+        </div>
       )
     }
   />

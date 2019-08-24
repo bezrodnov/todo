@@ -1,5 +1,12 @@
 .incoming-task-list {
+  background: repeating-linear-gradient(150deg, rgba(0, 0, 0, 0.15), transparent 100px);
+  border-radius: 25px;
+  padding: 8px !important;
+  margin-bottom: 24px !important;
+
   .incoming-task-list-item {
+    border-radius: 15px;
+
     .trash-icon {
       opacity: 0;
       pointer-events: none;
@@ -8,15 +15,12 @@
 
     &:focus,
     &:hover {
-      background-color: rgba(130, 212, 104, 0.5) !important;
+      background-color: rgba(130, 212, 104, 0.75);
+      box-shadow: rgb(25, 90, 5) 0 0 15px 0px;
       .trash-icon {
         opacity: 1;
         pointer-events: all;
       }
-    }
-
-    &:nth-child(2n + 1) {
-      background-color: rgba(130, 212, 104, 0.25);
     }
   }
 }
