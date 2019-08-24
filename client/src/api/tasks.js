@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-const sendJSON = (payload, path) => {
+const sendJSON = (json, path, method) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const body = JSON.stringify(payload);
-  return axios.post(`/api/tasks${path}`, body, config);
+  const body = method === 'delete' ? { data: json } : JSON.stringify(json);
+  return axios[method || 'post'](`/api/tasks${path}`, body, config);
 };
 
 const createTask = task => sendJSON(task, '');
 const loadTasks = () => axios.get(`/api/tasks`);
 const markTaskAsTrash = id => sendJSON({ id }, '/trash');
-const deleteTask = id => axios.delete(`/api/tasks/${id}`);
+const deleteTask = id => sendJSON({ id }, '', 'delete');
 
 export { createTask, loadTasks, markTaskAsTrash, deleteTask };

@@ -30,4 +30,8 @@ export const MARK_TASK_AS_TRASH = 'MARK_TASK_AS_TRASH';
 export const MARK_TASK_AS_TRASH_SUCCESS = 'MARK_TASK_AS_TRASH_SUCCESS';
 export const MARK_TASK_AS_TRASH_FAIL = 'MARK_TASK_AS_TRASH_FAIL';
 
+export const DELETE_TASK = 'DELETE_TASK';
+export const DELETE_TASK_SUCCESS = 'DELETE_TASK_SUCCESS';
+export const DELETE_TASK_FAIL = 'DELETE_TASK_FAIL';
+
 export const generateAction = (type, payload = {}) => ({ type, payload });

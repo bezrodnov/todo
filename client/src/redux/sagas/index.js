@@ -8,6 +8,7 @@ import {
   loadTasksFailSaga,
   loadTasksOnUserLoadSaga,
   markTaskAsTrashSaga,
+  deleteTaskSaga,
 } from './taskSagas';
 
 export default function* saga() {
@@ -26,5 +27,6 @@ export default function* saga() {
     loadTasksFailSaga(),
     loadTasksOnUserLoadSaga(),
     markTaskAsTrashSaga(),
+    deleteTaskSaga(),
   ]);
 }

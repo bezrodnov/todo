@@ -16,16 +16,16 @@ import CreateTaskDialog from '../../components/CreateTaskDialog';
 
 import './styles.scss';
 
-const Incoming = ({ tasks, markTaskAsTrash }) => {
+const Trash = ({ tasks, deleteTask }) => {
   const [isCreateTaskDialogOpen, setCreateTaskDialogOpen] = useState(false);
   const { t } = useTranslation();
 
   const openCreateTaskDialog = () => setCreateTaskDialogOpen(true);
   const closeCreateTaskDialog = () => setCreateTaskDialogOpen(false);
 
-  const getTaskTrasher = task => e => {
+  const getDeleteTaskHandler = task => e => {
     e.stopPropagation();
-    markTaskAsTrash(task._id);
+    deleteTask(task._id);
   };
 
   return (
@@ -33,11 +33,11 @@ const Incoming = ({ tasks, markTaskAsTrash }) => {
       <Button color="primary" onClick={openCreateTaskDialog}>
         {t('createTaskButton')}
       </Button>
-      <List className="incoming-task-list">
+      <List className="trash-task-list">
         {tasks.map(task => (
-          <ListItem key={task._id} button className="incoming-task-list-item">
-            <Tooltip title={t('moveTaskToTrash')} className="trash-icon">
-              <ListItemIcon onClick={getTaskTrasher(task)}>
+          <ListItem key={task._id} button className="trash-task-list-item">
+            <Tooltip title={t('deleteTask')} className="trash-icon">
+              <ListItemIcon onClick={getDeleteTaskHandler(task)}>
                 <DeleteIcon />
               </ListItemIcon>
             </Tooltip>
@@ -50,7 +50,7 @@ const Incoming = ({ tasks, markTaskAsTrash }) => {
   );
 };
 
-Incoming.propTypes = {
+Trash.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
@@ -60,7 +60,7 @@ Incoming.propTypes = {
       estimatedDate: PropTypes.string,
     })
   ).isRequired,
-  markTaskAsTrash: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
 };
 
-export default Incoming;
+export default Trash;

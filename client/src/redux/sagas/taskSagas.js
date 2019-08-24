@@ -12,6 +12,9 @@ import {
   MARK_TASK_AS_TRASH_FAIL,
   USER_LOADED,
   SET_ERROR,
+  DELETE_TASK,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAIL,
 } from '../actions';
 
 export function* createTaskSaga() {
@@ -69,6 +72,17 @@ export function* markTaskAsTrashSaga() {
       yield putAction(MARK_TASK_AS_TRASH_SUCCESS, action.payload);
     } catch (error) {
       yield putError(MARK_TASK_AS_TRASH_FAIL, error);
+    }
+  });
+}
+
+export function* deleteTaskSaga() {
+  yield takeLatest(DELETE_TASK, function*(action) {
+    try {
+      yield callApi('deleteTask', action.payload);
+      yield putAction(DELETE_TASK_SUCCESS, action.payload);
+    } catch (error) {
+      yield putError(DELETE_TASK_FAIL, error);
     }
   });
 }

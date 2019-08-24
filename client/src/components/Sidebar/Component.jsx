@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
+
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Badge from '@material-ui/core/Badge';
 import Divider from '@material-ui/core/Divider';
@@ -8,8 +9,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
 import MailIcon from '@material-ui/icons/Mail';
-import { useTranslation } from 'react-i18next';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   list: {
@@ -38,7 +42,7 @@ const Sidebar = ({ open, requestHide, requestShow, history, incomingTaskCount, t
         <ListItem button onClick={goToTrash}>
           <ListItemIcon>
             <Badge badgeContent={trashTaskCount} color="primary">
-              <MailIcon />
+              <DeleteIcon />
             </Badge>
           </ListItemIcon>
           <ListItemText primary={t('navigation.sidebar.trash')} />
