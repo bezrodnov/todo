@@ -6,7 +6,7 @@ const initialState = {
   id: null,
 };
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_ERROR:
       return {
@@ -19,4 +19,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};

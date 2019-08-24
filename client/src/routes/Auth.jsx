@@ -45,14 +45,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Auth(props) {
+const Auth = ({ login }) => {
   const classes = useStyles();
 
   const onSubmit = e => {
     e.preventDefault();
     const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
-    props.login({ email, password });
+    login({ email, password });
   };
 
   return (
@@ -110,7 +110,7 @@ function Auth(props) {
       </Grid>
     </Grid>
   );
-}
+};
 
 const mapStateToProps = state => ({});
 

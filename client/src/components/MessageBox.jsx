@@ -48,9 +48,8 @@ const useContentStyles = makeStyles(theme => ({
   },
 }));
 
-function MessageBoxContent(props) {
+const MessageBoxContent = ({ className, message, onClose, variant, ...other }) => {
   const classes = useContentStyles();
-  const { className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -71,7 +70,7 @@ function MessageBoxContent(props) {
       {...other}
     />
   );
-}
+};
 
 MessageBoxContent.propTypes = {
   className: PropTypes.string,
@@ -80,9 +79,18 @@ MessageBoxContent.propTypes = {
   variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
 };
 
-function MessageBox(props) {
-  const { open, message, variant, onClose, anchorVertical, anchorHorizontal,
-    autoHideDuration, className, ...other } = props;
+const MessageBox = props => {
+  const {
+    open,
+    message,
+    variant,
+    onClose,
+    anchorVertical,
+    anchorHorizontal,
+    autoHideDuration,
+    className,
+    ...other
+  } = props;
   return (
     <Snackbar
       anchorOrigin={{
@@ -94,15 +102,10 @@ function MessageBox(props) {
       onClose={onClose}
       {...other}
     >
-      <MessageBoxContent
-        onClose={onClose}
-        variant={variant}
-        message={message}
-        className={className}
-      />
+      <MessageBoxContent onClose={onClose} variant={variant} message={message} className={className} />
     </Snackbar>
   );
-}
+};
 
 MessageBox.propTypes = {
   className: PropTypes.string,
