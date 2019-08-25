@@ -24,20 +24,51 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MainMenu = ({ logout, anchorEl, open, onClose }) => {
+const MenuItems = ({ openProfileDialog, openSettingsDialog, logout }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const [isProfileDialogOpen, setProfileDialogOpen] = React.useState(false);
-  const [isSettingsDialogOpen, setSettingsDialogOpen] = React.useState(false);
+  return (
+    <>
+      <MenuItem onClick={openProfileDialog}>
+        <div className={classes.menuIcon}>
+          <PersonIcon />
+        </div>
+        {t('navigation.menu.profile')}
+      </MenuItem>
+      <MenuItem onClick={openSettingsDialog}>
+        <div className={classes.menuIcon}>
+          <SettingsIcon />
+        </div>
+        {t('navigation.menu.settings')}
+      </MenuItem>
+      <MenuItem onClick={logout}>
+        <div className={classes.menuIcon}>
+          <ExitToAppIcon />
+        </div>
+        {t('navigation.menu.logout')}
+      </MenuItem>
+    </>
+  );
+};
 
-  const openDialogHandler = stateMutator => () => {
-    stateMutator(true);
-    onClose();
+const MainMenu = ({ anchorEl, open, onClose, ...other }) => {
+  const [isDialogOpen, setDialogOpen] = React.useState({ settings: false, profile: false });
+
+  const menuItemsProps = {
+    ...other,
+    openProfileDialog: () => {
+      setDialogOpen(values => ({ ...values, profile: true }));
+      onClose();
+    },
+    openSettingsDialog: () => {
+      setDialogOpen(values => ({ ...values, settings: true }));
+      onClose();
+    },
   };
 
-  const closeDialogHandler = stateMutator => () => {
-    stateMutator(false);
+  const closeDialogHandler = dialogType => () => {
+    setDialogOpen(values => ({ ...values, [dialogType]: false }));
     onClose();
   };
 
@@ -52,27 +83,10 @@ const MainMenu = ({ logout, anchorEl, open, onClose }) => {
         open={open}
         onClose={onClose}
       >
-        <MenuItem onClick={openDialogHandler(setProfileDialogOpen)}>
-          <div className={classes.menuIcon}>
-            <PersonIcon />
-          </div>
-          {t('navigation.menu.profile')}
-        </MenuItem>
-        <MenuItem onClick={openDialogHandler(setSettingsDialogOpen)}>
-          <div className={classes.menuIcon}>
-            <SettingsIcon />
-          </div>
-          {t('navigation.menu.settings')}
-        </MenuItem>
-        <MenuItem onClick={logout}>
-          <div className={classes.menuIcon}>
-            <ExitToAppIcon />
-          </div>
-          {t('navigation.menu.logout')}
-        </MenuItem>
+        <MenuItems {...menuItemsProps} />
       </Menu>
-      <ProfileDialog open={isProfileDialogOpen} onClose={closeDialogHandler(setProfileDialogOpen)} />
-      <SettingsDialog open={isSettingsDialogOpen} onClose={closeDialogHandler(setSettingsDialogOpen)} />
+      <ProfileDialog open={isDialogOpen.profile} onClose={closeDialogHandler('profile')} />
+      <SettingsDialog open={isDialogOpen.settings} onClose={closeDialogHandler('settings')} />
     </>
   );
 };

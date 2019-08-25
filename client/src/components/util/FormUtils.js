@@ -9,7 +9,7 @@ export const useForm = (fields, opts = {}) => {
     return fieldMap;
   }, {});
 
-  const { defaultValues = {} } = opts;
+  const defaultValues = opts.defaultValues || {};
   fields.forEach(field => {
     defaultValues[field.name] = defaultValues[field.name] || field.defaultValue;
   });

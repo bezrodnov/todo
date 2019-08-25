@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useForm } from '../util/FormUtils';
+import LoadingMask from '../util/LoadingMask';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -46,7 +47,7 @@ const formFields = [
   },
 ];
 
-const DialogBody = ({ onClose, loading, createTask }) => {
+const DialogBody = ({ onClose, isLoading, createTask }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -54,7 +55,6 @@ const DialogBody = ({ onClose, loading, createTask }) => {
 
   const saveChanges = () => {
     if (form.isValid()) {
-      // TODO: add loading mask
       createTask(form.values);
       // TODO: verify results and close
       //onClose();
@@ -108,6 +108,7 @@ const DialogBody = ({ onClose, loading, createTask }) => {
           {t('global.save')}
         </Button>
       </DialogActions>
+      {isLoading && <LoadingMask />}
     </>
   );
 };
@@ -128,7 +129,7 @@ const CreateTaskDialog = ({ open, ...others }) => {
 CreateTaskDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   createTask: PropTypes.func.isRequired,
 };
 

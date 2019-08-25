@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import Header from '../../components/Header';
 
-const PrivateRoute = ({ hasToken, component: Component, ...other }) => (
+import Header from '../../components/Header';
+import LoadingMask from '../../components/util/LoadingMask';
+
+const PrivateRoute = ({ component: Component, hasToken, isLoading, ...other }) => (
   <Route
     {...other}
     component={props =>
@@ -13,14 +14,11 @@ const PrivateRoute = ({ hasToken, component: Component, ...other }) => (
         <div className="app">
           <Header />
           <Component {...props} />
+          {isLoading && <LoadingMask />}
         </div>
       )
     }
   />
 );
 
-const mapStateToProps = state => ({
-  hasToken: !!state.auth.token,
-});
-
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

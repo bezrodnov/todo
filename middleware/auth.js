@@ -9,15 +9,19 @@ const auth = (req, res, next) => {
     return res.status(401).json({ message: 'auth.noToken' });
   }
 
-  try {
-    // verify token
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
-    // add user from payload
-    req.user = decoded;
-    next();
-  } catch (e) {
-    return res.status(400).json({ message: 'auth.tokenInvalid' });
-  }
+  // TODO: remove this test code
+  // simulate remote server on high load (delay response)
+  setTimeout(() => {
+    try {
+      // verify token
+      const decoded = jwt.verify(token, config.get('jwtSecret'));
+      // add user from payload
+      req.user = decoded;
+      next();
+    } catch (e) {
+      return res.status(400).json({ message: 'auth.tokenInvalid' });
+    }
+  }, 0);
 };
 
 module.exports = auth;

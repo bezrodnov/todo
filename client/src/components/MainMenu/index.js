@@ -5,7 +5,7 @@ import { generateAction, LOGOUT } from '../../redux/actions';
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  loading: state.user.loading,
+  isLoading: state.user.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({

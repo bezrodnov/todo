@@ -16,6 +16,7 @@ import TextField from '@material-ui/core/TextField';
 import { useForm } from '../util/FormUtils';
 
 import { makeStyles } from '@material-ui/core/styles';
+import LoadingMask from '../util/LoadingMask';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
@@ -50,14 +51,13 @@ const formFields = [
   },
 ];
 
-const DialogBody = ({ user, updateUser, onClose }) => {
+const DialogBody = ({ user, updateUser, onClose, isLoading }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
   const form = useForm(formFields, { defaultValues: user });
 
   const saveChanges = () => {
-    // TODO: add loading mask
     if (form.isValid()) {
       updateUser(form.values);
       // TODO: verify results and close
@@ -103,19 +103,20 @@ const DialogBody = ({ user, updateUser, onClose }) => {
           {t('global.save')}
         </Button>
       </DialogActions>
+      {isLoading && <LoadingMask />}
     </>
   );
 };
 
-const ProfileDialog = ({ open, onClose, user, updateUser }) => {
+const ProfileDialog = ({ open, ...other }) => {
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={other.onClose}
       aria-labelledby="profile-dialog-title"
       aria-describedby="profile-dialog-description"
     >
-      <DialogBody user={user} updateUser={updateUser} onClose={onClose} />
+      <DialogBody {...other} />
     </Dialog>
   );
 };
@@ -132,6 +133,7 @@ ProfileDialog.propTypes = {
     gender: PropTypes.oneOf(['male', 'female', 'other']),
   }),
   updateUser: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default ProfileDialog;

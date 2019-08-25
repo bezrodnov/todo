@@ -5,7 +5,7 @@ import Component from './Component';
 import { generateAction, CREATE_TASK } from '../../redux/actions';
 
 const mapStateToProps = state => ({
-  loading: state.task.isCreatingTask,
+  isLoading: state.task.isCreating || state.task.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({

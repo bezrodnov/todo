@@ -11,9 +11,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import DeleteIcon from '@material-ui/icons/Clear';
 
+import LoadingMask from '../../components/util/LoadingMask';
+
+// TODO: use MUI styling approach (JSS) instead of SCSS files
 import './styles.scss';
 
-const Trash = ({ tasks, deleteTask }) => {
+const Trash = ({ tasks, deleteTask, isLoadingTasks }) => {
   const { t } = useTranslation();
 
   const getDeleteTaskHandler = task => e => {
@@ -35,6 +38,7 @@ const Trash = ({ tasks, deleteTask }) => {
           </ListItem>
         ))}
       </List>
+      {isLoadingTasks && <LoadingMask />}
     </Container>
   );
 };
@@ -50,6 +54,7 @@ Trash.propTypes = {
     })
   ).isRequired,
   deleteTask: PropTypes.func.isRequired,
+  isLoadingTasks: PropTypes.bool.isRequired,
 };
 
 export default Trash;

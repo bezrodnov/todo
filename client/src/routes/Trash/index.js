@@ -5,7 +5,7 @@ import Component from './Component';
 
 const mapStateToProps = state => ({
   tasks: state.task.tasks.filter(task => task.type === 'trash'),
-  loadingTasks: state.task.isLoading,
+  isLoadingTasks: state.task.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({

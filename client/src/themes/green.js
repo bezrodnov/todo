@@ -1,4 +1,4 @@
-import { red } from '@material-ui/core/colors';
+import { red, green } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 // A custom green theme for this app
@@ -14,7 +14,8 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      paper: green[100],
+      default: green[100],
     },
   },
 });

@@ -15,6 +15,7 @@ import Incoming from './routes/Incoming';
 import ThemeProvider from './components/util/ThemeProvider';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import LoadingMask from './components/util/LoadingMask';
 
 import store from './redux/store';
 
@@ -25,7 +26,7 @@ ReactDOM.render(
     <Provider store={store}>
       <ThemeProvider>
         <CssBaseline />
-        <Suspense fallback="...loading">
+        <Suspense fallback={<LoadingMask />}>
           <Notifications />
           <BrowserRouter>
             <Switch>

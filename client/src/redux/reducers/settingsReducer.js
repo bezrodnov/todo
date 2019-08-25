@@ -6,9 +6,9 @@ import light from '../../themes/light';
 
 const { localStorage } = window;
 
-const DEFAULT_THEME = (localStorage && localStorage.getItem('theme')) || 'green';
+const DEFAULT_THEME = (localStorage && localStorage.getItem('theme')) || 'light';
 
-const THEMES = { green, dark, light };
+const THEMES = { light, dark, green };
 
 const initialState = {
   theme: THEMES[DEFAULT_THEME],

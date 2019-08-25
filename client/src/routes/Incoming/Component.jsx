@@ -14,10 +14,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/AddCircle';
 
 import CreateTaskDialog from '../../components/CreateTaskDialog';
+import LoadingMask from '../../components/util/LoadingMask';
 
+// TODO: use MUI styling approach (JSS) instead of SCSS files
 import './styles.scss';
 
-const Incoming = ({ tasks, markTaskAsTrash }) => {
+const Incoming = ({ tasks, markTaskAsTrash, isLoadingTasks }) => {
   const [isCreateTaskDialogOpen, setCreateTaskDialogOpen] = useState(false);
   const { t } = useTranslation();
 
@@ -49,6 +51,7 @@ const Incoming = ({ tasks, markTaskAsTrash }) => {
         ))}
       </List>
       <CreateTaskDialog open={isCreateTaskDialogOpen} onClose={closeCreateTaskDialog} />
+      {isLoadingTasks && <LoadingMask />}
     </Container>
   );
 };
@@ -64,6 +67,7 @@ Incoming.propTypes = {
     })
   ).isRequired,
   markTaskAsTrash: PropTypes.func.isRequired,
+  isLoadingTasks: PropTypes.bool.isRequired,
 };
 
 export default Incoming;
