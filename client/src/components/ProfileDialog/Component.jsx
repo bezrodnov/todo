@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
+import { useForm } from '../util/FormUtils';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -23,31 +25,46 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const formFields = [
+  {
+    name: 'firstName',
+    type: 'text',
+    required: true,
+    defaultValue: '',
+  },
+  {
+    name: 'lastName',
+    type: 'text',
+    required: true,
+    defaultValue: '',
+  },
+  {
+    name: 'gender',
+    type: 'select',
+    defaultValue: 'other',
+  },
+  {
+    name: 'phone',
+    type: 'phone',
+    defaultValue: '',
+  },
+];
+
 const DialogBody = ({ user, updateUser, onClose }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const [values, setValues] = React.useState({
-    firstName: user.firstName || '',
-    lastName: user.lastName || '',
-    gender: user.gender || 'other',
-    phone: user.phone || '',
-  });
-
-  const handleChange = name => ({ target: { value } }) => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [name]: value,
-    }));
-  };
+  const form = useForm(formFields, { defaultValues: user });
 
   const saveChanges = () => {
-    updateUser(values);
-    // TODO: verify results and close
-    //onClose();
+    // TODO: add loading mask
+    if (form.isValid()) {
+      updateUser(form.values);
+      // TODO: verify results and close
+      //onClose();
+    }
   };
 
-  // TODO: add loading mask
   return (
     <>
       <DialogTitle id="profile-dialog-title">{t('profileDialog.title')}</DialogTitle>
@@ -59,20 +76,18 @@ const DialogBody = ({ user, updateUser, onClose }) => {
             label={t('user.firstName')}
             className={classes.formControl}
             placeholder={t('user.firstName')}
-            value={values.firstName}
-            onChange={handleChange('firstName')}
+            {...form.fieldProps('firstName')}
           />
           <TextField
             required
             label={t('user.lastName')}
             className={classes.formControl}
             placeholder={t('user.lastName')}
-            value={values.lastName}
-            onChange={handleChange('lastName')}
+            {...form.fieldProps('lastName')}
           />
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="user-gender">{t('user.gender')}</InputLabel>
-            <Select value={values.gender} onChange={handleChange('gender')} inputProps={{ id: 'user-gender' }}>
+            <Select {...form.fieldProps('gender')} inputProps={{ id: 'user-gender' }}>
               <MenuItem value="male">{t('gender.male')}</MenuItem>
               <MenuItem value="female">{t('gender.female')}</MenuItem>
               <MenuItem value="other">{t('gender.other')}</MenuItem>

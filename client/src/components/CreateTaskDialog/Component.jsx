@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import { useForm } from '../util/FormUtils';
+
 const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
@@ -20,58 +22,63 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const formFields = [
+  {
+    name: 'name',
+    type: 'text',
+    required: true,
+    defaultValue: '',
+  },
+  {
+    name: 'description',
+    type: 'text',
+    defaultValue: '',
+  },
+  {
+    name: 'notes',
+    type: 'multilinetext',
+    defaultValue: '',
+  },
+  {
+    name: 'estimatedDate',
+    type: 'date',
+    defaultValue: null,
+  },
+];
+
 const DialogBody = ({ onClose, loading, createTask }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const [values, setValues] = React.useState({
-    name: '',
-    description: '',
-    notes: '',
-    estimatedDate: null,
-  });
-
-  const handleChange = name => ({ target: { value } }) => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [name]: value,
-    }));
-  };
-
-  const handleDateChange = name => date => {
-    setValues(oldValues => ({
-      ...oldValues,
-      [name]: date,
-    }));
-  };
+  const form = useForm(formFields);
 
   const saveChanges = () => {
-    createTask(values);
-    // TODO: verify results and close
-    //onClose();
+    if (form.isValid()) {
+      // TODO: add loading mask
+      createTask(form.values);
+      // TODO: verify results and close
+      //onClose();
+    }
   };
 
-  // TODO: add loading mask
   return (
     <>
       <DialogTitle id="create-task-dialog-title">{t('createTaskDialog.title')}</DialogTitle>
       <DialogContent>
-        <form>
+        <form noValidate>
           <TextField
             autoFocus
             required
             label={t('task.name')}
             className={classes.formControl}
             placeholder={t('task.name')}
-            value={values.name}
-            onChange={handleChange('name')}
+            {...form.fieldProps('name')}
           />
           <TextField
             label={t('task.description')}
             className={classes.formControl}
             placeholder={t('task.description')}
-            value={values.description}
-            onChange={handleChange('description')}
+            {...form.fieldProps('description')}
           />
           <KeyboardDatePicker
             autoOk
@@ -79,8 +86,7 @@ const DialogBody = ({ onClose, loading, createTask }) => {
             label={t('task.estimatedDate')}
             className={classes.formControl}
             format="MM/dd/yyyy"
-            value={values.estimatedDate}
-            onChange={handleDateChange('estimatedDate')}
+            {...form.fieldProps('estimatedDate')}
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
@@ -89,8 +95,8 @@ const DialogBody = ({ onClose, loading, createTask }) => {
             label={t('task.notes')}
             className={classes.formControl}
             placeholder={t('task.notes')}
-            value={values.notes}
-            onChange={handleChange('notes')}
+            multiline
+            {...form.fieldProps('notes')}
           />
         </form>
       </DialogContent>
@@ -106,15 +112,15 @@ const DialogBody = ({ onClose, loading, createTask }) => {
   );
 };
 
-const CreateTaskDialog = ({ open, onClose, loading, createTask }) => {
+const CreateTaskDialog = ({ open, ...others }) => {
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={others.onClose}
       aria-labelledby="create-task-dialog-title"
       aria-describedby="create-task-dialog-description"
     >
-      <DialogBody createTask={createTask} onClose={onClose} loading={loading} />
+      <DialogBody {...others} />
     </Dialog>
   );
 };

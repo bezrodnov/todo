@@ -4,7 +4,11 @@
   "global": {
     "save": "Save",
     "cancel": "Cancel",
-    "ok": "OK"
+    "ok": "OK",
+    "form": {
+      "fieldRequired": "This field is required",
+      "enterAllMandatoryFields": "Please enter all mandatory fields."
+    }
   },
 
   "gender": {

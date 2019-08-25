@@ -4,7 +4,11 @@
   "global": {
     "save": "Сохранить",
     "cancel": "Отмена",
-    "ok": "ОК"
+    "ok": "ОК",
+    "form": {
+      "fieldRequired": "Это обязательное поле",
+      "enterAllMandatoryFields": "Пожалуйста, заполните все обязательные поля."
+    }
   },
 
   "gender": {

@@ -12,7 +12,7 @@ import Auth from './routes/Auth';
 import Trash from './routes/Trash';
 import Incoming from './routes/Incoming';
 
-import ThemeProvider from './components/ThemeProvider';
+import ThemeProvider from './components/util/ThemeProvider';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 
