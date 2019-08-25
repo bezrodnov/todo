@@ -24,51 +24,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const MenuItems = ({ openProfileDialog, openSettingsDialog, logout }) => {
+const MainMenu = ({ anchorEl, open, onClose, logout }) => {
+  const [isDialogOpen, setDialogOpen] = React.useState({ settings: false, profile: false });
+
   const classes = useStyles();
   const { t } = useTranslation();
 
-  return (
-    <>
-      <MenuItem onClick={openProfileDialog}>
-        <div className={classes.menuIcon}>
-          <PersonIcon />
-        </div>
-        {t('navigation.menu.profile')}
-      </MenuItem>
-      <MenuItem onClick={openSettingsDialog}>
-        <div className={classes.menuIcon}>
-          <SettingsIcon />
-        </div>
-        {t('navigation.menu.settings')}
-      </MenuItem>
-      <MenuItem onClick={logout}>
-        <div className={classes.menuIcon}>
-          <ExitToAppIcon />
-        </div>
-        {t('navigation.menu.logout')}
-      </MenuItem>
-    </>
-  );
-};
-
-const MainMenu = ({ anchorEl, open, onClose, ...other }) => {
-  const [isDialogOpen, setDialogOpen] = React.useState({ settings: false, profile: false });
-
-  const menuItemsProps = {
-    ...other,
-    openProfileDialog: () => {
-      setDialogOpen(values => ({ ...values, profile: true }));
-      onClose();
-    },
-    openSettingsDialog: () => {
-      setDialogOpen(values => ({ ...values, settings: true }));
-      onClose();
-    },
-  };
-
-  const closeDialogHandler = dialogType => () => {
-    setDialogOpen(values => ({ ...values, [dialogType]: false }));
+  const toggleDialogHandler = (dialogType, open) => () => {
+    setDialogOpen(values => ({ ...values, [dialogType]: open }));
     onClose();
   };
 
@@ -83,10 +46,27 @@ const MainMenu = ({ anchorEl, open, onClose, ...other }) => {
         open={open}
         onClose={onClose}
       >
-        <MenuItems {...menuItemsProps} />
+        <MenuItem onClick={toggleDialogHandler('profile', true)}>
+          <div className={classes.menuIcon}>
+            <PersonIcon />
+          </div>
+          {t('navigation.menu.profile')}
+        </MenuItem>
+        <MenuItem onClick={toggleDialogHandler('settings', true)}>
+          <div className={classes.menuIcon}>
+            <SettingsIcon />
+          </div>
+          {t('navigation.menu.settings')}
+        </MenuItem>
+        <MenuItem onClick={logout}>
+          <div className={classes.menuIcon}>
+            <ExitToAppIcon />
+          </div>
+          {t('navigation.menu.logout')}
+        </MenuItem>
       </Menu>
-      <ProfileDialog open={isDialogOpen.profile} onClose={closeDialogHandler('profile')} />
-      <SettingsDialog open={isDialogOpen.settings} onClose={closeDialogHandler('settings')} />
+      <ProfileDialog open={isDialogOpen.profile} onClose={toggleDialogHandler('profile', false)} />
+      <SettingsDialog open={isDialogOpen.settings} onClose={toggleDialogHandler('settings', false)} />
     </>
   );
 };
