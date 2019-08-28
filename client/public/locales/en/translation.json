@@ -46,7 +46,8 @@
     },
     "sidebar": {
       "inbox": "Inbox",
-      "trash": "Trash"
+      "trash": "Trash",
+      "createTask": "Create Task"
     }
   },
 

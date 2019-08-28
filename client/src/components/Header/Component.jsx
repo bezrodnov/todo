@@ -9,13 +9,11 @@ import Typography from '@material-ui/core/Typography';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-import MenuIcon from '@material-ui/icons/Menu';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 
-import Sidebar from '../Sidebar';
 import MainMenu from '../MainMenu';
 import MobileMenu from '../MobileMenu';
 import { useTranslation } from 'react-i18next';
@@ -81,9 +79,6 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     },
   },
-  spacer: {
-    height: theme.spacing(10),
-  },
 }));
 
 const Header = ({ history }) => {
@@ -92,10 +87,6 @@ const Header = ({ history }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [isSidebarOpen, setSidebarOpen] = React.useState(false);
-
-  const hideSidebar = () => setSidebarOpen(false);
-  const showSidebar = () => setSidebarOpen(true);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -115,15 +106,6 @@ const Header = ({ history }) => {
     <React.Fragment>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={showSidebar}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography className={classes.brand} variant="h6" noWrap onClick={goHome}>
             {t('brand')}
           </Typography>
@@ -166,7 +148,6 @@ const Header = ({ history }) => {
           </div>
         </Toolbar>
       </AppBar>
-      <div className={classes.spacer} />
       <MobileMenu
         anchorEl={mobileMoreAnchorEl}
         open={isMobileMenuOpen}
@@ -174,7 +155,6 @@ const Header = ({ history }) => {
         openMainMenu={handleProfileMenuOpen}
       />
       <MainMenu anchorEl={anchorEl} open={isMenuOpen} onClose={handleMenuClose} />
-      <Sidebar open={isSidebarOpen} requestHide={hideSidebar} requestShow={showSidebar} />
     </React.Fragment>
   );
 };

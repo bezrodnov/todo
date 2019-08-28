@@ -1,68 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Badge from '@material-ui/core/Badge';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
-import MailIcon from '@material-ui/icons/Mail';
-import DeleteIcon from '@material-ui/icons/Delete';
+import ArrowRight from '@material-ui/icons/ArrowRight';
+
+import CreateTaskItem from './CreateTaskItem';
+import IncomingTaskItem from './IncomingTaskItem';
+import TrashTaskItem from './TrashTaskItem';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
+const useStyles = makeStyles(theme => ({
+  sideBar: {
+    overflow: 'hidden',
+    background: theme.palette.primary.main,
+    transition: theme.transitions.create(['width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.standard,
+    }),
+    width: theme.spacing(8),
+    '&$expanded': {
+      width: theme.spacing(24),
+    },
   },
-});
+  arrowButton: {
+    color: theme.palette.background.default,
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+  },
+  arrow: {
+    margin: -5,
+    transition: theme.transitions.create(['transform'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.standard,
+    }),
+    '&$expanded': {
+      transform: 'rotate(-180deg)',
+    },
+  },
+  expanded: {},
+}));
 
-const Sidebar = ({ open, requestHide, requestShow, history, incomingTaskCount, trashTaskCount }) => {
+const Sidebar = () => {
   const classes = useStyles();
-  const { t } = useTranslation();
+  const [expanded, setExpanded] = useState(!!localStorage.getItem(EXPAND_SIDEBAR_LOCAL_STORAGE_KEY));
 
-  const goToIncoming = () => history.push('/incoming');
-  const goToTrash = () => history.push('/trash');
+  const toggleExpand = () => {
+    setExpanded(!expanded);
+    if (expanded) {
+      localStorage.removeItem(EXPAND_SIDEBAR_LOCAL_STORAGE_KEY);
+    } else {
+      localStorage.setItem(EXPAND_SIDEBAR_LOCAL_STORAGE_KEY, 1);
+    }
+  };
 
-  const sideList = () => (
-    <div className={classes.list} role="presentation" onClick={requestHide} onKeyDown={requestHide}>
-      <List>
-        <ListItem button onClick={goToIncoming}>
-          <ListItemIcon>
-            <Badge badgeContent={incomingTaskCount} color="primary">
-              <MailIcon />
-            </Badge>
-          </ListItemIcon>
-          <ListItemText primary={t('navigation.sidebar.inbox')} />
-        </ListItem>
-        <ListItem button onClick={goToTrash}>
-          <ListItemIcon>
-            <Badge badgeContent={trashTaskCount} color="primary">
-              <DeleteIcon />
-            </Badge>
-          </ListItemIcon>
-          <ListItemText primary={t('navigation.sidebar.trash')} />
-        </ListItem>
-      </List>
-      <Divider />
-    </div>
-  );
+  const expandClass = { [classes.expanded]: expanded };
+
+  const arrows = count =>
+    new Array(count)
+      .fill('')
+      .map((el, index) => <ArrowRight key={index} className={clsx(classes.arrow, expandClass)} />);
 
   return (
-    <SwipeableDrawer open={open} onClose={requestHide} onOpen={requestShow}>
-      {sideList()}
-    </SwipeableDrawer>
+    <Box className={clsx(classes.sideBar, expandClass)} boxShadow={3}>
+      <Button onClick={toggleExpand} className={classes.arrowButton} disableRipple>
+        {arrows(2)}
+      </Button>
+      <Divider />
+      <List>
+        <CreateTaskItem expanded={expanded} />
+        <IncomingTaskItem expanded={expanded} />
+        <TrashTaskItem expanded={expanded} />
+      </List>
+      <Divider />
+    </Box>
   );
 };
 
 Sidebar.propTypes = {
-  open: PropTypes.bool,
-  requestShow: PropTypes.func.isRequired,
-  requestHide: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }),
@@ -71,3 +92,5 @@ Sidebar.propTypes = {
 };
 
 export default Sidebar;
+
+const EXPAND_SIDEBAR_LOCAL_STORAGE_KEY = 'expandSideBar';

@@ -1,14 +1,4 @@
 .incoming-tasks {
-  .create-task-icon {
-    position: fixed;
-    top: 68px;
-    right: 12px;
-    z-index: 1;
-    svg {
-      font-size: 4rem;
-    }
-  }
-
   .incoming-task-list {
     border-radius: 25px;
     padding: 8px !important;
@@ -30,30 +20,6 @@
           pointer-events: all;
         }
       }
-    }
-  }
-}
-
-@media screen and (max-width: 599px) {
-  .incoming-tasks {
-    .create-task-icon {
-      right: 4px;
-    }
-  }
-}
-
-@media screen and (min-width: 960px) {
-  .incoming-tasks {
-    .create-task-icon {
-      right: 20px;
-    }
-  }
-}
-
-@media screen and (min-width: 1300px) {
-  .incoming-tasks {
-    .create-task-icon {
-      right: calc((100% - 1240px) / 2);
     }
   }
 }
