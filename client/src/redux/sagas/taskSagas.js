@@ -23,6 +23,7 @@ export function* createTaskSaga() {
       const response = yield callApi('createTask', action.payload);
       const { task } = response.data;
       yield putAction(CREATE_TASK_SUCCESS, task);
+      action.payload.onSuccess();
     } catch (error) {
       yield putError(CREATE_TASK_FAIL, error);
     }

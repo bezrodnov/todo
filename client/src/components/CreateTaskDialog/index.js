@@ -5,11 +5,11 @@ import Component from './Component';
 import { generateAction, CREATE_TASK } from '../../redux/actions';
 
 const mapStateToProps = state => ({
-  isLoading: state.task.isCreating || state.task.isLoading,
+  isCreating: state.task.isCreating,
 });
 
 const mapDispatchToProps = dispatch => ({
-  createTask: task => dispatch(generateAction(CREATE_TASK, { ...task, type: 'incoming' })),
+  createTask: (task, onSuccess) => dispatch(generateAction(CREATE_TASK, { ...task, type: 'incoming', onSuccess })),
 });
 
 export default connect(

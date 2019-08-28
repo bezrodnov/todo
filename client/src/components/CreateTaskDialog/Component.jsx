@@ -47,7 +47,7 @@ const formFields = [
   },
 ];
 
-const DialogBody = ({ onClose, isLoading, createTask }) => {
+const DialogBody = ({ onClose, isCreating, createTask }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -55,9 +55,7 @@ const DialogBody = ({ onClose, isLoading, createTask }) => {
 
   const saveChanges = () => {
     if (form.isValid()) {
-      createTask(form.values);
-      // TODO: verify results and close
-      //onClose();
+      createTask(form.values, onClose);
     }
   };
 
@@ -108,7 +106,7 @@ const DialogBody = ({ onClose, isLoading, createTask }) => {
           {t('global.save')}
         </Button>
       </DialogActions>
-      {isLoading && <LoadingMask />}
+      {isCreating && <LoadingMask />}
     </>
   );
 };
@@ -129,7 +127,7 @@ const CreateTaskDialog = ({ open, ...others }) => {
 CreateTaskDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isCreating: PropTypes.bool.isRequired,
   createTask: PropTypes.func.isRequired,
 };
 
