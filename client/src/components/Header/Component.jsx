@@ -15,7 +15,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import { fade, makeStyles } from '@material-ui/core/styles';
 
 import MainMenu from '../MainMenu';
-import MobileMenu from '../MobileMenu';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
@@ -67,18 +66,6 @@ const useStyles = makeStyles(theme => ({
       width: 200,
     },
   },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
 }));
 
 const Header = ({ history }) => {
@@ -86,19 +73,13 @@ const Header = ({ history }) => {
   const { t } = useTranslation();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = event => setAnchorEl(event.currentTarget);
-  const handleMobileMenuClose = () => setMobileMoreAnchorEl(null);
   const handleMenuClose = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
-
-  const handleMobileMenuOpen = event => setMobileMoreAnchorEl(event.currentTarget);
 
   const goHome = () => history.push('/home');
 
@@ -123,7 +104,7 @@ const Header = ({ history }) => {
             />
           </div>
           <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
+          <div>
             <IconButton
               edge="end"
               aria-label="Account of current user"
@@ -135,25 +116,8 @@ const Header = ({ history }) => {
               <AccountCircle />
             </IconButton>
           </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="Show more"
-              aria-controls="mobile-menu"
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
-      <MobileMenu
-        anchorEl={mobileMoreAnchorEl}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
-        openMainMenu={handleProfileMenuOpen}
-      />
       <MainMenu anchorEl={anchorEl} open={isMenuOpen} onClose={handleMenuClose} />
     </React.Fragment>
   );
