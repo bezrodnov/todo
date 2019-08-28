@@ -24,22 +24,25 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.standard,
     }),
     width: theme.spacing(8),
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       width: theme.spacing(6),
     },
     '&$expanded': {
       width: theme.spacing(24),
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         width: theme.spacing(6),
       },
     },
+  },
+  list: {
+    padding: 0,
   },
   arrowButton: {
     color: theme.palette.background.default,
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },
@@ -82,7 +85,7 @@ const Sidebar = () => {
         {arrows(2)}
       </Button>
       <Divider />
-      <List>
+      <List className={classes.list}>
         <CreateTaskItem expanded={expanded} />
         <IncomingTaskItem expanded={expanded} />
         <TrashTaskItem expanded={expanded} />

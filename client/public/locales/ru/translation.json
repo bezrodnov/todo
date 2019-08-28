@@ -71,7 +71,6 @@
     "theme": "Тема"
   },
 
-  "createTaskButton": "Добавить Задачу",
   "moveTaskToTrash": "Переместить Задачу в Корзину",
   "deleteTask": "Удалить Задачу",
 

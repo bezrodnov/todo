@@ -71,7 +71,6 @@
     "theme": "Theme"
   },
 
-  "createTaskButton": "New Task",
   "moveTaskToTrash": "Move Task to Trash",
   "deleteTask": "Delete Task",
 
