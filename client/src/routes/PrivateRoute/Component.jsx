@@ -10,16 +10,16 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   mainContainer: {
     position: 'fixed',
-    top: theme.spacing(6),
+    top: theme.spacing(8),
     width: '100%',
     height: `calc(100% - ${theme.spacing(6)}px)`,
     zIndex: 1100,
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'stretch',
-    [theme.breakpoints.up('sm')]: {
-      top: theme.spacing(8),
-      height: `calc(100% - ${theme.spacing(8)}px)`,
+    [theme.breakpoints.down('xs')]: {
+      top: theme.spacing(7),
+      height: `calc(100% - ${theme.spacing(7)}px)`,
     },
   },
   pageContents: {

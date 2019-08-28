@@ -24,8 +24,14 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.standard,
     }),
     width: theme.spacing(8),
+    [theme.breakpoints.down('sm')]: {
+      width: theme.spacing(6),
+    },
     '&$expanded': {
       width: theme.spacing(24),
+      [theme.breakpoints.down('sm')]: {
+        width: theme.spacing(6),
+      },
     },
   },
   arrowButton: {
@@ -33,6 +39,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
   arrow: {
     margin: -5,
