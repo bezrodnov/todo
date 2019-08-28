@@ -25,6 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
   listItemText: {
     color: theme.palette.background.default,
+    whiteSpace: 'nowrap',
     margin: 0,
   },
   focused: {},
