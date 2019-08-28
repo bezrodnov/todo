@@ -28,16 +28,16 @@ router.post('/update', auth, (req, res) => {
 module.exports = router;
 
 const registerUser = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const { email, password } = req.body;
 
   // simple validation
-  if (!firstName || !lastName || !email || !password) {
+  if (!email || !password) {
     return res.status(400).json({ message: 'global.form.enterAllMandatoryFields' });
   }
 
   // Check existing user
   if (await User.findOne({ email: req.body.email })) {
-    return res.status(400).json({ message: 'user.register.error.alreadyExists' });
+    return res.status(400).json({ message: 'auth.alreadyExists' });
   }
   const newUser = new User(req.body);
 
@@ -45,11 +45,11 @@ const registerUser = async (req, res) => {
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
 
-    bcrypt.hash(newUser.password, salt, (err, hash) => {
+    bcrypt.hash(newUser.password, salt, async (err, hash) => {
       if (err) throw err;
 
       newUser.password = hash;
-      const user = newUser.save();
+      const user = await newUser.save();
       jwt.sign({ id: user._id }, config.get('jwtSecret'), { expiresIn: 3600 }, (err, token) => {
         if (err) throw err;
 
@@ -72,7 +72,7 @@ const updateUser = async (req, res) => {
   sendUserInfo(res, user);
 };
 
-const sendUserInfo = (res, userModel, other) => {
+const sendUserInfo = (res, userModel, token) => {
   const { password, ...user } = userModel.toJSON();
-  res.status(200).json({ success: true, user, ...other });
+  res.status(200).json({ success: true, user, token });
 };

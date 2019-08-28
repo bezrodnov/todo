@@ -15,12 +15,12 @@ const theme = createMuiTheme({
       main: red['900'],
     },
     background: {
-      paper: grey['800'],
-      default: grey['800'],
+      paper: grey['700'],
+      default: grey['700'],
     },
     text: {
-      primary: 'rgba(255, 255, 255, 0.87)',
-      secondary: 'rgba(255, 255, 255, 0.54)',
+      primary: 'rgba(255, 255, 255, 0.5)',
+      secondary: 'rgba(255, 255, 255, 0.5)',
       disabled: 'rgba(255, 255, 255, 0.38)',
       hint: 'rgba(255, 255, 255, 0.38)',
     },

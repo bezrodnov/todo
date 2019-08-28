@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
+  firstName: { type: String },
+  lastName: { type: String },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   registerDate: { type: Date, default: Date.now },
@@ -14,7 +14,7 @@ const schema = new Schema({
 });
 
 schema.virtual('name').get(function() {
-  return `${this.firstName}${this.lastName ? ' ' + this.lastName : ''}`;
+  return `${this.firstName || ''}${this.lastName ? ' ' + this.lastName : ''}`;
 });
 
 const model = mongoose.model('user', schema);
