@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -216,7 +216,7 @@ const SignUpForm = ({ register }) => {
   return (
     <div className={containerClassName}>
       <Tooltip title={t(show ? 'SignIn' : 'SignUp')} placement={show ? 'left' : 'bottom'} enterDelay={300}>
-        <div className={iconClassName} onClick={toggleForm} />
+        <IconButton className={iconClassName} onClick={toggleForm} />
       </Tooltip>
       <div className={classes.paper}>
         <Avatar className={classes.avatarSignUp}>
