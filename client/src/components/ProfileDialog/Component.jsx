@@ -59,9 +59,7 @@ const DialogBody = ({ user, updateUser, onClose, isLoading }) => {
 
   const saveChanges = () => {
     if (form.isValid()) {
-      updateUser(form.values);
-      // TODO: verify results and close
-      //onClose();
+      updateUser(form.values, onClose);
     }
   };
 

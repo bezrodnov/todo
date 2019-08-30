@@ -16,6 +16,7 @@ export function* updateUserSaga() {
       const response = yield callApi('updateUser', action.payload);
       const { user } = response.data;
       yield putAction(UPDATE_USER_SUCCESS, user);
+      action.payload.onSuccess();
     } catch (error) {
       yield putError(UPDATE_USER_FAIL, error);
     }

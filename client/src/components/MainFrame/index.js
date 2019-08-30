@@ -2,6 +2,6 @@ import { connect } from 'react-redux';
 
 import Component from './Component';
 
-const mapStateToProps = ({ auth: { token } }) => ({ hasToken: !!token });
+const mapStateToProps = ({ user: { isLoading } }) => ({ isLoading });
 
 export default connect(mapStateToProps)(Component);

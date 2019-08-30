@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateUser: user => dispatch(generateAction(UPDATE_USER, user)),
+  updateUser: (user, onSuccess) => dispatch(generateAction(UPDATE_USER, { ...user, onSuccess })),
 });
 
 export default connect(

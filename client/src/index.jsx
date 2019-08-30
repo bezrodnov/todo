@@ -16,6 +16,7 @@ import ThemeProvider from './components/util/ThemeProvider';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
 import LoadingMask from './components/util/LoadingMask';
+import MainFrame from './components/MainFrame';
 
 import store from './redux/store';
 
@@ -30,10 +31,10 @@ ReactDOM.render(
           <Notifications />
           <BrowserRouter>
             <Switch>
-              <PrivateRoute exact path="/trash" component={Trash} />
-              <PrivateRoute exact path="/incoming" component={Incoming} />
-              <PrivateRoute exact path="/home" component={Incoming} />
-              <PublicRoute exact path="/auth" component={Auth} />
+              <PrivateRoute exact path="/trash" component={Trash} wrapper={MainFrame} />
+              <PrivateRoute exact path="/incoming" component={Incoming} wrapper={MainFrame} />
+              <PrivateRoute exact path="/home" component={Incoming} wrapper={MainFrame} />
+              <PublicRoute exact path="/auth" component={Auth} wrapper={MainFrame} />
               <Redirect to="/home" />
             </Switch>
           </BrowserRouter>
