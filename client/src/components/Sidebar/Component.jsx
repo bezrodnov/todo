@@ -10,8 +10,10 @@ import List from '@material-ui/core/List';
 import ArrowRight from '@material-ui/icons/ArrowRight';
 
 import CreateTaskItem from './CreateTaskItem';
-import IncomingTaskItem from './IncomingTaskItem';
-import TrashTaskItem from './TrashTaskItem';
+import IncomingItem from './IncomingItem';
+import TrashItem from './TrashItem';
+import ProjectsItem from './ProjectsItem';
+import DelayedItem from './DelayedItem';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -87,8 +89,10 @@ const Sidebar = () => {
       <Divider />
       <List className={classes.list}>
         <CreateTaskItem expanded={expanded} />
-        <IncomingTaskItem expanded={expanded} />
-        <TrashTaskItem expanded={expanded} />
+        <IncomingItem expanded={expanded} />
+        <TrashItem expanded={expanded} />
+        <ProjectsItem expanded={expanded} />
+        <DelayedItem expanded={expanded} />
       </List>
       <Divider />
     </Box>

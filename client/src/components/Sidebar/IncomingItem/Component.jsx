@@ -8,7 +8,7 @@ import AbstractSidebarItem from '../AbstractSidebarItem';
 
 const PATH = '/incoming';
 
-const IncomingTaskItem = ({ taskCount, history, location, expanded }) => {
+const IncomingItem = ({ history, location, ...other }) => {
   const { t } = useTranslation();
 
   const goToIncoming = () => history.push(PATH);
@@ -17,20 +17,19 @@ const IncomingTaskItem = ({ taskCount, history, location, expanded }) => {
 
   return (
     <AbstractSidebarItem
-      expanded={expanded}
       onClick={goToIncoming}
       isFocused={isFocused}
       icon={<MailIcon />}
       text={t('navigation.sidebar.inbox')}
-      count={taskCount}
+      {...other}
     />
   );
 };
 
-IncomingTaskItem.propTypes = {
+IncomingItem.propTypes = {
   expanded: PropTypes.bool.isRequired,
-  taskCount: PropTypes.number.isRequired,
+  count: PropTypes.number.isRequired,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 };
 
-export default IncomingTaskItem;
+export default IncomingItem;

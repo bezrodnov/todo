@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { incomingTasksSelector } from '../../../redux/selectors';
 
 const mapStateToProps = state => ({
-  taskCount: incomingTasksSelector(state).length,
+  count: incomingTasksSelector(state).length,
 });
 
 const mapDispatchToProps = () => ({});
