@@ -47,11 +47,11 @@ const formFields = [
   },
 ];
 
-const DialogBody = ({ onClose, isSaving, saveTask }) => {
+const DialogBody = ({ onClose, isSaving, saveTask, task }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
-  const form = useForm(formFields);
+  const form = useForm(formFields, { defaultValues: task });
 
   const saveChanges = () => {
     if (form.isValid()) {
@@ -61,7 +61,7 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
 
   return (
     <>
-      <DialogTitle id="create-task-dialog-title">{t('createTaskDialog.title')}</DialogTitle>
+      <DialogTitle id="task-details-dialog-title">{t('taskDetailsDialog.title')}</DialogTitle>
       <DialogContent>
         <form noValidate>
           <TextField
@@ -111,24 +111,24 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
   );
 };
 
-const CreateTaskDialog = ({ open, ...others }) => {
+const TaskDetailsDialog = ({ open, ...others }) => {
   return (
     <Dialog
       open={open}
       onClose={others.onClose}
-      aria-labelledby="create-task-dialog-title"
-      aria-describedby="create-task-dialog-description"
+      aria-labelledby="task-details-dialog-title"
+      aria-describedby="task-details-dialog-description"
     >
       <DialogBody {...others} />
     </Dialog>
   );
 };
 
-CreateTaskDialog.propTypes = {
+TaskDetailsDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   saveTask: PropTypes.func.isRequired,
 };
 
-export default CreateTaskDialog;
+export default TaskDetailsDialog;

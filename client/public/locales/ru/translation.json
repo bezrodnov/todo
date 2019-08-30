@@ -78,6 +78,10 @@
     "title": "Новая Задача"
   },
 
+  "taskDetailsDialog": {
+    "title": "Детали Задачи"
+  },
+
   "task": {
     "name": "Задача",
     "description": "Описание",

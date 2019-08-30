@@ -1,9 +1,9 @@
 import { takeLatest } from 'redux-saga/effects';
 import { putAction, putError, callApi } from '../utils';
 import {
-  CREATE_TASK,
-  CREATE_TASK_SUCCESS,
-  CREATE_TASK_FAIL,
+  SAVE_TASK,
+  SAVE_TASK_SUCCESS,
+  SAVE_TASK_FAIL,
   LOAD_TASKS,
   LOAD_TASKS_SUCCESS,
   LOAD_TASKS_FAIL,
@@ -17,24 +17,24 @@ import {
   DELETE_TASK_FAIL,
 } from '../actions';
 
-export function* createTaskSaga() {
-  yield takeLatest(CREATE_TASK, function*(action) {
+export function* saveTaskSaga() {
+  yield takeLatest(SAVE_TASK, function*(action) {
     try {
-      const response = yield callApi('createTask', action.payload);
+      const response = yield callApi('saveTask', action.payload);
       const { task } = response.data;
-      yield putAction(CREATE_TASK_SUCCESS, task);
+      yield putAction(SAVE_TASK_SUCCESS, task);
       action.payload.onSuccess();
     } catch (error) {
-      yield putError(CREATE_TASK_FAIL, error);
+      yield putError(SAVE_TASK_FAIL, error);
     }
   });
 }
 
-export function* createTaskFailSaga() {
-  yield takeLatest(CREATE_TASK_FAIL, function*(action) {
+export function* saveTaskFailSaga() {
+  yield takeLatest(SAVE_TASK_FAIL, function*(action) {
     const { message } = action.payload;
     if (message) {
-      yield putAction(SET_ERROR, { message, id: 'CREATE_TASK_ERROR' });
+      yield putAction(SET_ERROR, { message, id: 'SAVE_TASK_ERROR' });
     }
   });
 }

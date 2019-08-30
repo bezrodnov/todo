@@ -78,6 +78,10 @@
     "title": "New Task"
   },
 
+  "taskDetailsDialog": {
+    "title": "Task Details"
+  },
+
   "task": {
     "name": "Task",
     "description": "Description",

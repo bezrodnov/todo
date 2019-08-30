@@ -11,9 +11,9 @@ const sendJSON = (json, path, method) => {
   return axios[method || 'post'](`/api/tasks${path}`, body, config);
 };
 
-const createTask = task => sendJSON(task, '');
+const saveTask = task => sendJSON(task, '');
 const loadTasks = () => axios.get(`/api/tasks`);
 const markTaskAsTrash = id => sendJSON({ id }, '/trash');
 const deleteTask = id => sendJSON({ id }, '', 'delete');
 
-export { createTask, loadTasks, markTaskAsTrash, deleteTask };
+export { saveTask, loadTasks, markTaskAsTrash, deleteTask };

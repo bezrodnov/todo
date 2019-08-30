@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-import MoreIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { fade, makeStyles } from '@material-ui/core/styles';

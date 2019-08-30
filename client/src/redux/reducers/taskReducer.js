@@ -1,9 +1,9 @@
 import {
   LOGIN_SUCCESS,
   LOGOUT,
-  CREATE_TASK,
-  CREATE_TASK_SUCCESS,
-  CREATE_TASK_FAIL,
+  SAVE_TASK,
+  SAVE_TASK_SUCCESS,
+  SAVE_TASK_FAIL,
   LOAD_TASKS,
   LOAD_TASKS_SUCCESS,
   LOAD_TASKS_FAIL,
@@ -16,7 +16,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  isCreating: false,
+  isSaving: false,
   isLoading: false,
   tasks: [],
 };
@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
         ...state,
         tasks: [],
         isLoading: false,
-        isCreating: false,
+        isSaving: false,
       };
     case LOAD_TASKS:
     case MARK_TASK_AS_TRASH:
@@ -51,21 +51,21 @@ export default (state = initialState, action) => {
         isLoading: false,
         tasks: action.payload.tasks,
       };
-    case CREATE_TASK:
+    case SAVE_TASK:
       return {
         ...state,
-        isCreating: true,
+        isSaving: true,
       };
-    case CREATE_TASK_SUCCESS:
+    case SAVE_TASK_SUCCESS:
       return {
         ...state,
-        isCreating: false,
+        isSaving: false,
         tasks: [action.payload, ...state.tasks],
       };
-    case CREATE_TASK_FAIL:
+    case SAVE_TASK_FAIL:
       return {
         ...state,
-        isCreating: false,
+        isSaving: false,
       };
     case MARK_TASK_AS_TRASH_SUCCESS:
       return {

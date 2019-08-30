@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 
 import Component from './Component';
 
-import { generateAction, CREATE_TASK } from '../../redux/actions';
+import { generateAction, SAVE_TASK } from '../../redux/actions';
 
 const mapStateToProps = state => ({
-  isCreating: state.task.isCreating,
+  isSaving: state.task.isSaving,
 });
 
 const mapDispatchToProps = dispatch => ({
-  createTask: (task, onSuccess) => dispatch(generateAction(CREATE_TASK, { ...task, type: 'incoming', onSuccess })),
+  saveTask: (task, onSuccess) => dispatch(generateAction(SAVE_TASK, { ...task, type: 'incoming', onSuccess })),
 });
 
 export default connect(
