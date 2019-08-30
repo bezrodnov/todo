@@ -30,6 +30,7 @@ export default (state = initialState, action) => {
     case REGISTER_SUCCESS:
       return {
         ...state,
+        token: action.payload.token,
         isLoading: false,
         isAuthenticated: true,
       };
