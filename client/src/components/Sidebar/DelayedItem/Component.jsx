@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import TimeIcon from '@material-ui/icons/Schedule';
+import { delay } from '../../../icons';
 
 import AbstractSidebarItem from '../AbstractSidebarItem';
 
@@ -19,7 +19,7 @@ const DelayedItem = ({ history, location, ...other }) => {
     <AbstractSidebarItem
       onClick={goToDelayed}
       isFocused={isFocused}
-      icon={<TimeIcon />}
+      icon={delay}
       text={t('navigation.sidebar.delayed')}
       {...other}
     />

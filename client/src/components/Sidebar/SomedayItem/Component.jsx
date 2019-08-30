@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { someday } from '../../../icons';
+
 import AbstractSidebarItem from '../AbstractSidebarItem';
-import { mdiCalendarClock } from '@mdi/js';
 
 const PATH = '/someday';
 
@@ -18,7 +19,7 @@ const SomedayItem = ({ history, location, ...other }) => {
     <AbstractSidebarItem
       onClick={goToSomeday}
       isFocused={isFocused}
-      svgIconPath={mdiCalendarClock}
+      icon={someday}
       text={t('navigation.sidebar.someday')}
       {...other}
     />

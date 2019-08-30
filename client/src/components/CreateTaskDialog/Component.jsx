@@ -78,6 +78,13 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             placeholder={t('task.description')}
             {...form.getFieldProps('description')}
           />
+          <TextField
+            label={t('task.notes')}
+            className={classes.formControl}
+            placeholder={t('task.notes')}
+            multiline
+            {...form.getFieldProps('notes')}
+          />
           <KeyboardDatePicker
             autoOk
             margin="normal"
@@ -88,13 +95,6 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
-          />
-          <TextField
-            label={t('task.notes')}
-            className={classes.formControl}
-            placeholder={t('task.notes')}
-            multiline
-            {...form.getFieldProps('notes')}
           />
         </form>
       </DialogContent>

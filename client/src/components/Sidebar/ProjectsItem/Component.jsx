@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import { project } from '../../../icons';
 
 import AbstractSidebarItem from '../AbstractSidebarItem';
 
@@ -19,7 +19,7 @@ const ProjectsItem = ({ history, location, ...other }) => {
     <AbstractSidebarItem
       onClick={goToProjects}
       isFocused={isFocused}
-      icon={<AssignmentIcon />}
+      icon={project}
       text={t('navigation.sidebar.projects')}
       {...other}
     />

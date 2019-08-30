@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import DeleteIcon from '@material-ui/icons/Delete';
+import { trash } from '../../../icons';
 
 import AbstractSidebarItem from '../AbstractSidebarItem';
 
@@ -20,7 +20,7 @@ const TrashItem = ({ count, history, location, expanded }) => {
       expanded={expanded}
       onClick={goToTrash}
       isFocused={isFocused}
-      icon={<DeleteIcon />}
+      icon={trash}
       text={t('navigation.sidebar.trash')}
       count={count}
     />

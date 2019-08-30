@@ -9,7 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { SvgIcon } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -37,18 +36,12 @@ const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon, 
 
   const className = clsx(classes.listItem, { [classes.focused]: isFocused });
 
-  const iconEl = icon || (
-    <SvgIcon>
-      <path d={svgIconPath} />
-    </SvgIcon>
-  );
-
   return (
     <ListItem button onClick={onClick} className={className}>
       <ListItemIcon className={classes.listItemIcon}>
         <Tooltip title={expanded ? '' : text} placement="right">
           <Badge badgeContent={count} color="secondary">
-            {iconEl}
+            {icon}
           </Badge>
         </Tooltip>
       </ListItemIcon>

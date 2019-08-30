@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
 
-import AddIcon from '@material-ui/icons/AddCircle';
+import { add } from '../../../icons';
 
 import CreateTaskDialog from '../../../components/CreateTaskDialog';
 import AbstractSidebarItem from '../AbstractSidebarItem';
@@ -20,7 +20,7 @@ const CreateTaskItem = ({ ...other }) => {
     <>
       <AbstractSidebarItem
         onClick={openCreateTaskDialog}
-        icon={<AddIcon />}
+        icon={add}
         text={t('navigation.sidebar.createTask')}
         {...other}
       />

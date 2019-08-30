@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import AbstractSidebarItem from '../AbstractSidebarItem';
-import { mdiCheckboxMarkedCircleOutline } from '@mdi/js';
+
+import { completed } from '../../../icons';
 
 const PATH = '/finished';
 
@@ -18,7 +19,7 @@ const FinishedItem = ({ history, location, ...other }) => {
     <AbstractSidebarItem
       onClick={goToFinished}
       isFocused={isFocused}
-      svgIconPath={mdiCheckboxMarkedCircleOutline}
+      icon={completed}
       text={t('navigation.sidebar.finished')}
       {...other}
     />

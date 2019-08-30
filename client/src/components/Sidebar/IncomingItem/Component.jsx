@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import MailIcon from '@material-ui/icons/Mail';
+import { incoming } from '../../../icons';
 
 import AbstractSidebarItem from '../AbstractSidebarItem';
 
@@ -19,7 +19,7 @@ const IncomingItem = ({ history, location, ...other }) => {
     <AbstractSidebarItem
       onClick={goToIncoming}
       isFocused={isFocused}
-      icon={<MailIcon />}
+      icon={incoming}
       text={t('navigation.sidebar.inbox')}
       {...other}
     />
