@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import MailIcon from '@material-ui/icons/Mail';
 
-import AbstractItem from '../AbstractItem';
+import AbstractSidebarItem from '../AbstractSidebarItem';
 
 const PATH = '/incoming';
 
@@ -16,7 +16,7 @@ const IncomingTaskItem = ({ taskCount, history, location, expanded }) => {
   const isFocused = location.pathname === PATH || location.pathname === '/home';
 
   return (
-    <AbstractItem
+    <AbstractSidebarItem
       expanded={expanded}
       onClick={goToIncoming}
       isFocused={isFocused}

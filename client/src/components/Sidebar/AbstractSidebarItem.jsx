@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   focused: {},
 }));
 
-const AbstractItem = ({ expanded, onClick, text, count, isFocused, icon }) => {
+const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon }) => {
   const classes = useStyles();
 
   const className = clsx(classes.listItem, { [classes.focused]: isFocused });
@@ -50,7 +50,7 @@ const AbstractItem = ({ expanded, onClick, text, count, isFocused, icon }) => {
   );
 };
 
-AbstractItem.propTypes = {
+AbstractSidebarItem.propTypes = {
   expanded: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   isFocused: PropTypes.bool,
@@ -58,4 +58,4 @@ AbstractItem.propTypes = {
   count: PropTypes.number,
 };
 
-export default AbstractItem;
+export default AbstractSidebarItem;

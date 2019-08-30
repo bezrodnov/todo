@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import AddIcon from '@material-ui/icons/AddCircle';
 
 import CreateTaskDialog from '../../../components/CreateTaskDialog';
-import AbstractItem from '../AbstractItem';
+import AbstractSidebarItem from '../AbstractSidebarItem';
 
 const CreateTaskItem = ({ expanded }) => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ const CreateTaskItem = ({ expanded }) => {
 
   return (
     <>
-      <AbstractItem
+      <AbstractSidebarItem
         expanded={expanded}
         onClick={openCreateTaskDialog}
         icon={<AddIcon />}

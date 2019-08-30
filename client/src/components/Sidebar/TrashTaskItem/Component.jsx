@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import AbstractItem from '../AbstractItem';
+import AbstractSidebarItem from '../AbstractSidebarItem';
 
 const PATH = '/trash';
 
@@ -16,7 +16,7 @@ const TrashTaskItem = ({ taskCount, history, location, expanded }) => {
   const isFocused = location.pathname === PATH;
 
   return (
-    <AbstractItem
+    <AbstractSidebarItem
       expanded={expanded}
       onClick={goToTrash}
       isFocused={isFocused}

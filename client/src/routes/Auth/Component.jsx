@@ -47,6 +47,9 @@ const useStyles = makeStyles(theme => ({
   },
   formContainer: {
     position: 'relative',
+    '& input:-webkit-autofill': {
+      '-webkit-transition-delay': '9999999s',
+    },
   },
   signUnForm: {
     position: 'absolute',
@@ -54,7 +57,7 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     width: '100%',
     height: '100%',
-    zIndex: 1,
+    zIndex: 100,
     clipPath: 'circle(25px at calc(100% - 50px) 50px)',
     background: theme.palette.secondary.main,
     transition: theme.transitions.create(['clip-path'], {
@@ -128,8 +131,8 @@ const Auth = ({ login, register }) => {
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.formContainer}>
-        <SignInForm login={login} />
         <SignUpForm register={register} />
+        <SignInForm login={login} />
       </Grid>
     </Grid>
   );
@@ -225,16 +228,21 @@ const SignUpForm = ({ register }) => {
         <Typography component="h1" variant="h5">
           {t('SignUp')}
         </Typography>
-        <form className={classes.form} onSubmit={onSubmit}>
+        <form className={classes.form} onSubmit={onSubmit} id="signup">
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             label={t('Email')}
-            name="newEmail"
-            autoFocus
+            name="email"
             inputRef={emailRef}
+            inputProps={{
+              autoComplete: 'username email',
+              form: {
+                autoComplete: 'off',
+              },
+            }}
           />
           <TextField
             variant="outlined"
