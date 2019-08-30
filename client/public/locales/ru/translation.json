@@ -47,7 +47,11 @@
     "sidebar": {
       "inbox": "Входящие",
       "trash": "Корзина",
-      "createTask": "Создать"
+      "createTask": "Создать",
+      "someday": "Когда-нибудь",
+      "delayed": "Отложенные",
+      "finished": "Завершенные",
+      "projects": "Проекты"
     }
   },
 

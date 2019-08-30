@@ -47,7 +47,11 @@
     "sidebar": {
       "inbox": "Inbox",
       "trash": "Trash",
-      "createTask": "Create Task"
+      "createTask": "Create Task",
+      "someday": "Someday/Maybe",
+      "delayed": "Delayed",
+      "finished": "Finished",
+      "projects": "Projects"
     }
   },
 

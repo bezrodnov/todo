@@ -14,6 +14,8 @@ import IncomingItem from './IncomingItem';
 import TrashItem from './TrashItem';
 import ProjectsItem from './ProjectsItem';
 import DelayedItem from './DelayedItem';
+import FinishedItem from './FinishedItem';
+import SomedayItem from './SomedayItem';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -90,9 +92,13 @@ const Sidebar = () => {
       <List className={classes.list}>
         <CreateTaskItem expanded={expanded} />
         <IncomingItem expanded={expanded} />
-        <TrashItem expanded={expanded} />
         <ProjectsItem expanded={expanded} />
         <DelayedItem expanded={expanded} />
+        <SomedayItem expanded={expanded} />
+        <Divider />
+        <FinishedItem expanded={expanded} />
+        <Divider />
+        <TrashItem expanded={expanded} />
       </List>
       <Divider />
     </Box>

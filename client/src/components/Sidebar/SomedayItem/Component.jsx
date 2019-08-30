@@ -2,34 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import TimeIcon from '@material-ui/icons/Schedule';
-
 import AbstractSidebarItem from '../AbstractSidebarItem';
+import { mdiCalendarClock } from '@mdi/js';
 
-const PATH = '/delayed';
+const PATH = '/someday';
 
-const DelayedItem = ({ history, location, ...other }) => {
+const SomedayItem = ({ history, location, ...other }) => {
   const { t } = useTranslation();
 
-  const goToDelayed = () => history.push(PATH);
+  const goToSomeday = () => history.push(PATH);
 
   const isFocused = location.pathname === PATH;
 
   return (
     <AbstractSidebarItem
-      onClick={goToDelayed}
+      onClick={goToSomeday}
       isFocused={isFocused}
-      icon={<TimeIcon />}
-      text={t('navigation.sidebar.delayed')}
+      svgIconPath={mdiCalendarClock}
+      text={t('navigation.sidebar.someday')}
       {...other}
     />
   );
 };
 
-DelayedItem.propTypes = {
+SomedayItem.propTypes = {
   expanded: PropTypes.bool.isRequired,
   count: PropTypes.number,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 };
 
-export default DelayedItem;
+export default SomedayItem;

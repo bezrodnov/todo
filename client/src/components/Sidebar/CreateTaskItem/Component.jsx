@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/AddCircle';
 import CreateTaskDialog from '../../../components/CreateTaskDialog';
 import AbstractSidebarItem from '../AbstractSidebarItem';
 
-const CreateTaskItem = ({ expanded }) => {
+const CreateTaskItem = ({ ...other }) => {
   const { t } = useTranslation();
 
   const [isCreateTaskDialogOpen, setCreateTaskDialogOpen] = useState(false);
@@ -19,10 +19,10 @@ const CreateTaskItem = ({ expanded }) => {
   return (
     <>
       <AbstractSidebarItem
-        expanded={expanded}
         onClick={openCreateTaskDialog}
         icon={<AddIcon />}
         text={t('navigation.sidebar.createTask')}
+        {...other}
       />
       <CreateTaskDialog open={isCreateTaskDialogOpen} onClose={closeCreateTaskDialog} />
     </>

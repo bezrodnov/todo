@@ -2,34 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import TimeIcon from '@material-ui/icons/Schedule';
-
 import AbstractSidebarItem from '../AbstractSidebarItem';
+import { mdiCheckboxMarkedCircleOutline } from '@mdi/js';
 
-const PATH = '/delayed';
+const PATH = '/finished';
 
-const DelayedItem = ({ history, location, ...other }) => {
+const FinishedItem = ({ history, location, ...other }) => {
   const { t } = useTranslation();
 
-  const goToDelayed = () => history.push(PATH);
+  const goToFinished = () => history.push(PATH);
 
   const isFocused = location.pathname === PATH;
 
   return (
     <AbstractSidebarItem
-      onClick={goToDelayed}
+      onClick={goToFinished}
       isFocused={isFocused}
-      icon={<TimeIcon />}
-      text={t('navigation.sidebar.delayed')}
+      svgIconPath={mdiCheckboxMarkedCircleOutline}
+      text={t('navigation.sidebar.finished')}
       {...other}
     />
   );
 };
 
-DelayedItem.propTypes = {
+FinishedItem.propTypes = {
   expanded: PropTypes.bool.isRequired,
   count: PropTypes.number,
   location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired,
 };
 
-export default DelayedItem;
+export default FinishedItem;
