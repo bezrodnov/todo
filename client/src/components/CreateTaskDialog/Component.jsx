@@ -70,13 +70,13 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             label={t('task.name')}
             className={classes.formControl}
             placeholder={t('task.name')}
-            {...form.fieldProps('name')}
+            {...form.getFieldProps('name')}
           />
           <TextField
             label={t('task.description')}
             className={classes.formControl}
             placeholder={t('task.description')}
-            {...form.fieldProps('description')}
+            {...form.getFieldProps('description')}
           />
           <KeyboardDatePicker
             autoOk
@@ -84,7 +84,7 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             label={t('task.estimatedDate')}
             className={classes.formControl}
             format="MM/dd/yyyy"
-            {...form.fieldProps('estimatedDate')}
+            {...form.getFieldProps('estimatedDate')}
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
@@ -94,7 +94,7 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             className={classes.formControl}
             placeholder={t('task.notes')}
             multiline
-            {...form.fieldProps('notes')}
+            {...form.getFieldProps('notes')}
           />
         </form>
       </DialogContent>

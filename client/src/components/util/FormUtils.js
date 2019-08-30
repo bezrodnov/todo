@@ -39,15 +39,24 @@ export const useForm = (fields, opts = {}) => {
     }
   };
 
-  return {
-    values,
-    fieldProps: name => ({
+  const getFieldProps = name => {
+    const props = {
       value: values[name],
       error: !!errors[name],
-      helperText: errors[name],
       onBlur: handleBlur(name),
       onChange: handleChange(name),
-    }),
-    isValid: () => !Object.keys(errors).some(name => errors[name]),
+    };
+
+    if (isHelperTextSupported(fieldMap[name])) {
+      props.helperText = errors[name];
+    }
+
+    return props;
   };
+
+  const isValid = () => !Object.keys(errors).some(name => errors[name]);
+
+  return { isValid, values, getFieldProps };
 };
+
+const isHelperTextSupported = ({ type }) => ['select'].indexOf(type) === -1;

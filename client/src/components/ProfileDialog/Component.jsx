@@ -74,18 +74,18 @@ const DialogBody = ({ user, updateUser, onClose, isLoading }) => {
             label={t('user.firstName')}
             className={classes.formControl}
             placeholder={t('user.firstName')}
-            {...form.fieldProps('firstName')}
+            {...form.getFieldProps('firstName')}
           />
           <TextField
             required
             label={t('user.lastName')}
             className={classes.formControl}
             placeholder={t('user.lastName')}
-            {...form.fieldProps('lastName')}
+            {...form.getFieldProps('lastName')}
           />
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="user-gender">{t('user.gender')}</InputLabel>
-            <Select {...form.fieldProps('gender')} inputProps={{ id: 'user-gender' }}>
+            <Select {...form.getFieldProps('gender')} inputProps={{ id: 'user-gender' }}>
               <MenuItem value="male">{t('gender.male')}</MenuItem>
               <MenuItem value="female">{t('gender.female')}</MenuItem>
               <MenuItem value="other">{t('gender.other')}</MenuItem>
