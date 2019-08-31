@@ -220,7 +220,11 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
         <div>
           {availableActions.map(actionType => {
             const ButtonComponent = ACTION_BUTTONS[actionType];
-            return ButtonComponent && <ButtonComponent task={task} callback={onResolveEnd} actions={actions} />;
+            return (
+              ButtonComponent && (
+                <ButtonComponent key={actionType} task={task} callback={onResolveEnd} actions={actions} />
+              )
+            );
           })}
         </div>
       </div>
@@ -239,7 +243,7 @@ IncomingTaskView.propTypes = {
     creationDate: PropTypes.string,
   }).isRequired,
   isLoading: PropTypes.bool.isRequired,
-  markAsTrash: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 export default IncomingTaskView;

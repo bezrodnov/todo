@@ -108,7 +108,8 @@
     "project": "Create Project",
     "delay": "Postpone Task",
     "schedule": "Schedule",
-    "now": "Finish Task Now"
+    "now": "Finish Task Now",
+    "someday": "Someday/Maybe"
   },
 
   "incomingTask": {
