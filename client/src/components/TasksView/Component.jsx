@@ -79,7 +79,7 @@ const TasksView = ({ tasks, isLoading, markAsTrash }) => {
     const task = tasks[taskNo];
     const label = t('taskDetails.indexInRange', { index: taskNo + 1, total: tasks.length });
 
-    const moveTaskToTrash = () => markAsTrash(task);
+    const moveTaskToTrash = () => markAsTrash(task._id);
 
     return (
       <div key={key} className={classes.taskContainer}>
@@ -104,7 +104,6 @@ const TasksView = ({ tasks, isLoading, markAsTrash }) => {
             </Tooltip>
           </div>
         </div>
-        {isLoading && <LoadingMask />}
       </div>
     );
   };
@@ -114,7 +113,10 @@ const TasksView = ({ tasks, isLoading, markAsTrash }) => {
   }
 
   return (
-    <VirtualizeSwipeableViews slideRenderer={slideRenderer} className={classes.tasksContainer} enableMouseEvents />
+    <>
+      <VirtualizeSwipeableViews slideRenderer={slideRenderer} className={classes.tasksContainer} enableMouseEvents />
+      {isLoading && <LoadingMask />}
+    </>
   );
 };
 
@@ -129,7 +131,7 @@ TasksView.propTypes = {
       creationDate: PropTypes.string,
     })
   ).isRequired,
-  isLoading: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   markAsTrash: PropTypes.func.isRequired,
 };
 
