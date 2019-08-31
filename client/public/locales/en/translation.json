@@ -5,6 +5,8 @@
     "save": "Save",
     "cancel": "Cancel",
     "ok": "OK",
+    "yes": "Yes",
+    "no": "No",
     "form": {
       "fieldRequired": "This field is required",
       "enterAllMandatoryFields": "Please enter all mandatory fields."
@@ -101,5 +103,9 @@
     "indexInRange": "Task {{index}} of {{total}}",
     "quickDecisions": "Quick Decisions",
     "creationDate": "on {{date}}"
+  },
+
+  "incomingTask": {
+    "isActionRequired": "Is Action Required?"
   }
 }

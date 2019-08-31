@@ -69,8 +69,9 @@ export function* loadTasksOnUserLoadSaga() {
 export function* markTaskAsTrashSaga() {
   yield takeLatest(MARK_TASK_AS_TRASH, function*(action) {
     try {
-      yield callApi('markTaskAsTrash', action.payload);
-      yield putAction(MARK_TASK_AS_TRASH_SUCCESS, action.payload);
+      yield callApi('markTaskAsTrash', action.payload.id);
+      yield putAction(MARK_TASK_AS_TRASH_SUCCESS, action.payload.id);
+      action.payload.onSuccess();
     } catch (error) {
       yield putError(MARK_TASK_AS_TRASH_FAIL, error);
     }

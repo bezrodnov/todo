@@ -5,6 +5,8 @@
     "save": "Сохранить",
     "cancel": "Отмена",
     "ok": "ОК",
+    "yes": "Да",
+    "no": "Нет",
     "form": {
       "fieldRequired": "Это обязательное поле",
       "enterAllMandatoryFields": "Пожалуйста, заполните все обязательные поля."
@@ -101,5 +103,9 @@
     "indexInRange": "Задача {{index}} из {{total}}",
     "quickDecisions": "Быстрые решения",
     "creationDate": "от {{date}}"
+  },
+
+  "incomingTask": {
+    "isActionRequired": "Требует ли задача от Вас действия?"
   }
 }

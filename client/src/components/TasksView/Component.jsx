@@ -1,19 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
-
 import { makeStyles } from '@material-ui/core/styles';
 
+import IncomingTaskView from '../IncomingTaskView';
 import LoadingMask from '../util/LoadingMask';
-import { formatDate } from '../util/Date';
-import { trash } from '../../icons';
 
 const useStyles = makeStyles(theme => ({
   tasksContainer: {
@@ -39,82 +34,47 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     padding: theme.spacing(2),
   },
-  taskDetails: {
-    width: '100%',
-    position: 'relative',
-  },
-  taskName: {
-    pointerEvents: 'none',
-  },
-  creationDate: {
-    position: 'absolute',
-    top: '-0.4rem',
-    padding: '0 0.25rem',
-    fontSize: '0.75rem',
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    fontWeight: '400',
-    lineHeight: 1,
-    letterSpacing: '0.00938em',
-    color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.background.default,
-    right: theme.spacing(4),
-  },
-  quickDecisions: {
-    paddingTop: theme.spacing(2),
-  },
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'center',
-  },
 }));
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
-const TasksView = ({ tasks, isLoading, markAsTrash }) => {
+const TasksView = ({ tasks, isLoading }) => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const [swipeDisabled, setSwipeDisabled] = useState(false);
+
+  if (tasks.length === 0) {
+    return null;
+  }
+
+  const disableSwipe = () => setSwipeDisabled(true);
+  const enableSwipe = () => setSwipeDisabled(false);
 
   const slideRenderer = ({ index, key }) => {
     const taskNo = mod(index, tasks.length);
     const task = tasks[taskNo];
     const label = t('taskDetails.indexInRange', { index: taskNo + 1, total: tasks.length });
 
-    const moveTaskToTrash = () => markAsTrash(task._id);
-
     return (
-      <div key={key} className={classes.taskContainer}>
-        <div className={classes.taskDetails}>
-          <TextField
-            variant="outlined"
-            label={label}
-            className={classes.taskName}
-            value={task.name}
-            multiline
-            fullWidth
-          />
-          <div className={classes.creationDate}>
-            {t('taskDetails.creationDate', { date: formatDate(task.creationDate) })}
-          </div>
-        </div>
-        <div className={classes.quickDecisions}>
-          {t('taskDetails.quickDecisions')}
-          <div className={classes.toolbar}>
-            <Tooltip title={t('moveTaskToTrash')}>
-              <IconButton onClick={moveTaskToTrash}>{trash}</IconButton>
-            </Tooltip>
-          </div>
-        </div>
-      </div>
+      <IncomingTaskView
+        key={key + task._id}
+        task={task}
+        taskLabel={label}
+        className={classes.taskContainer}
+        onResolveStart={disableSwipe}
+        onResolveEnd={enableSwipe}
+      />
     );
   };
 
-  if (tasks.length === 0) {
-    return null;
-  }
-
   return (
     <>
-      <VirtualizeSwipeableViews slideRenderer={slideRenderer} className={classes.tasksContainer} enableMouseEvents />
+      <VirtualizeSwipeableViews
+        slideRenderer={slideRenderer}
+        className={classes.tasksContainer}
+        enableMouseEvents
+        disabled={swipeDisabled}
+      />
       {isLoading && <LoadingMask />}
     </>
   );
@@ -132,7 +92,6 @@ TasksView.propTypes = {
     })
   ).isRequired,
   isLoading: PropTypes.bool.isRequired,
-  markAsTrash: PropTypes.func.isRequired,
 };
 
 export default TasksView;
