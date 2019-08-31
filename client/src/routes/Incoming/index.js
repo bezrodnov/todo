@@ -1,16 +1,14 @@
 import { connect } from 'react-redux';
 
-import { generateAction, MARK_TASK_AS_TRASH } from '../../redux/actions';
 import Component from './Component';
 
+import { incomingTasksSelector } from '../../redux/selectors';
+
 const mapStateToProps = state => ({
-  tasks: state.task.tasks.filter(task => task.type === 'incoming'),
-  isLoadingTasks: state.task.isLoading,
+  tasks: incomingTasksSelector(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  markTaskAsTrash: id => dispatch(generateAction(MARK_TASK_AS_TRASH, id)),
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,

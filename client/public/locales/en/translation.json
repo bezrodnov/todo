@@ -95,5 +95,11 @@
       "emptyName": "Task name is required",
       "emptyType": "Task type is required"
     }
+  },
+
+  "taskDetails": {
+    "indexInRange": "Task {{index}} of {{total}}",
+    "quickDecisions": "Quick Decisions",
+    "creationDate": "on {{date}}"
   }
 }

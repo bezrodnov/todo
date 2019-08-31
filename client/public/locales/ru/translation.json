@@ -95,5 +95,11 @@
       "emptyName": "Название задачи - обязательное поле",
       "emptyType": "Отсутствует тип задачи"
     }
+  },
+
+  "taskDetails": {
+    "indexInRange": "Задача {{index}} из {{total}}",
+    "quickDecisions": "Быстрые решения",
+    "creationDate": "от {{date}}"
   }
 }

@@ -23,18 +23,26 @@ const useStyles = makeStyles(theme => ({
   sideBar: {
     overflow: 'hidden',
     background: theme.palette.primary.main,
-    transition: theme.transitions.create(['width'], {
+    transition: theme.transitions.create(['width', 'min-width', 'max-width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.standard,
     }),
     width: theme.spacing(8),
+    minWidth: theme.spacing(8),
+    maxWidth: theme.spacing(8),
     [theme.breakpoints.down('xs')]: {
       width: theme.spacing(6),
+      minWidth: theme.spacing(6),
+      maxWidth: theme.spacing(6),
     },
     '&$expanded': {
       width: theme.spacing(24),
+      minWidth: theme.spacing(24),
+      maxWidth: theme.spacing(24),
       [theme.breakpoints.down('xs')]: {
         width: theme.spacing(6),
+        minWidth: theme.spacing(6),
+        maxWidth: theme.spacing(6),
       },
     },
   },

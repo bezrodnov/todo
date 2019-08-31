@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
   pageContents: {
     flex: 1,
+    transform: 'translate(0px, 0px)',
   },
 }));
 
