@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -12,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import LoadingMask from '../util/LoadingMask';
 import { formatDate } from '../util/Date';
-import { trash } from '../../icons';
+import { trash, delay, project, someday, completed } from '../../icons';
 
 const useStyles = makeStyles(theme => ({
   startResolveQuery: {
@@ -41,31 +40,131 @@ const useStyles = makeStyles(theme => ({
     right: theme.spacing(4),
   },
   startResolveBar: {
+    padding: theme.spacing(2, 0, 0),
     '& button': {
-      padding: theme.spacing(2, 0),
+      padding: theme.spacing(1, 2),
+      margin: theme.spacing(0, 0.5),
     },
   },
   actionsBar: {
     paddingTop: theme.spacing(2),
-  },
-  toolbar: {
-    display: 'flex',
-    justifyContent: 'center',
+    '& > div': {
+      paddingTop: theme.spacing(2),
+      display: 'flex',
+      justifyContent: 'center',
+      '& button': {
+        margin: theme.spacing(0, 0.5),
+      },
+    },
   },
   resolveStarted: {
     visibility: 'hidden',
   },
 }));
 
-const IncomingTaskView = ({ task, taskLabel, markAsTrash, onResolveStart, onResolveEnd, isSaving, ...other }) => {
+const TrashActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    actions.markAsTrash(task, callback);
+  };
+
+  return (
+    <Tooltip title={t('taskActions.trash')}>
+      <Button variant="outlined" onClick={onClick}>
+        {trash}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const ProjectActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "project" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.project')}>
+      <Button variant="outlined" onClick={onClick}>
+        {project}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const ScheduleActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "schedule" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.schedule')}>
+      <Button variant="outlined" onClick={onClick}>
+        {delay}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const DelayActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "delay" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.delay')}>
+      <Button variant="outlined" onClick={onClick}>
+        {delay}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const SomedayActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "someday" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.someday')}>
+      <Button variant="outlined" onClick={onClick}>
+        {someday}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const DoNowActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "now" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.now')}>
+      <Button variant="outlined" onClick={onClick}>
+        {completed}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const ACTION_BUTTONS = {
+  trash: TrashActionButton,
+  project: ProjectActionButton,
+  schedule: ScheduleActionButton,
+  delay: DelayActionButton,
+  now: DoNowActionButton,
+  someday: SomedayActionButton,
+};
+
+const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveEnd, isLoading, ...other }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const [isActionRequired, setActionRequired] = useState();
-
-  const moveTaskToTrash = () => {
-    onResolveStart();
-    markAsTrash(task, onResolveEnd);
-  };
 
   const onActionRequiredClick = isRequired => () => {
     onResolveStart();
@@ -73,6 +172,21 @@ const IncomingTaskView = ({ task, taskLabel, markAsTrash, onResolveStart, onReso
   };
 
   const isResolveStarted = isActionRequired !== undefined;
+
+  const renderResolveButton = isActionRequired => (
+    <Button variant="contained" onClick={onActionRequiredClick(isActionRequired)}>
+      {t(isActionRequired ? 'global.yes' : 'global.no')}
+    </Button>
+  );
+
+  const availableActions = [];
+  if (!isResolveStarted) {
+    availableActions.push('project', 'delay', 'schedule', 'someday', 'reference', 'delegate', 'trash');
+  } else if (isActionRequired) {
+    availableActions.push('project', 'now', 'delegate', 'schedule', 'repeat');
+  } else {
+    availableActions.push('trash', 'reference', 'someday');
+  }
 
   return (
     <div {...other}>
@@ -97,19 +211,20 @@ const IncomingTaskView = ({ task, taskLabel, markAsTrash, onResolveStart, onReso
       </div>
 
       <div className={clsx(classes.startResolveBar, { [classes.resolveStarted]: isResolveStarted })}>
-        <Button onClick={onActionRequiredClick(false)}>{t('global.no')}</Button>
-        <Button onClick={onActionRequiredClick(true)}>{t('global.yes')}</Button>
+        {renderResolveButton(false)}
+        {renderResolveButton(true)}
       </div>
 
       <div className={classes.actionsBar}>
-        <span className={clsx({ [classes.resolveStarted]: isResolveStarted })}>{t('taskDetails.quickDecisions')}</span>
-        <div className={classes.toolbar}>
-          <Tooltip title={t('moveTaskToTrash')}>
-            <IconButton onClick={moveTaskToTrash}>{trash}</IconButton>
-          </Tooltip>
+        <span>{t('taskDetails.availableActions')}</span>
+        <div>
+          {availableActions.map(actionType => {
+            const ButtonComponent = ACTION_BUTTONS[actionType];
+            return ButtonComponent && <ButtonComponent task={task} callback={onResolveEnd} actions={actions} />;
+          })}
         </div>
       </div>
-      {isSaving && <LoadingMask />}
+      {isLoading && <LoadingMask />}
     </div>
   );
 };
@@ -123,7 +238,7 @@ IncomingTaskView.propTypes = {
     estimatedDate: PropTypes.string,
     creationDate: PropTypes.string,
   }).isRequired,
-  isSaving: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   markAsTrash: PropTypes.func.isRequired,
 };
 

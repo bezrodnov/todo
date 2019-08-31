@@ -29,7 +29,7 @@ const Trash = ({ tasks, deleteTask, isLoadingTasks }) => {
       <List className="trash-task-list">
         {tasks.map(task => (
           <ListItem key={task._id} button className="trash-task-list-item">
-            <Tooltip title={t('deleteTask')} className="trash-icon">
+            <Tooltip title={t('taskActions.delete')} className="trash-icon">
               <ListItemIcon onClick={getDeleteTaskHandler(task)}>
                 <DeleteIcon />
               </ListItemIcon>

@@ -77,9 +77,6 @@
     "theme": "Тема"
   },
 
-  "moveTaskToTrash": "Переместить Задачу в Корзину",
-  "deleteTask": "Удалить Задачу",
-
   "createTaskDialog": {
     "title": "Новая Задача"
   },
@@ -101,8 +98,17 @@
 
   "taskDetails": {
     "indexInRange": "Задача {{index}} из {{total}}",
-    "quickDecisions": "Быстрые решения",
+    "availableActions": "Доступные действия",
     "creationDate": "от {{date}}"
+  },
+
+  "taskActions": {
+    "trash": "Переместить задачу в корзину",
+    "delete": "Удалить задачу",
+    "project": "Создать многошаговый проект",
+    "delay": "Отложить задачу",
+    "schedule": "Запланировать выполнение задачи",
+    "now": "Выполнить задачу сейчас"
   },
 
   "incomingTask": {

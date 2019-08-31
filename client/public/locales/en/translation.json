@@ -77,9 +77,6 @@
     "theme": "Theme"
   },
 
-  "moveTaskToTrash": "Move Task to Trash",
-  "deleteTask": "Delete Task",
-
   "createTaskDialog": {
     "title": "New Task"
   },
@@ -101,11 +98,20 @@
 
   "taskDetails": {
     "indexInRange": "Task {{index}} of {{total}}",
-    "quickDecisions": "Quick Decisions",
+    "availableActions": "Available Actions",
     "creationDate": "on {{date}}"
   },
 
+  "taskActions": {
+    "trash": "Move Task to Trash",
+    "delete": "Delete Task",
+    "project": "Create Project",
+    "delay": "Postpone Task",
+    "schedule": "Schedule",
+    "now": "Finish Task Now"
+  },
+
   "incomingTask": {
-    "isActionRequired": "Is Action Required?"
+    "isActionRequired": "Does this task require any action from your side?"
   }
 }

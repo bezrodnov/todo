@@ -4,10 +4,14 @@ import { generateAction, MARK_TASK_AS_TRASH } from '../../redux/actions';
 
 import Component from './Component';
 
-const mapStateToProps = ({ task: { isSaving } }) => ({ isSaving });
+const mapStateToProps = ({ task: { isSaving, isLoading } }) => ({
+  isLoading: isLoading || isSaving,
+});
 
 const mapDispatchToProps = dispatch => ({
-  markAsTrash: (task, onSuccess) => dispatch(generateAction(MARK_TASK_AS_TRASH, { id: task._id, onSuccess })),
+  actions: {
+    markAsTrash: (task, onSuccess) => dispatch(generateAction(MARK_TASK_AS_TRASH, { id: task._id, onSuccess })),
+  },
 });
 
 export default connect(
