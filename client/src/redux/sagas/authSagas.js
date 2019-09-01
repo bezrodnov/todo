@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga/effects';
-import { putAction, putError, callApi, getAuthToken, setAuthToken, setRequestHeaderAuthToken } from '../utils';
-import { LOAD_USER, USER_LOADED, AUTH_ERROR, LOGIN, LOGIN_SUCCESS, LOGOUT, SET_ERROR } from '../actions';
+import { putAction, putError, callApi, delay, getAuthToken, setAuthToken, setRequestHeaderAuthToken } from '../utils';
+import { LOAD_USER, USER_LOADED, AUTH_ERROR, LOGIN, LOGIN_SUCCESS, LOGOUT, SET_ERROR, CHECK_SESSION } from '../actions';
 
 export function* loadUserSaga() {
   yield takeLatest(LOAD_USER, function*() {
@@ -41,6 +41,7 @@ export function* loginSaga() {
       setAuthToken(token);
       yield putAction(LOGIN_SUCCESS);
       yield putAction(USER_LOADED, { ...user, token });
+      yield putAction(CHECK_SESSION);
     } catch (error) {
       yield putError(AUTH_ERROR, error);
     }
@@ -50,5 +51,17 @@ export function* loginSaga() {
 export function* logoutSaga() {
   yield takeLatest(LOGOUT, function*(action) {
     yield setAuthToken();
+  });
+}
+
+export function* checkSessionSaga() {
+  yield takeLatest(CHECK_SESSION, function*() {
+    try {
+      yield callApi('isAlive');
+      yield delay(60000);
+      yield putAction(CHECK_SESSION);
+    } catch (error) {
+      yield putAction(LOGOUT);
+    }
   });
 }

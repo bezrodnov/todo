@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { loadUserSaga, loginSaga, authErrorSaga, logoutSaga } from './authSagas';
+import { loadUserSaga, loginSaga, authErrorSaga, logoutSaga, checkSessionSaga } from './authSagas';
 import { updateUserSaga, updateUserFailSaga, registerSaga, registerFailSaga } from './userSagas';
 import {
   saveTaskSaga,
@@ -19,6 +19,7 @@ export default function* saga() {
     registerSaga(),
     registerFailSaga(),
     logoutSaga(),
+    checkSessionSaga(),
     updateUserSaga(),
     updateUserFailSaga(),
     saveTaskSaga(),

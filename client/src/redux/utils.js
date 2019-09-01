@@ -11,7 +11,7 @@ export const putError = (action, error) => {
 };
 export const callApi = (method, ...args) => call(api[method], ...args);
 
-// TODO: update token
+// TODO: update token before moving to prod
 const AUTH_TOKEN_STORAGE_KEY = 'ABEZRODNOV_BLOG_AUTH_TOKEN';
 
 export const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_STORAGE_KEY);
@@ -29,3 +29,5 @@ export const setRequestHeaderAuthToken = token => {
   axios.defaults.headers.common['x-auth-token'] = token;
   axios.defaults.headers.common['Access-Control-Allow-Origin'] = true;
 };
+
+export const delay = ms => new Promise(res => setTimeout(res, ms));

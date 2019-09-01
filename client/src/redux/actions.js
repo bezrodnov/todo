@@ -1,6 +1,7 @@
 export const LOAD_USER = 'LOAD_USER';
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const CHECK_SESSION = 'CHECK_SESSION';
 
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
