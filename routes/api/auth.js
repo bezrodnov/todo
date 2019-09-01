@@ -53,4 +53,13 @@ router.get('/user', auth, (req, res) => {
     .then(user => res.json(user));
 });
 
+/**
+ * @route GET api/auth/isalive
+ * @desc let client now if session is still alive
+ * @access Private
+ */
+router.get('/isalive', auth, (req, res) => {
+  res.status(200).json();
+});
+
 module.exports = router;
