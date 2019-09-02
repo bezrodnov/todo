@@ -57,8 +57,8 @@ export function* logoutSaga() {
 export function* checkSessionSaga() {
   yield takeLatest(CHECK_SESSION, function*() {
     try {
-      yield callApi('isAlive');
       yield delay(60000);
+      yield callApi('isAlive');
       yield putAction(CHECK_SESSION);
     } catch (error) {
       yield putAction(LOGOUT);
