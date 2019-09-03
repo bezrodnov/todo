@@ -11,7 +11,20 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import LoadingMask from '../util/LoadingMask';
 import { formatDate } from '../util/Date';
-import { trash, delay, project, someday, completed, reference, awaiting, repeating, delegate } from '../../icons';
+import { repeating } from '../../icons';
+
+import {
+  Trash,
+  Project,
+  Schedule,
+  Delay,
+  Delegate,
+  Someday,
+  DoNow,
+  Reference,
+  AwaitingProject,
+  Repeat,
+} from './ActionItems';
 
 const useStyles = makeStyles(theme => ({
   startResolveQuery: {
@@ -36,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     letterSpacing: '0.00938em',
     color: theme.palette.text.secondary,
     backgroundColor: theme.palette.background.default,
-    right: theme.spacing(4),
+    right: theme.spacing(1),
   },
   startResolveBar: {
     padding: theme.spacing(2, 0, 0),
@@ -52,7 +65,7 @@ const useStyles = makeStyles(theme => ({
     borderStyle: 'solid',
     borderRadius: theme.shape.borderRadius,
     borderColor: theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)',
-    '& > span': {
+    '& $title': {
       position: 'absolute',
       top: '-0.4rem',
       left: '0.4rem',
@@ -77,169 +90,20 @@ const useStyles = makeStyles(theme => ({
   resolveStarted: {
     visibility: 'hidden',
   },
+  title: {},
 }));
 
-const TrashActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    actions.markAsTrash(task, callback);
-  };
-
-  return (
-    <Tooltip title={t('taskActions.trash')}>
-      <Button variant="outlined" onClick={onClick}>
-        {trash}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const ProjectActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "project" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.project')}>
-      <Button variant="outlined" onClick={onClick}>
-        {project}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const ScheduleActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "schedule" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.schedule')}>
-      <Button variant="outlined" onClick={onClick}>
-        {delay}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const DelayActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "delay" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.delay')}>
-      <Button variant="outlined" onClick={onClick}>
-        {delay}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const SomedayActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "someday" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.someday')}>
-      <Button variant="outlined" onClick={onClick}>
-        {someday}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const DoNowActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "now" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.now')}>
-      <Button variant="outlined" onClick={onClick}>
-        {completed}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const ReferenceActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "reference" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.reference')}>
-      <Button variant="outlined" onClick={onClick}>
-        {reference}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const AwaitingProjectActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "awaiting project" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.awaitingProject')}>
-      <Button variant="outlined" onClick={onClick}>
-        {awaiting}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const RepeatingActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "repeating" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.repeating')}>
-      <Button variant="outlined" onClick={onClick}>
-        {repeating}
-      </Button>
-    </Tooltip>
-  );
-};
-
-const DelegateActionButton = ({ task, actions, callback }) => {
-  const { t } = useTranslation();
-  const onClick = () => {
-    console.warn('action type "delegate" is not implemented yet');
-  };
-
-  return (
-    <Tooltip title={t('taskActions.delegate')}>
-      <Button variant="outlined" onClick={onClick}>
-        {delegate}
-      </Button>
-    </Tooltip>
-  );
-};
-
 const ACTION_BUTTONS = {
-  awaiting: AwaitingProjectActionButton,
-  trash: TrashActionButton,
-  project: ProjectActionButton,
-  schedule: ScheduleActionButton,
-  delay: DelayActionButton,
-  now: DoNowActionButton,
-  someday: SomedayActionButton,
-  reference: ReferenceActionButton,
-  repeating: RepeatingActionButton,
-  delegate: DelegateActionButton,
+  AwaitingProject,
+  Trash,
+  Project,
+  Schedule,
+  Delay,
+  DoNow,
+  Someday,
+  Reference,
+  Repeat,
+  Delegate,
 };
 
 const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveEnd, isLoading, ...other }) => {
@@ -262,11 +126,20 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
 
   const availableActions = [];
   if (!isResolveStarted) {
-    availableActions.push('project', 'delay', 'schedule', 'someday', 'awaiting', 'reference', 'delegate', 'trash');
+    availableActions.push(
+      'Project',
+      'Delay',
+      'Schedule',
+      'Someday',
+      'AwaitingProject',
+      'Reference',
+      'Delegate',
+      'Trash'
+    );
   } else if (isActionRequired) {
-    availableActions.push('project', 'now', 'delegate', 'schedule', 'repeating');
+    availableActions.push('Project', 'DoNow', 'Delegate', 'Schedule', 'Repeat');
   } else {
-    availableActions.push('trash', 'reference', 'someday');
+    availableActions.push('Trash', 'Reference', 'Someday');
   }
 
   return (
@@ -297,7 +170,7 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
       </div>
 
       <div className={classes.actionsBar}>
-        <span>{t('taskDetails.availableActions')}</span>
+        <span className={classes.title}>{t('taskDetails.availableActions')}</span>
         <div>
           {availableActions.map(actionType => {
             const ButtonComponent = ACTION_BUTTONS[actionType];

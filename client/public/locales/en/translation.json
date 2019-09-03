@@ -103,17 +103,50 @@
   },
 
   "taskActions": {
-    "trash": "Move Task to Trash",
-    "delete": "Delete Task",
-    "project": "Create Project",
-    "delay": "Postpone Task",
-    "schedule": "Schedule",
-    "now": "Finish Task Now",
-    "someday": "Someday/Maybe",
-    "reference": "Reference Material",
-    "awaitingProject": "Awaiting Project",
-    "repeating": "Repeating Activity",
-    "delegate": "Delegate Task"
+    "trash": {
+      "title": "Move Task to Trash",
+      "description": ""
+    },
+    "delete": {
+      "title": "Delete Task",
+      "description": ""
+    },
+    "project": {
+      "title": "Create Project",
+      "description": ""
+    },
+    "delay": {
+      "title": "Postpone Task",
+      "description": ""
+    },
+    "schedule": {
+      "title": "Schedule",
+      "description": ""
+    },
+    "now": {
+      "title": "Finish Task Now",
+      "description": ""
+    },
+    "someday": {
+      "title": "Someday/Maybe",
+      "description": ""
+    },
+    "reference": {
+      "title": "Reference Material",
+      "description": ""
+    },
+    "awaitingProject": {
+      "title": "Awaiting Project",
+      "description": ""
+    },
+    "repeating": {
+      "title": "Repeating Activity",
+      "description": ""
+    },
+    "delegate": {
+      "title": "Delegate Task",
+      "description": ""
+    }
   },
 
   "incomingTask": {
