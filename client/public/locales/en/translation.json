@@ -109,7 +109,11 @@
     "delay": "Postpone Task",
     "schedule": "Schedule",
     "now": "Finish Task Now",
-    "someday": "Someday/Maybe"
+    "someday": "Someday/Maybe",
+    "reference": "Reference Material",
+    "awaitingProject": "Awaiting Project",
+    "repeating": "Repeating Activity",
+    "delegate": "Delegate Task"
   },
 
   "incomingTask": {

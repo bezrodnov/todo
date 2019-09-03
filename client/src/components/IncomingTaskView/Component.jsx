@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import LoadingMask from '../util/LoadingMask';
 import { formatDate } from '../util/Date';
-import { trash, delay, project, someday, completed } from '../../icons';
+import { trash, delay, project, someday, completed, reference, awaiting, repeating, delegate } from '../../icons';
 
 const useStyles = makeStyles(theme => ({
   startResolveQuery: {
@@ -152,13 +152,77 @@ const DoNowActionButton = ({ task, actions, callback }) => {
   );
 };
 
+const ReferenceActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "reference" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.reference')}>
+      <Button variant="outlined" onClick={onClick}>
+        {reference}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const AwaitingProjectActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "awaiting project" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.awaitingProject')}>
+      <Button variant="outlined" onClick={onClick}>
+        {awaiting}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const RepeatingActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "repeating" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.repeating')}>
+      <Button variant="outlined" onClick={onClick}>
+        {repeating}
+      </Button>
+    </Tooltip>
+  );
+};
+
+const DelegateActionButton = ({ task, actions, callback }) => {
+  const { t } = useTranslation();
+  const onClick = () => {
+    console.warn('action type "delegate" is not implemented yet');
+  };
+
+  return (
+    <Tooltip title={t('taskActions.delegate')}>
+      <Button variant="outlined" onClick={onClick}>
+        {delegate}
+      </Button>
+    </Tooltip>
+  );
+};
+
 const ACTION_BUTTONS = {
+  awaiting: AwaitingProjectActionButton,
   trash: TrashActionButton,
   project: ProjectActionButton,
   schedule: ScheduleActionButton,
   delay: DelayActionButton,
   now: DoNowActionButton,
   someday: SomedayActionButton,
+  reference: ReferenceActionButton,
+  repeating: RepeatingActionButton,
+  delegate: DelegateActionButton,
 };
 
 const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveEnd, isLoading, ...other }) => {
@@ -181,9 +245,9 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
 
   const availableActions = [];
   if (!isResolveStarted) {
-    availableActions.push('project', 'delay', 'schedule', 'someday', 'reference', 'delegate', 'trash');
+    availableActions.push('project', 'delay', 'schedule', 'someday', 'awaiting', 'reference', 'delegate', 'trash');
   } else if (isActionRequired) {
-    availableActions.push('project', 'now', 'delegate', 'schedule', 'repeat');
+    availableActions.push('project', 'now', 'delegate', 'schedule', 'repeating');
   } else {
     availableActions.push('trash', 'reference', 'someday');
   }
