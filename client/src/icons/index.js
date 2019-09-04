@@ -29,7 +29,7 @@ export const reference = <Reference className="MuiSvgIcon-root" />;
 export const repeating = <Repeating className="MuiSvgIcon-root" />;
 export const search = <Search className="MuiSvgIcon-root" />;
 
-export const completed = (
+export const finished = (
   <SvgIcon>
     <path d={mdiCheckboxMarkedCircleOutline} />
   </SvgIcon>

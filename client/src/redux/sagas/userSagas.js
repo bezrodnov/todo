@@ -23,15 +23,6 @@ export function* updateUserSaga() {
   });
 }
 
-export function* updateUserFailSaga() {
-  yield takeLatest(UPDATE_USER_FAIL, function*(action) {
-    const { message } = action.payload;
-    if (message) {
-      yield putAction(SET_ERROR, { message, id: 'UPDATE_USER_ERROR' });
-    }
-  });
-}
-
 export function* registerSaga() {
   yield takeLatest(REGISTER, function*(action) {
     try {
@@ -41,15 +32,6 @@ export function* registerSaga() {
       yield putAction(REGISTER_SUCCESS, { ...user, token });
     } catch (error) {
       yield putError(REGISTER_FAIL, error);
-    }
-  });
-}
-
-export function* registerFailSaga() {
-  yield takeLatest(REGISTER_FAIL, function*(action) {
-    const { message } = action.payload;
-    if (message) {
-      yield putAction(SET_ERROR, { message, id: 'REGISTER_ERROR' });
     }
   });
 }

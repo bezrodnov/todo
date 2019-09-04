@@ -13,3 +13,18 @@ export const trashTasksSelector = createSelector(
   tasksSelector,
   filterTasksByType('trash')
 );
+
+export const somedayTasksSelector = createSelector(
+  tasksSelector,
+  filterTasksByType('someday')
+);
+
+export const referenceTasksSelector = createSelector(
+  tasksSelector,
+  filterTasksByType('reference')
+);
+
+export const finishedTasksSelector = createSelector(
+  tasksSelector,
+  filterTasksByType('reference')
+);

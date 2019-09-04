@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import BaseActionItem from './BaseActionItem';
 
-import { completed } from '../../../icons';
+import { finished } from '../../../icons';
 
 export default ({ task, actions, callback }) => {
   const { t } = useTranslation();
@@ -12,5 +12,5 @@ export default ({ task, actions, callback }) => {
   const description = t('taskActions.now.description');
   const onClick = () => console.warn('action is not implemented yet');
 
-  return <BaseActionItem title={title} description={description} icon={completed} onClick={onClick} />;
+  return <BaseActionItem title={title} description={description} icon={finished} onClick={onClick} />;
 };

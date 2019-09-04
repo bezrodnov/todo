@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import AbstractSidebarItem from '../AbstractSidebarItem';
 
-import { completed } from '../../../icons';
+import { finished } from '../../../icons';
 
 const PATH = '/finished';
 
@@ -19,7 +19,7 @@ const FinishedItem = ({ history, location, ...other }) => {
     <AbstractSidebarItem
       onClick={goToFinished}
       isFocused={isFocused}
-      icon={completed}
+      icon={finished}
       text={t('navigation.sidebar.finished')}
       {...other}
     />

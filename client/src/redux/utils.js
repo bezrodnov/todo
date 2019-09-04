@@ -1,14 +1,19 @@
 import axios from 'axios';
 import { put, call } from 'redux-saga/effects';
 
-import { generateAction } from './actions';
+import { generateAction, SET_ERROR } from './actions';
 import api from '../api';
 
 export const putAction = (action, payload) => put(generateAction(action, payload));
-export const putError = (action, error) => {
+
+export const putError = function*(action, error) {
   const message = error.response && error.response.data.message;
-  return putAction(action, message && { message });
+  yield putAction(action, message && { message });
+  if (message) {
+    yield putAction(SET_ERROR, { message, id: action });
+  }
 };
+
 export const callApi = (method, ...args) => call(api[method], ...args);
 
 // TODO: update token before moving to prod

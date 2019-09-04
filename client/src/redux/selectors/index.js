@@ -1,1 +1,1 @@
-export { incomingTasksSelector, trashTasksSelector } from './taskSelectors';
+export * from './taskSelectors';

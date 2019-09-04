@@ -28,6 +28,8 @@ const useContentStyles = makeStyles(theme => ({
   },
   error: {
     backgroundColor: theme.palette.error.dark,
+    display: 'flex',
+    flexWrap: 'nowrap',
   },
   info: {
     backgroundColor: theme.palette.primary.main,

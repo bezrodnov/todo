@@ -25,15 +25,6 @@ export function* loadUserSaga() {
   });
 }
 
-export function* authErrorSaga() {
-  yield takeLatest(AUTH_ERROR, function*(action) {
-    const { message } = action.payload;
-    if (message) {
-      yield putAction(SET_ERROR, { message, id: 'AUTH_ERROR' });
-    }
-  });
-}
-
 export function* loginSaga() {
   yield takeLatest(LOGIN, function*(action) {
     try {

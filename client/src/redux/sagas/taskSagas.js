@@ -30,15 +30,6 @@ export function* saveTaskSaga() {
   });
 }
 
-export function* saveTaskFailSaga() {
-  yield takeLatest(SAVE_TASK_FAIL, function*(action) {
-    const { message } = action.payload;
-    if (message) {
-      yield putAction(SET_ERROR, { message, id: 'SAVE_TASK_ERROR' });
-    }
-  });
-}
-
 export function* loadTasksSaga() {
   yield takeLatest(LOAD_TASKS, function*() {
     try {
@@ -47,15 +38,6 @@ export function* loadTasksSaga() {
       yield putAction(LOAD_TASKS_SUCCESS, { tasks });
     } catch (error) {
       yield putError(LOAD_TASKS_FAIL, error);
-    }
-  });
-}
-
-export function* loadTasksFailSaga() {
-  yield takeLatest(LOAD_TASKS_FAIL, function*(action) {
-    const { message } = action.payload;
-    if (message) {
-      yield putAction(SET_ERROR, { message, id: 'LOAD_TASKS_ERROR' });
     }
   });
 }
