@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     position: 'fixed',
     top: theme.spacing(8),
     width: '100%',
-    height: `calc(100% - ${theme.spacing(6)}px)`,
+    height: `calc(100% - ${theme.spacing(8)}px)`,
     zIndex: 1100,
     overflow: 'hidden',
     display: 'flex',

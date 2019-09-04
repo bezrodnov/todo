@@ -72,6 +72,9 @@ const useStyles = makeStyles(theme => ({
       transform: 'rotate(-180deg)',
     },
   },
+  divider: {
+    flex: 1,
+  },
   expanded: {},
 }));
 
@@ -109,12 +112,12 @@ const Sidebar = () => {
         <SomedayItem expanded={expanded} />
         <ReferenceItem expanded={expanded} />
         <DelegateItem expanded={expanded} />
-        <Divider />
         <FinishedItem expanded={expanded} />
-        <Divider />
+      </List>
+      <div className={classes.divider} />
+      <List className={classes.list}>
         <TrashItem expanded={expanded} />
       </List>
-      <Divider />
     </Box>
   );
 };

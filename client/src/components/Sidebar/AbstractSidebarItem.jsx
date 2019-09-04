@@ -14,12 +14,19 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     padding: theme.spacing(1.25, 2, 1.25),
     [theme.breakpoints.down('xs')]: {
-      padding: theme.spacing(1.5, 1, 1),
+      padding: theme.spacing(1.5, 1.25, 1),
+      '&$expanded .MuiBadge-badge:not(.MuiBadge-invisible)': {
+        transform: 'scale(1) translate(50%, -50%)',
+        transformOrigin: '50% 50%',
+      },
     },
     '&$focused': {
       background: theme.palette.primary.light,
     },
     '&:not($expanded) $counter': {
+      transform: 'scale(0)',
+    },
+    '&$expanded .MuiBadge-badge': {
       transform: 'scale(0)',
     },
   },
@@ -58,7 +65,7 @@ const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon }
     <ListItem button onClick={onClick} className={className}>
       <ListItemIcon className={classes.listItemIcon}>
         <Tooltip title={expanded ? '' : text} placement="right">
-          <Badge badgeContent={!expanded ? count : 0} color="secondary">
+          <Badge badgeContent={count} color="secondary">
             {icon}
           </Badge>
         </Tooltip>
