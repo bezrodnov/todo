@@ -29,9 +29,17 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
   },
   focused: {},
+  counter: {
+    width: theme.spacing(3),
+    background: theme.palette.secondary.light,
+    color: theme.palette.secondary.contrastText,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    borderRadius: theme.shape.borderRadius,
+  },
 }));
 
-const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon, svgIconPath }) => {
+const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon }) => {
   const classes = useStyles();
 
   const className = clsx(classes.listItem, { [classes.focused]: isFocused });
@@ -40,12 +48,13 @@ const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon, 
     <ListItem button onClick={onClick} className={className}>
       <ListItemIcon className={classes.listItemIcon}>
         <Tooltip title={expanded ? '' : text} placement="right">
-          <Badge badgeContent={count} color="secondary">
+          <Badge badgeContent={!expanded ? count : 0} color="secondary">
             {icon}
           </Badge>
         </Tooltip>
       </ListItemIcon>
       <ListItemText className={classes.listItemText} primary={expanded ? text : ''} />
+      {expanded && count > 0 && <span className={classes.counter}>{count}</span>}
     </ListItem>
   );
 };

@@ -36,9 +36,9 @@ const useStyles = makeStyles(theme => ({
       maxWidth: theme.spacing(6),
     },
     '&$expanded': {
-      width: theme.spacing(24),
-      minWidth: theme.spacing(24),
-      maxWidth: theme.spacing(24),
+      width: theme.spacing(32),
+      minWidth: theme.spacing(32),
+      maxWidth: theme.spacing(32),
       [theme.breakpoints.down('xs')]: {
         width: theme.spacing(6),
         minWidth: theme.spacing(6),
