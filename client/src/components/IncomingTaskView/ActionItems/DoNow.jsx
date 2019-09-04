@@ -10,7 +10,7 @@ export default ({ task, actions, callback }) => {
 
   const title = t('taskActions.now.title');
   const description = t('taskActions.now.description');
-  const onClick = () => console.warn('action is not implemented yet');
+  const onClick = () => actions.markAsFinished(task, callback);
 
   return <BaseActionItem title={title} description={description} icon={finished} onClick={onClick} />;
 };

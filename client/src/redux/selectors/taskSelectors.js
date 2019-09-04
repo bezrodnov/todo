@@ -26,5 +26,5 @@ export const referenceTasksSelector = createSelector(
 
 export const finishedTasksSelector = createSelector(
   tasksSelector,
-  filterTasksByType('reference')
+  filterTasksByType('finished')
 );

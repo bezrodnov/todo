@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
 
-// import { trashTasksSelector } from '../../../redux/selectors';
+import { referenceTasksSelector } from '../../../redux/selectors';
 
 const mapStateToProps = state => ({
-  count: 0,
+  count: referenceTasksSelector(state).length,
 });
 
 const mapDispatchToProps = () => ({});

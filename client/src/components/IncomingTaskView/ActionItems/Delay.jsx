@@ -10,7 +10,7 @@ export default ({ task, actions, callback }) => {
 
   const title = t('taskActions.delay.title');
   const description = t('taskActions.delay.description');
-  const onClick = () => console.warn('action is not implemented yet');
+  const onClick = () => actions.markAsDelayed(task, callback); // TODO: review
 
   return <BaseActionItem title={title} description={description} icon={delay} onClick={onClick} />;
 };

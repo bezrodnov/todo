@@ -10,7 +10,7 @@ export default ({ task, actions, callback }) => {
 
   const title = t('taskActions.repeating.title');
   const description = t('taskActions.repeating.description');
-  const onClick = () => console.warn('action is not implemented yet');
+  const onClick = () => console.warn('action is not implemented yet'); // TODO: implement
 
   return <BaseActionItem title={title} description={description} icon={repeating} onClick={onClick} />;
 };

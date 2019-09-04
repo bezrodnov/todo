@@ -1,7 +1,16 @@
 import { all } from 'redux-saga/effects';
 import { loadUserSaga, loginSaga, logoutSaga, checkSessionSaga } from './authSagas';
 import { updateUserSaga, registerSaga } from './userSagas';
-import { saveTaskSaga, loadTasksSaga, loadTasksOnUserLoadSaga, markTaskAsTrashSaga, deleteTaskSaga } from './taskSagas';
+import {
+  saveTaskSaga,
+  loadTasksSaga,
+  loadTasksOnUserLoadSaga,
+  markTaskAsTrashSaga,
+  markTaskAsReferenceSaga,
+  markTaskAsFinishedSaga,
+  markTaskAsDelayedSaga,
+  deleteTaskSaga,
+} from './taskSagas';
 
 export default function* saga() {
   yield all([
@@ -15,6 +24,9 @@ export default function* saga() {
     loadTasksSaga(),
     loadTasksOnUserLoadSaga(),
     markTaskAsTrashSaga(),
+    markTaskAsReferenceSaga(),
+    markTaskAsFinishedSaga(),
+    markTaskAsDelayedSaga(),
     deleteTaskSaga(),
   ]);
 }

@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga/effects';
 import { putAction, putError, callApi, delay, getAuthToken, setAuthToken, setRequestHeaderAuthToken } from '../utils';
-import { LOAD_USER, USER_LOADED, AUTH_ERROR, LOGIN, LOGIN_SUCCESS, LOGOUT, SET_ERROR, CHECK_SESSION } from '../actions';
+import { LOAD_USER, USER_LOADED, AUTH_ERROR, LOGIN, LOGIN_SUCCESS, LOGOUT, CHECK_SESSION } from '../actions';
 
 export function* loadUserSaga() {
   yield takeLatest(LOAD_USER, function*() {
@@ -41,7 +41,7 @@ export function* loginSaga() {
 }
 
 export function* logoutSaga() {
-  yield takeLatest(LOGOUT, function*(action) {
+  yield takeLatest(LOGOUT, function*() {
     yield setAuthToken();
   });
 }

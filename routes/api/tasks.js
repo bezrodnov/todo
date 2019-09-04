@@ -46,15 +46,28 @@ router.post('/', auth, async (req, res) => {
  * @desc Mark Task as a Trash
  * @access Private
  */
-router.post('/trash', auth, async (req, res) => {
-  const task = await Task.findById(req.body.id);
-  if (!task || task.userId !== req.user.id) {
-    return res.status(404).json({ message: 'task.errors.NoTaskToMoveToTrash' });
-  }
-  task.type = 'trash';
-  await task.save();
-  res.status(200).json({ success: true });
-});
+router.post('/trash', auth, (req, res) => updateTaskType(req, res, 'trash'));
+
+/**
+ * @route POST api/tasks/reference
+ * @desc Mark Task as a Reference
+ * @access Private
+ */
+router.post('/reference', auth, (req, res) => updateTaskType(req, res, 'reference'));
+
+/**
+ * @route POST api/tasks/delay
+ * @desc Mark Task as a Someday/Maybe
+ * @access Private
+ */
+router.post('/delay', auth, (req, res) => updateTaskType(req, res, 'someday'));
+
+/**
+ * @route POST api/tasks/finish
+ * @desc Mark Task as a Finished
+ * @access Private
+ */
+router.post('/finish', auth, (req, res) => updateTaskType(req, res, 'finished'));
 
 /**
  * @route DELETE api/tasks
@@ -71,3 +84,13 @@ router.delete('/', auth, async (req, res) => {
 });
 
 module.exports = router;
+
+const updateTaskType = async (req, res, taskType) => {
+  const task = await Task.findById(req.body.id);
+  if (!task || task.userId !== req.user.id) {
+    return res.status(404).json({ message: 'task.errors.NoTaskToUpdate' });
+  }
+  task.type = taskType;
+  await task.save();
+  res.status(200).json({ success: true });
+};

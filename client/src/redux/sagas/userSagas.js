@@ -7,7 +7,6 @@ import {
   REGISTER,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  SET_ERROR,
 } from '../actions';
 
 export function* updateUserSaga() {
@@ -16,7 +15,7 @@ export function* updateUserSaga() {
       const response = yield callApi('updateUser', action.payload);
       const { user } = response.data;
       yield putAction(UPDATE_USER_SUCCESS, user);
-      action.payload.onSuccess();
+      action.payload.onSuccess && action.payload.onSuccess();
     } catch (error) {
       yield putError(UPDATE_USER_FAIL, error);
     }

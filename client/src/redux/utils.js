@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, call } from 'redux-saga/effects';
 
 import { generateAction, SET_ERROR } from './actions';
-import api from '../api';
+import * as api from '../api';
 
 export const putAction = (action, payload) => put(generateAction(action, payload));
 
