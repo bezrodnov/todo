@@ -12,12 +12,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
-    padding: theme.spacing(1.5, 2, 1),
+    padding: theme.spacing(1.25, 2, 1.25),
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(1.5, 1, 1),
     },
     '&$focused': {
       background: theme.palette.primary.light,
+    },
+    '&:not($expanded) $counter': {
+      transform: 'scale(0)',
     },
   },
   listItemIcon: {
@@ -28,21 +31,28 @@ const useStyles = makeStyles(theme => ({
     whiteSpace: 'nowrap',
     margin: 0,
   },
-  focused: {},
   counter: {
-    width: theme.spacing(3),
+    width: theme.spacing(4.5),
     background: theme.palette.secondary.light,
     color: theme.palette.secondary.contrastText,
     textAlign: 'center',
     fontWeight: 'bold',
-    borderRadius: theme.shape.borderRadius,
+    padding: theme.spacing(0.25, 0),
+    borderRadius: theme.spacing(1.5),
+    transition: theme.transitions.create('transform'),
+    transform: 'scale(1)',
   },
+  focused: {},
+  expanded: {},
 }));
 
 const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon }) => {
   const classes = useStyles();
 
-  const className = clsx(classes.listItem, { [classes.focused]: isFocused });
+  const className = clsx(classes.listItem, {
+    [classes.focused]: isFocused,
+    [classes.expanded]: expanded,
+  });
 
   return (
     <ListItem button onClick={onClick} className={className}>
@@ -54,7 +64,7 @@ const AbstractSidebarItem = ({ expanded, onClick, text, count, isFocused, icon }
         </Tooltip>
       </ListItemIcon>
       <ListItemText className={classes.listItemText} primary={expanded ? text : ''} />
-      {expanded && count > 0 && <span className={classes.counter}>{count}</span>}
+      {count > 0 && <span className={classes.counter}>{count}</span>}
     </ListItem>
   );
 };

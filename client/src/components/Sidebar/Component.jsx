@@ -16,11 +16,15 @@ import ProjectsItem from './ProjectsItem';
 import DelayedItem from './DelayedItem';
 import FinishedItem from './FinishedItem';
 import SomedayItem from './SomedayItem';
+import ReferenceItem from './ReferenceItem';
+import DelegateItem from './DelegateItem';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   sideBar: {
+    display: 'flex',
+    flexDirection: 'column',
     overflow: 'hidden',
     background: theme.palette.primary.main,
     transition: theme.transitions.create(['width', 'min-width', 'max-width'], {
@@ -103,6 +107,8 @@ const Sidebar = () => {
         <ProjectsItem expanded={expanded} />
         <DelayedItem expanded={expanded} />
         <SomedayItem expanded={expanded} />
+        <ReferenceItem expanded={expanded} />
+        <DelegateItem expanded={expanded} />
         <Divider />
         <FinishedItem expanded={expanded} />
         <Divider />

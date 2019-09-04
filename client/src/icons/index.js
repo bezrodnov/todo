@@ -2,9 +2,9 @@ import React from 'react';
 
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-import AddCircle from '@material-ui/icons/AddCircle';
-import Delete from '@material-ui/icons/Delete';
-import Mail from '@material-ui/icons/Mail';
+import AddCircle from '@material-ui/icons/AddCircleOutline';
+import Delete from '@material-ui/icons/DeleteOutline';
+import Mail from '@material-ui/icons/MailOutline';
 
 import { mdiCheckboxMarkedCircleOutline } from '@mdi/js';
 

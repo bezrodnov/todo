@@ -53,7 +53,9 @@
       "someday": "Someday",
       "delayed": "Delayed",
       "finished": "Finished",
-      "projects": "Projects"
+      "projects": "Projects",
+      "reference": "Reference",
+      "delegate": "Delegate"
     }
   },
 
