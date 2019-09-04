@@ -5,13 +5,11 @@ import clsx from 'clsx';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Tooltip from '@material-ui/core/Tooltip';
 
 import { makeStyles } from '@material-ui/core/styles';
 
 import LoadingMask from '../util/LoadingMask';
 import { formatDate } from '../util/Date';
-import { repeating } from '../../icons';
 
 import {
   Trash,

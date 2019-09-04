@@ -16,6 +16,7 @@ export function* loadUserSaga() {
       const response = yield callApi('loadUser');
       const user = response.data;
       yield putAction(USER_LOADED, { ...user, token });
+      yield putAction(CHECK_SESSION);
     } catch (error) {
       // failed to load user - which means authentication is required
       // perform sign out to clear token and force user to sign in
