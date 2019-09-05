@@ -8,7 +8,7 @@ const Wrapper = ({ tasks, taskId, ...other }) => Component({ task: tasks.find(({
 const mapStateToProps = ({ task: { tasks, isSaving } }) => ({ tasks, isSaving });
 
 const mapDispatchToProps = dispatch => ({
-  saveTask: task => dispatch(generateAction(SAVE_TASK, task)),
+  saveTask: (task, onSuccess) => dispatch(generateAction(SAVE_TASK, { ...task, onSuccess })),
 });
 
 export default connect(
