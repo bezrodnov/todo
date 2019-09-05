@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import LoadingMask from '../util/LoadingMask';
+import LoadingMask from '../LoadingMask';
 import { formatDate } from '../util/Date';
 
 import {

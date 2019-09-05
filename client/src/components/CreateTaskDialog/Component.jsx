@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useForm } from '../util/FormUtils';
-import LoadingMask from '../util/LoadingMask';
+import LoadingMask from '../LoadingMask';
 
 const useStyles = makeStyles(theme => ({
   formControl: {

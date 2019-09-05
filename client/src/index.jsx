@@ -12,10 +12,10 @@ import Auth from './routes/Auth';
 import Trash from './routes/Trash';
 import Incoming from './routes/Incoming';
 
-import ThemeProvider from './components/util/ThemeProvider';
+import ThemeProvider from './components/ThemeProvider';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
-import LoadingMask from './components/util/LoadingMask';
+import LoadingMask from './components/LoadingMask';
 import MainFrame from './components/MainFrame';
 
 import store from './redux/store';

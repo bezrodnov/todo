@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { incomingTasksSelector } from '../redux/selectors';
 
 import IncomingTaskView from '../components/IncomingTaskView';
-import LoadingMask from '../components/util/LoadingMask'; // TODO: move out from util folder
+import LoadingMask from '../components/LoadingMask';
 
 const useStyles = makeStyles(theme => ({
   tasksContainer: {

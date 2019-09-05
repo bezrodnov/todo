@@ -11,7 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import DeleteIcon from '@material-ui/icons/Clear';
 
-import LoadingMask from '../../components/util/LoadingMask';
+import LoadingMask from '../../components/LoadingMask';
 
 // TODO: use MUI styling approach (JSS) instead of SCSS files
 import './styles.scss';
