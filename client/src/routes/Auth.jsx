@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
@@ -13,6 +14,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { generateAction, LOGIN, REGISTER } from '../redux/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -125,31 +128,35 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Auth = ({ login, register }) => {
+const Auth = () => {
   const classes = useStyles();
   return (
     <Grid container component="main" className={classes.root}>
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.formContainer}>
-        <SignUpForm register={register} />
-        <SignInForm login={login} />
+        <SignUpForm />
+        <SignInForm />
       </Grid>
     </Grid>
   );
 };
 
-const SignInForm = ({ login }) => {
+const SignInForm = () => {
   const classes = useStyles();
   const { t } = useTranslation('auth');
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const dispatch = useDispatch();
 
-  const onSubmit = e => {
-    e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    login({ email, password });
-  };
+  const onSubmit = useCallback(
+    e => {
+      e.preventDefault();
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      dispatch(generateAction(LOGIN, { email, password }));
+    },
+    [dispatch, emailRef, passwordRef]
+  );
 
   return (
     <div className={classes.paper}>
@@ -190,29 +197,31 @@ const SignInForm = ({ login }) => {
   );
 };
 
-const SignUpForm = ({ register }) => {
+const SignUpForm = () => {
   const classes = useStyles();
   const { t } = useTranslation('auth');
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const dispatch = useDispatch();
 
   const [show, setShow] = useState(false);
-  const toggleForm = () => setShow(!show);
+  const toggleForm = useCallback(() => setShow(!show), [show]);
 
-  const onSubmit = e => {
-    e.preventDefault();
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
-    register({ email, password });
-  };
+  const onSubmit = useCallback(
+    e => {
+      e.preventDefault();
+      const email = emailRef.current.value;
+      const password = passwordRef.current.value;
+      dispatch(generateAction(REGISTER, { email, password }));
+    },
+    [dispatch, emailRef, passwordRef]
+  );
 
-  const containerClassName = clsx({
-    [classes.signUnForm]: true,
+  const containerClassName = clsx(classes.signUnForm, {
     [classes.show]: show,
   });
 
-  const iconClassName = clsx({
-    [classes.switchIcon]: true,
+  const iconClassName = clsx(classes.switchIcon, {
     [classes.show]: show,
   });
 

@@ -42,5 +42,5 @@ ReactDOM.render(
       </ThemeProvider>
     </Provider>
   </MuiPickersUtilsProvider>,
-  document.querySelector('#app')
+  document.getElementById('app')
 );
