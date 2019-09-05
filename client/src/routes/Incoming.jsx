@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     maxWidth: theme.spacing(100),
     margin: 'auto',
-    overflowY: 'auto',
+    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

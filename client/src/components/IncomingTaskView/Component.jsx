@@ -5,24 +5,12 @@ import clsx from 'clsx';
 
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-
 import { makeStyles } from '@material-ui/core/styles';
 
 import LoadingMask from '../LoadingMask';
 import { formatDate } from '../util/Date';
 
-import {
-  Trash,
-  Project,
-  Schedule,
-  Delay,
-  Delegate,
-  Someday,
-  DoNow,
-  Reference,
-  AwaitingProject,
-  Repeat,
-} from './ActionItems';
+import * as ActionItems from './ActionItems';
 
 const useStyles = makeStyles(theme => ({
   startResolveQuery: {
@@ -59,6 +47,8 @@ const useStyles = makeStyles(theme => ({
   actionsBar: {
     position: 'relative',
     marginTop: theme.spacing(3),
+    width: '100%',
+    maxHeight: 'calc(100% - 300px)',
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: theme.shape.borderRadius,
@@ -76,13 +66,17 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.default,
     },
     '& > div': {
-      padding: theme.spacing(1.5, 1, 1),
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center',
-      '& button': {
-        margin: theme.spacing(0.5, 0.5),
-      },
+      overflow: 'hidden',
+      height: `calc(100% - ${theme.spacing(1)}px)`,
+      marginTop: theme.spacing(1),
+    },
+  },
+  actionList: {
+    padding: theme.spacing(1),
+    height: '100%',
+    overflow: 'hidden auto',
+    '& button': {
+      margin: theme.spacing(0.25, 0.25),
     },
   },
   resolveStarted: {
@@ -90,19 +84,6 @@ const useStyles = makeStyles(theme => ({
   },
   title: {},
 }));
-
-const ACTION_BUTTONS = {
-  AwaitingProject,
-  Trash,
-  Project,
-  Schedule,
-  Delay,
-  DoNow,
-  Someday,
-  Reference,
-  Repeat,
-  Delegate,
-};
 
 const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveEnd, isLoading, ...other }) => {
   const classes = useStyles();
@@ -142,9 +123,9 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
 
   return (
     <div {...other}>
-      <span className={clsx(classes.startResolveQuery, { [classes.resolveStarted]: isResolveStarted })}>
+      <div className={clsx(classes.startResolveQuery, { [classes.resolveStarted]: isResolveStarted })}>
         {t('incomingTask.isActionRequired')}
-      </span>
+      </div>
       <div className={classes.taskDetails}>
         <TextField
           variant="outlined"
@@ -170,14 +151,12 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
       <div className={classes.actionsBar}>
         <span className={classes.title}>{t('taskDetails.availableActions')}</span>
         <div>
-          {availableActions.map(actionType => {
-            const ButtonComponent = ACTION_BUTTONS[actionType];
-            return (
-              ButtonComponent && (
-                <ButtonComponent key={actionType} task={task} callback={onResolveEnd} actions={actions} />
-              )
-            );
-          })}
+          <div className={classes.actionList}>
+            {availableActions.map(actionType => {
+              const ButtonComponent = ActionItems[actionType];
+              return <ButtonComponent key={actionType} task={task} callback={onResolveEnd} actions={actions} />;
+            })}
+          </div>
         </div>
       </div>
       {isLoading && <LoadingMask />}
