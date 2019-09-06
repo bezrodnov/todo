@@ -17,7 +17,6 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'stretch',
-    zIndex: 0,
     [theme.breakpoints.down('xs')]: {
       top: theme.spacing(7),
       height: `calc(100% - ${theme.spacing(7)}px)`,

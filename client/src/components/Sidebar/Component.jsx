@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     paddingRight: 17,
     overflow: 'hidden scroll',
     width: 'calc(100% + 34px)',
-    minHeight: '100%',
+    height: '100%',
   },
   expanded: {},
 }));
