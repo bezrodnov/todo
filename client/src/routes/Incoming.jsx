@@ -26,7 +26,6 @@ const useStyles = makeStyles(theme => ({
   },
   taskContainer: {
     position: 'relative',
-    height: '100%',
     maxWidth: theme.spacing(100),
     margin: 'auto',
     overflow: 'hidden',

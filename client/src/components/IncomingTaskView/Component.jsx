@@ -53,23 +53,6 @@ const useStyles = makeStyles(theme => ({
     borderStyle: 'solid',
     borderRadius: theme.shape.borderRadius,
     borderColor: theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)',
-    '& $title': {
-      position: 'absolute',
-      top: '-0.4rem',
-      left: '0.4rem',
-      padding: '0 0.25rem',
-      fontSize: '0.75rem',
-      fontWeight: '400',
-      lineHeight: 1,
-      letterSpacing: '0.00938em',
-      color: theme.palette.text.secondary,
-      backgroundColor: theme.palette.background.default,
-    },
-    '& > div': {
-      overflow: 'hidden',
-      height: `calc(100% - ${theme.spacing(2)}px)`,
-      margin: theme.spacing(1, 0),
-    },
   },
   actionList: {
     padding: theme.spacing(1),
@@ -82,7 +65,18 @@ const useStyles = makeStyles(theme => ({
   resolveStarted: {
     visibility: 'hidden',
   },
-  title: {},
+  title: {
+    position: 'absolute',
+    top: '-0.4rem',
+    left: '0.4rem',
+    padding: '0 0.25rem',
+    fontSize: '0.75rem',
+    fontWeight: '400',
+    lineHeight: 1,
+    letterSpacing: '0.00938em',
+    color: theme.palette.text.secondary,
+    backgroundColor: theme.palette.background.default,
+  },
 }));
 
 const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveEnd, isLoading, ...other }) => {
@@ -150,13 +144,11 @@ const IncomingTaskView = ({ task, taskLabel, actions, onResolveStart, onResolveE
 
       <div className={classes.actionsBar}>
         <span className={classes.title}>{t('taskDetails.availableActions')}</span>
-        <div>
-          <div className={classes.actionList}>
-            {availableActions.map(actionType => {
-              const ButtonComponent = ActionItems[actionType];
-              return <ButtonComponent key={actionType} task={task} callback={onResolveEnd} actions={actions} />;
-            })}
-          </div>
+        <div className={classes.actionList}>
+          {availableActions.map(actionType => {
+            const ButtonComponent = ActionItems[actionType];
+            return <ButtonComponent key={actionType} task={task} callback={onResolveEnd} actions={actions} />;
+          })}
         </div>
       </div>
       {isLoading && <LoadingMask />}
