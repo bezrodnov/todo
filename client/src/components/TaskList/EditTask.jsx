@@ -7,15 +7,15 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useForm } from '../util/FormUtils';
-import LoadingMask from '../LoadingMask';
 
 const useStyles = makeStyles(theme => ({
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0.5, 1),
     paddingRight: theme.spacing(2),
     width: '100%',
   },
 }));
+
 const formFields = [
   {
     name: 'name',
@@ -54,13 +54,27 @@ const EditTask = ({ task, ...other }) => {
           className={classes.formControl}
           multiline
           {...form.getFieldProps('name')}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <TextField
           label={t('task.description')}
           className={classes.formControl}
           {...form.getFieldProps('description')}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
-        <TextField label={t('task.notes')} className={classes.formControl} multiline {...form.getFieldProps('notes')} />
+        <TextField
+          label={t('task.notes')}
+          className={classes.formControl}
+          multiline
+          {...form.getFieldProps('notes')}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
         <KeyboardDatePicker
           autoOk
           margin="normal"
@@ -70,6 +84,9 @@ const EditTask = ({ task, ...other }) => {
           {...form.getFieldProps('estimatedDate')}
           KeyboardButtonProps={{
             'aria-label': 'change date',
+          }}
+          InputLabelProps={{
+            shrink: true,
           }}
         />
       </form>

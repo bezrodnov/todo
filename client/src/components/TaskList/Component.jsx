@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
     '&$expanded $arrow': {
       transform: 'rotate(90deg)',
     },
-    '&$expanded $taskEditor': {
+    '&$expanded $taskDetails': {
       padding: theme.spacing(1, 1, 2),
       maxHeight: 500,
     },
@@ -73,7 +73,7 @@ const useStyles = makeStyles(theme => ({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
   },
-  taskEditor: {
+  taskDetails: {
     padding: theme.spacing(0, 1),
     transition: theme.transitions.create(['max-height', 'padding-top', 'padding-bottom']),
     height: 'auto',
@@ -133,7 +133,7 @@ const TaskList = ({ tasks }) => {
           <Arrow className={classes.arrow} />
           <span className={classes.taskTitle}>{task.name}</span>
         </div>
-        <EditTask task={task} className={classes.taskEditor} />
+        <EditTask task={task} className={classes.taskDetails} />
       </div>
     );
   };

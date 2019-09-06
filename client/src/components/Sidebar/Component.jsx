@@ -75,6 +75,14 @@ const useStyles = makeStyles(theme => ({
   divider: {
     flex: 1,
   },
+  taskItems: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingRight: 17,
+    overflow: 'hidden scroll',
+    width: 'calc(100% + 34px)',
+    minHeight: '100%',
+  },
   expanded: {},
 }));
 
@@ -104,20 +112,22 @@ const Sidebar = () => {
         {arrows(2)}
       </Button>
       <Divider />
-      <List className={classes.list}>
-        <CreateTaskItem expanded={expanded} />
-        <IncomingItem expanded={expanded} />
-        <ProjectsItem expanded={expanded} />
-        <DelayedItem expanded={expanded} />
-        <SomedayItem expanded={expanded} />
-        <ReferenceItem expanded={expanded} />
-        <DelegateItem expanded={expanded} />
-        <FinishedItem expanded={expanded} />
-      </List>
-      <div className={classes.divider} />
-      <List className={classes.list}>
-        <TrashItem expanded={expanded} />
-      </List>
+      <div className={classes.taskItems}>
+        <List className={classes.list}>
+          <CreateTaskItem expanded={expanded} />
+          <IncomingItem expanded={expanded} />
+          <ProjectsItem expanded={expanded} />
+          <DelayedItem expanded={expanded} />
+          <SomedayItem expanded={expanded} />
+          <ReferenceItem expanded={expanded} />
+          <DelegateItem expanded={expanded} />
+          <FinishedItem expanded={expanded} />
+        </List>
+        <div className={classes.divider} />
+        <List className={classes.list}>
+          <TrashItem expanded={expanded} />
+        </List>
+      </div>
     </Box>
   );
 };

@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
       top: theme.spacing(7),
       height: `calc(100% - ${theme.spacing(7)}px)`,
     },
+    [theme.breakpoints.down('xs') + ' and (orientation: landscape)']: {
+      top: theme.spacing(6),
+      height: `calc(100% - ${theme.spacing(6)}px)`,
+    },
   },
   pageContents: {
     flex: 1,
