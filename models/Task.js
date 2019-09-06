@@ -9,6 +9,8 @@ const schema = new Schema({
   estimatedDate: { type: Date },
   userId: { type: String, required: true },
   type: { type: String, required: true },
+  priority: { type: String },
+  tags: { type: String },
 });
 
 const model = mongoose.model('task', schema);

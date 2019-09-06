@@ -6,15 +6,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
-import Notifications from './components/Notifications';
-
-import Auth from './routes/Auth';
-import Trash from './routes/Trash';
-import Incoming from './routes/Incoming';
-
-import ThemeProvider from './components/ThemeProvider';
 import PublicRoute from './routes/PublicRoute';
 import PrivateRoute from './routes/PrivateRoute';
+import Auth from './routes/Auth';
+import Finished from './routes/Finished';
+import Incoming from './routes/Incoming';
+import Reference from './routes/Reference';
+import Someday from './routes/Someday';
+import Trash from './routes/Trash';
+
+import ThemeProvider from './components/ThemeProvider';
+import Notifications from './components/Notifications';
 import LoadingMask from './components/LoadingMask';
 import MainFrame from './components/MainFrame';
 
@@ -31,8 +33,11 @@ ReactDOM.render(
           <Notifications />
           <BrowserRouter>
             <Switch>
-              <PrivateRoute exact path="/trash" component={Trash} wrapper={MainFrame} />
+              <PrivateRoute exact path="/finished" component={Finished} wrapper={MainFrame} />
               <PrivateRoute exact path="/incoming" component={Incoming} wrapper={MainFrame} />
+              <PrivateRoute exact path="/reference" component={Reference} wrapper={MainFrame} />
+              <PrivateRoute exact path="/someday" component={Someday} wrapper={MainFrame} />
+              <PrivateRoute exact path="/trash" component={Trash} wrapper={MainFrame} />
               <PrivateRoute exact path="/home" component={Incoming} wrapper={MainFrame} />
               <PublicRoute exact path="/auth" component={Auth} wrapper={MainFrame} />
               <Redirect to="/home" />

@@ -67,8 +67,8 @@ const useStyles = makeStyles(theme => ({
     },
     '& > div': {
       overflow: 'hidden',
-      height: `calc(100% - ${theme.spacing(1)}px)`,
-      marginTop: theme.spacing(1),
+      height: `calc(100% - ${theme.spacing(2)}px)`,
+      margin: theme.spacing(1, 0),
     },
   },
   actionList: {
