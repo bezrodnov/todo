@@ -69,19 +69,16 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             required
             label={t('task.name')}
             className={classes.formControl}
-            placeholder={t('task.name')}
             {...form.getFieldProps('name')}
           />
           <TextField
             label={t('task.description')}
             className={classes.formControl}
-            placeholder={t('task.description')}
             {...form.getFieldProps('description')}
           />
           <TextField
             label={t('task.notes')}
             className={classes.formControl}
-            placeholder={t('task.notes')}
             multiline
             {...form.getFieldProps('notes')}
           />
