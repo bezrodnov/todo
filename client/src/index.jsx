@@ -11,9 +11,12 @@ import PrivateRoute from './routes/PrivateRoute';
 import Auth from './routes/Auth';
 import Finished from './routes/Finished';
 import Incoming from './routes/Incoming';
+import Project from './routes/Project';
 import Reference from './routes/Reference';
 import Someday from './routes/Someday';
 import Trash from './routes/Trash';
+
+import Development from './routes/Development';
 
 import ThemeProvider from './components/ThemeProvider';
 import Notifications from './components/Notifications';
@@ -39,7 +42,9 @@ ReactDOM.render(
               <PrivateRoute exact path="/someday" component={Someday} wrapper={MainFrame} />
               <PrivateRoute exact path="/trash" component={Trash} wrapper={MainFrame} />
               <PrivateRoute exact path="/home" component={Incoming} wrapper={MainFrame} />
-              <PublicRoute exact path="/auth" component={Auth} wrapper={MainFrame} />
+              {/* <PrivateRoute exact path="/project/:taskId" component={Project} wrapper={MainFrame} /> */}
+              <PublicRoute exact path="/auth" component={Auth} />
+              <PublicRoute exact path="/dev" component={Development} />
               <Redirect to="/home" />
             </Switch>
           </BrowserRouter>

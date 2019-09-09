@@ -1,11 +1,12 @@
 import React, { useReducer } from 'react';
+// import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
 import Container from '@material-ui/core/Container';
 import Arrow from '@material-ui/icons/ArrowRight';
+
 import { makeStyles, lighten } from '@material-ui/core/styles';
-import { useTranslation } from 'react-i18next';
 
 import EditTask from './EditTask';
 
@@ -67,6 +68,7 @@ const useStyles = makeStyles(theme => ({
     paddingRight: theme.spacing(2),
     transition: theme.transitions.create(['background', 'color']),
     zIndex: 1,
+    userSelect: 'none',
   },
   taskTitle: {
     whiteSpace: 'nowrap',

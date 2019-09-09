@@ -59,6 +59,13 @@
     }
   },
 
+  "priorities": {
+    "high": "High",
+    "medium": "medium",
+    "low": "Low",
+    "unset": "Unset"
+  },
+
   "profileDialog": {
     "title": "User Profile"
   },
@@ -92,6 +99,7 @@
     "description": "Description",
     "estimatedDate": "Estimated Date",
     "notes": "Notes",
+    "priority": "Priority",
     "errors": {
       "emptyName": "Task name is required",
       "emptyType": "Task type is required"
