@@ -50,7 +50,7 @@ const taskTree = {
           task: {
             name: 'Periodically save edits inside this component',
             description:
-              'Creating project can take some time and user can possibly leave the page before saving changes.\n' +
+              'Creating project can take some time and user can possibly leave the page before changes are saved.\n' +
               'It would be nice to save changes on this page from time to time so that user can return to it and resume editing',
             priority: 'medium',
           },

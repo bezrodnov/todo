@@ -27,6 +27,18 @@ const TaskPriority = ({ priority, ...other }) => {
   );
 };
 
+const PriorityMenu = ({ anchorEl, onClose, onSelect }) => {
+  return (
+    <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose}>
+      {['high', 'medium', 'low', null].map(priority => (
+        <MenuItem key={priority || 'unset'} onClick={() => onSelect(priority)}>
+          <TaskPriority priority={priority} />
+        </MenuItem>
+      ))}
+    </Menu>
+  );
+};
+
 const TaskDetails = ({ task }) => {
   const classes = useStyles();
   return (
@@ -44,7 +56,7 @@ const TaskDetails = ({ task }) => {
   );
 };
 
-const TaskHeader = ({ task, onToggleExpand, onRemove }) => {
+const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
   const classes = useStyles();
   const [priorityEl, setPriorityEl] = React.useState(null);
 
@@ -58,32 +70,28 @@ const TaskHeader = ({ task, onToggleExpand, onRemove }) => {
     [onRemove]
   );
 
+  const handleNameChange = useCallback(e => onChange({ name: e.target.value }), [onChange]);
+
   const onPriorityClick = useCallback(e => setPriorityEl(e.target), []);
   const closePriorityMenu = useCallback(() => setPriorityEl(null), []);
   const selectPriority = useCallback(
     priority => {
       closePriorityMenu();
-      // TODO: declare and execute callback to update task priority
+      onChange({ priority });
     },
-    [closePriorityMenu]
+    [closePriorityMenu, onChange]
   );
 
   return (
     <div className={classes.taskHeader}>
-      <InputBase className={classes.taskTitle} onClick={onToggleExpand} value={task.name} />
+      <InputBase className={classes.taskTitle} onClick={onToggleExpand} value={task.name} onChange={handleNameChange} />
       <TaskPriority priority={task.priority} onClick={onPriorityClick} />
       <Arrow className={classes.expandIcon} onClick={onToggleExpand} />
       <span className={removeIconClass} onClick={onRemoveClick}>
         <Clear />
       </span>
 
-      <Menu anchorEl={priorityEl} open={Boolean(priorityEl)} onClose={closePriorityMenu}>
-        {['high', 'medium', 'low', null].map(priority => (
-          <MenuItem key={priority || 'unset'} onClick={() => selectPriority(priority)}>
-            <TaskPriority priority={priority} />
-          </MenuItem>
-        ))}
-      </Menu>
+      <PriorityMenu anchorEl={priorityEl} onClose={closePriorityMenu} onSelect={selectPriority} />
     </div>
   );
 };
@@ -108,6 +116,11 @@ const reducer = (state, action) => {
         ...state,
         expanded: !state.expanded,
       };
+    case 'UPDATE_TASK':
+      return {
+        ...state,
+        task: { ...state.task, ...action.task },
+      };
     default:
       return state;
   }
@@ -119,16 +132,24 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
   const { id, task, subtasks = [], expanded } = state;
 
   const toggleExpand = useCallback(() => dispatch({ type: 'TOGGLE_EXPAND' }), []);
+
   const removeSelf = useCallback(() => onRemove(id), [id, onRemove]);
 
   const onRemoveChild = useCallback(id => dispatch({ type: 'REMOVE_SUBTASK', id }), []);
+
+  const onTaskChange = useCallback(task => dispatch({ type: 'UPDATE_TASK', task }));
 
   const taskClass = clsx(classes.task, { [classes.expanded]: expanded });
 
   return (
     <div className={classes.container}>
       <div className={taskClass}>
-        <TaskHeader task={task} onToggleExpand={toggleExpand} onRemove={onRemove && removeSelf} />
+        <TaskHeader
+          task={task}
+          onToggleExpand={toggleExpand}
+          onRemove={onRemove && removeSelf}
+          onChange={onTaskChange}
+        />
         <ExpandableContainer className={classes.taskDetails} expanded={expanded}>
           <TaskDetails task={task} />
         </ExpandableContainer>
