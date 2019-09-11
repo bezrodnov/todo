@@ -9,14 +9,45 @@ const taskFieldStyles = {
 
 export const useStyles = makeStyles(theme => ({
   container: {
+    position: 'relative',
     transition: theme.transitions.create('opacity', { duration: 500 }),
     '&.task-enter': { opacity: 0 },
     '&.task-enter-active': { opacity: 1 },
     '&.task-exit': { opacity: 1, pointerEvents: 'none' },
     '&.task-exit-active': { opacity: 0, pointerEvents: 'none' },
+    '& $container:before': {
+      content: '""',
+      position: 'absolute',
+      left: -10,
+      borderWidth: 3,
+      borderStyle: 'solid',
+      borderColor: theme.palette.secondary.main,
+      borderRightWidth: 0,
+      borderTopWidth: 0,
+      borderBottomLeftRadius: 5,
+      left: -10,
+      top: 0,
+      width: 10,
+      height: 18,
+    },
+
+    '& $container:not(:last-child)::after': {
+      content: '""',
+      position: 'absolute',
+      left: -10,
+      left: -10,
+      top: -theme.spacing(1),
+      width: 3,
+      height: `calc(100% + ${theme.spacing(2)}px)`,
+      background: theme.palette.secondary.main,
+    },
+    '& $container:last-child::after': {
+      top: -16,
+      height: 32,
+    },
   },
   task: {
-    margin: theme.spacing(1, 0),
+    marginTop: theme.spacing(1),
     borderRadius: theme.shape.borderRadius,
     border: `1px solid ${theme.palette.secondary.main}`,
     overflow: 'hidden',
@@ -111,7 +142,7 @@ export const useStyles = makeStyles(theme => ({
     visibility: 'hidden',
   },
   subtasks: {
-    marginLeft: theme.spacing(2),
+    margin: theme.spacing(1, 0, 0, 2),
     opacity: 1,
   },
   taskDetails: {

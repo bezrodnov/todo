@@ -42,7 +42,7 @@ const PriorityMenu = ({ anchorEl, onClose, onSelect }) => {
 const TaskDetails = ({ task }) => {
   const classes = useStyles();
   return (
-    <>
+    <div className={classes.taskDetails}>
       <div className={classes.field}>
         <InputLabel>Description</InputLabel>
         <InputBase value={task.description} multiline />
@@ -52,7 +52,7 @@ const TaskDetails = ({ task }) => {
         <InputLabel>Comments</InputLabel>
         <InputBase value={task.comments} multiline />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -150,7 +150,7 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
           onRemove={onRemove && removeSelf}
           onChange={onTaskChange}
         />
-        <ExpandableContainer className={classes.taskDetails} expanded={expanded}>
+        <ExpandableContainer expanded={expanded}>
           <TaskDetails task={task} />
         </ExpandableContainer>
       </div>

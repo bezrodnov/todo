@@ -15,7 +15,6 @@ const useStyles = makeStyles(theme => ({
 export default ({ expanded, children, ...other }) => {
   const classes = useStyles();
   const [height, setHeight] = useState(expanded ? null : 0);
-  const innerRef = useRef();
   const outerRef = useRef();
 
   const isInitialMount = useRef(true);
@@ -25,25 +24,22 @@ export default ({ expanded, children, ...other }) => {
       isInitialMount.current = false;
       return;
     }
-    const innerDiv = innerRef.current;
     const outerDiv = outerRef.current;
     const onTransitionEnd = () => {
       outerDiv.removeEventListener('transitionend', onTransitionEnd);
       setHeight(expanded ? null : 0);
     };
 
-    outerDiv.style.height = (!expanded ? innerDiv.scrollHeight : 0) + 'px';
+    outerDiv.style.height = (!expanded ? outerDiv.scrollHeight : 0) + 'px';
     outerDiv.addEventListener('transitionend', onTransitionEnd);
     requestAnimationFrame(() => {
-      setHeight(expanded ? innerDiv.scrollHeight : 0);
+      setHeight(expanded ? outerDiv.scrollHeight : 0);
     });
   }, [expanded]);
 
   return (
     <div className={classes.outer} ref={outerRef} style={{ height }}>
-      <div {...other} ref={innerRef}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 };
