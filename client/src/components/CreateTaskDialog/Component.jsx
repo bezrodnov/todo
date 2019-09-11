@@ -7,8 +7,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { KeyboardDatePicker } from '@material-ui/pickers';
 import TextField from '@material-ui/core/TextField';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -89,9 +89,6 @@ const DialogBody = ({ onClose, isSaving, saveTask }) => {
             className={classes.formControl}
             format="MM/dd/yyyy"
             {...form.getFieldProps('estimatedDate')}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
           />
         </form>
       </DialogContent>

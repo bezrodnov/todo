@@ -12,7 +12,9 @@ import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Tooltip from '@material-ui/core/Tooltip';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 import ExpandableContainer from './ExpandableContainer';
 
@@ -44,18 +46,21 @@ const PriorityMenu = ({ anchorEl, onClose, onSelect }) => {
 };
 
 const TaskDetails = ({ task }) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   return (
     <div className={classes.taskDetails}>
-      <div className={classes.field}>
-        <InputLabel>Description</InputLabel>
-        <InputBase value={task.description} multiline />
-      </div>
-      <div>estimated date</div>
-      <div className={classes.field}>
-        <InputLabel>Comments</InputLabel>
-        <InputBase value={task.comments} multiline />
-      </div>
+      <InputLabel>{t('task.description')}</InputLabel>
+      <InputBase value={task.description} multiline />
+
+      <InputLabel>{t('task.estimatedDate')}</InputLabel>
+      <KeyboardDatePicker autoOk format="MM/dd/yyyy" />
+
+      <InputLabel>{t('task.notes')}</InputLabel>
+      <InputBase value={task.notes} multiline />
+
+      <InputLabel>{t('task.estimates')}</InputLabel>
+      <InputBase value={task.estimates} multiline />
     </div>
   );
 };

@@ -155,11 +155,9 @@ export const useStyles = makeStyles(theme => ({
     borderTop: `2px solid ${theme.palette.secondary.main}`,
     padding: theme.spacing(1),
     display: 'grid',
-    gridTemplateColumns: '1fr 100px',
+    gridTemplateColumns: '80px 1fr 130px 100px',
     gridColumnGap: theme.spacing(1),
-  },
-  field: {
-    display: 'flex',
+
     '& .MuiInputBase-root': {
       flex: 1,
       padding: 0,
@@ -173,13 +171,25 @@ export const useStyles = makeStyles(theme => ({
       ...taskFieldStyles,
     },
     '& label': {
-      display: 'inline-block',
       fontSize: 12,
       lineHeight: '20px',
-      paddingRight: theme.spacing(1),
+      textAlign: 'right',
+      whiteSpace: 'nowrap',
       '&::after': {
         content: '":"',
       },
+    },
+    '& button': {
+      padding: 0,
+      '& svg': {
+        fontSize: '1.25rem',
+      },
+    },
+    '& .MuiInput-underline:before': {
+      display: 'none',
+    },
+    '& .MuiInput-underline:after': {
+      display: 'none',
     },
   },
   expanded: {},

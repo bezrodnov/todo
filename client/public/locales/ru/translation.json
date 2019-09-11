@@ -103,6 +103,7 @@
     "name": "Задача",
     "description": "Описание",
     "estimatedDate": "Выполнить до",
+    "estimates": "Время на выполнение",
     "notes": "Примечания",
     "priority": "Приоритет",
     "errors": {

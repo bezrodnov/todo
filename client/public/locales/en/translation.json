@@ -103,6 +103,7 @@
     "name": "Task",
     "description": "Description",
     "estimatedDate": "Estimated Date",
+    "estimates": "Estimates",
     "notes": "Notes",
     "priority": "Priority",
     "errors": {
