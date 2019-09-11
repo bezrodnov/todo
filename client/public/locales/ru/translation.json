@@ -30,6 +30,18 @@
     "light": "Светлая"
   },
 
+  "estimates": {
+    "fiveMins": "5 минут",
+    "fifteenMins": "15 минут",
+    "thirtyMins": "30 минут",
+    "hour": "1 час",
+    "twoHours": "2 часа",
+    "fourHours": "4 часа",
+    "day": "1 день",
+    "twoDays": "2 дня",
+    "more": "больше 2 дней"
+  },
+
   "auth": {
     "noToken": "No token, authorization denied",
     "tokenInvalid": "Token is invalid",

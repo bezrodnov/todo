@@ -11,7 +11,7 @@ import PrivateRoute from './routes/PrivateRoute';
 import Auth from './routes/Auth';
 import Finished from './routes/Finished';
 import Incoming from './routes/Incoming';
-import Project from './routes/Project';
+// import Project from './routes/Project';
 import Reference from './routes/Reference';
 import Someday from './routes/Someday';
 import Trash from './routes/Trash';

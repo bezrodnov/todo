@@ -6,18 +6,21 @@ import { useCallback, useRef } from 'react';
  * double click and with a `false` (after 200ms delay) - if it was a
  * single click
  */
-export const useClickCallback = (handler, dependencies = []) => {
+export const useClickCallback = handler => {
   const clickTimeout = useRef(null);
-  return useCallback(e => {
-    if (!clickTimeout.current) {
-      clickTimeout.current = setTimeout(() => {
+  return useCallback(
+    e => {
+      if (!clickTimeout.current) {
+        clickTimeout.current = setTimeout(() => {
+          clickTimeout.current = null;
+          handler(false);
+        }, 200);
+      } else {
+        clearTimeout(clickTimeout.current);
         clickTimeout.current = null;
-        handler(false);
-      }, 200);
-    } else {
-      clearTimeout(clickTimeout.current);
-      clickTimeout.current = null;
-      handler(true);
-    }
-  }, dependencies);
+        handler(true);
+      }
+    },
+    [handler]
+  );
 };

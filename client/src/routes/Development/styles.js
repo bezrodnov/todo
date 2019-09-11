@@ -4,7 +4,8 @@ const taskFieldStyles = {
   fontSize: 12,
   lineHeight: '20px',
   overflow: 'hidden',
-  padding: 0,
+  padding: '0px 5px',
+  borderRadius: 5,
 };
 
 export const useStyles = makeStyles(theme => ({
@@ -155,8 +156,9 @@ export const useStyles = makeStyles(theme => ({
     borderTop: `2px solid ${theme.palette.secondary.main}`,
     padding: theme.spacing(1),
     display: 'grid',
-    gridTemplateColumns: '80px 1fr 130px 100px',
+    gridTemplateColumns: '80px 1fr 130px 105px',
     gridColumnGap: theme.spacing(1),
+    alignItems: 'baseline',
 
     '& .MuiInputBase-root': {
       flex: 1,
@@ -166,15 +168,27 @@ export const useStyles = makeStyles(theme => ({
       ...taskFieldStyles,
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
+      '&:focus': {
+        background: theme.palette.background.paper,
+      },
     },
     '& textarea': {
       ...taskFieldStyles,
+      '&:focus': {
+        background: theme.palette.background.paper,
+      },
+    },
+    '& .MuiSelect-select': {
+      ...taskFieldStyles,
+      padding: 0,
     },
     '& label': {
       fontSize: 12,
       lineHeight: '20px',
       textAlign: 'right',
       whiteSpace: 'nowrap',
+      verticalAlign: 'top',
+      height: 20,
       '&::after': {
         content: '":"',
       },

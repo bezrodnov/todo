@@ -30,6 +30,18 @@
     "light": "Light"
   },
 
+  "estimates": {
+    "fiveMins": "5 minutes",
+    "fifteenMins": "15 minutes",
+    "thirtyMins": "30 minutes",
+    "hour": "1 hour",
+    "twoHours": "2 hours",
+    "fourHours": "4 hours",
+    "day": "1 day",
+    "twoDays": "2 days",
+    "more": "more"
+  },
+
   "auth": {
     "noToken": "No token, authorization denied",
     "tokenInvalid": "Token is invalid",
