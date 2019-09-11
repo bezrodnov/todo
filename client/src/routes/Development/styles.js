@@ -24,11 +24,13 @@ export const useStyles = makeStyles(theme => ({
       borderColor: theme.palette.secondary.main,
       borderRightWidth: 0,
       borderTopWidth: 0,
-      borderBottomLeftRadius: 5,
       left: -10,
-      top: 0,
+      top: -theme.spacing(1),
       width: 10,
-      height: 18,
+      height: theme.spacing(3),
+    },
+    '& $container:last-child:before': {
+      borderBottomLeftRadius: 5,
     },
 
     '& $container:not(:last-child)::after': {
