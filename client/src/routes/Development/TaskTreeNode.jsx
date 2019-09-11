@@ -2,7 +2,9 @@ import React, { useReducer, useCallback, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import uuid from 'uuid/v4';
 
+import Add from '@material-ui/icons/Add';
 import Arrow from '@material-ui/icons/ArrowRight';
 import Clear from '@material-ui/icons/Clear';
 
@@ -58,13 +60,22 @@ const TaskDetails = ({ task }) => {
   );
 };
 
-const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
+const TaskHeader = ({ task, onToggleExpand, onAddSubtask, onRemove, onChange }) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const [priorityEl, setPriorityEl] = React.useState(null);
   const [isTitleEditable, setTitleEditable] = React.useState(false);
   const titleRef = useRef();
 
-  const removeIconClass = clsx(classes.removeIcon, { [classes.invisible]: !onRemove });
+  const removeIconClass = clsx(classes.icon, { [classes.invisible]: !onRemove });
+
+  const onAddClick = useCallback(
+    e => {
+      e.stopPropagation();
+      onAddSubtask();
+    },
+    [onAddSubtask]
+  );
 
   const onRemoveClick = useCallback(
     e => {
@@ -94,7 +105,7 @@ const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
     });
   }, []);
 
-  const stopTitleEditing = useCallback(e => setTitleEditable(false), []);
+  const stopTitleEditing = useCallback(() => setTitleEditable(false), []);
 
   const onTitleKeyDown = useCallback(e => {
     if (e.keyCode === 13 || e.keyCode === 27) {
@@ -117,6 +128,9 @@ const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
 
   return (
     <div className={classes.taskHeader}>
+      <Tooltip className={classes.icon} onClick={onAddClick} title={t('project.addSubtask')}>
+        <Add />
+      </Tooltip>
       <InputBase
         className={classes.taskTitle}
         value={task.name}
@@ -129,9 +143,9 @@ const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
       />
       <TaskPriority priority={task.priority} onClick={onPriorityClick} />
       <Arrow className={classes.expandIcon} onClick={onToggleExpand} />
-      <span className={removeIconClass} onClick={onRemoveClick}>
+      <Tooltip className={removeIconClass} onClick={onRemoveClick} title={t('project.removeSubtask')}>
         <Clear />
-      </span>
+      </Tooltip>
 
       <PriorityMenu anchorEl={priorityEl} onClose={closePriorityMenu} onSelect={selectPriority} />
     </div>
@@ -143,7 +157,8 @@ const reducer = (state, action) => {
     case 'ADD_SUBTASK':
       return {
         ...state,
-        subtasks: [...state.subtasks, {}],
+        expanded: true,
+        subtasks: [...(state.subtasks || []), { task: {}, subtasks: [], id: uuid() }],
       };
     case 'REMOVE_SUBTASK':
       return {
@@ -177,7 +192,8 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
 
   const removeSelf = useCallback(() => onRemove(id), [id, onRemove]);
 
-  const onRemoveChild = useCallback(id => dispatch({ type: 'REMOVE_SUBTASK', id }), []);
+  const onAddSubtask = useCallback(id => dispatch({ type: 'ADD_SUBTASK' }), []);
+  const onRemoveSubtask = useCallback(id => dispatch({ type: 'REMOVE_SUBTASK', id }), []);
 
   const onTaskChange = useCallback(task => dispatch({ type: 'UPDATE_TASK', task }), []);
 
@@ -189,6 +205,7 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
         <TaskHeader
           task={task}
           onToggleExpand={toggleExpand}
+          onAddSubtask={onAddSubtask}
           onRemove={onRemove && removeSelf}
           onChange={onTaskChange}
         />
@@ -200,7 +217,7 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
         <TransitionGroup className={classes.subtasks}>
           {subtasks.map(subtask => (
             <CSSTransition key={subtask.id} classNames="task" timeout={500}>
-              <TaskTreeNode {...subtask} onRemove={onRemoveChild} />
+              <TaskTreeNode {...subtask} onAddSubtask={onAddSubtask} onRemove={onRemoveSubtask} />
             </CSSTransition>
           ))}
         </TransitionGroup>

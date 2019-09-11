@@ -26,7 +26,7 @@ export const useStyles = makeStyles(theme => ({
       left: -10,
       top: -theme.spacing(1),
       width: 10,
-      height: theme.spacing(3),
+      height: theme.spacing(3) + 3,
     },
     '& $container:last-child:before': {
       borderBottomLeftRadius: 5,
@@ -88,6 +88,7 @@ export const useStyles = makeStyles(theme => ({
       padding: theme.spacing(0.5),
       cursor: 'pointer',
       color: theme.palette.getContrastText(theme.palette.secondary.main),
+      transition: theme.transitions.create('color'),
 
       '&:not(.Mui-disabled)': {
         color: theme.palette.getContrastText(theme.palette.background.paper),
@@ -116,7 +117,7 @@ export const useStyles = makeStyles(theme => ({
       fontSize: theme.spacing(3),
     },
   },
-  removeIcon: {
+  icon: {
     cursor: 'pointer',
     height: theme.spacing(4),
     transition: theme.transitions.create('color'),
