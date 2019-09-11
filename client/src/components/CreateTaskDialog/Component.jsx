@@ -12,8 +12,8 @@ import TextField from '@material-ui/core/TextField';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import { useForm } from '../util/FormUtils';
 import LoadingMask from '../LoadingMask';
+import { useForm } from '../../util/FormUtils';
 
 const useStyles = makeStyles(theme => ({
   formControl: {

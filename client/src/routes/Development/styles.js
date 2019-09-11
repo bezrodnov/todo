@@ -18,7 +18,6 @@ export const useStyles = makeStyles(theme => ({
     '& $container:before': {
       content: '""',
       position: 'absolute',
-      left: -10,
       borderWidth: 3,
       borderStyle: 'solid',
       borderColor: theme.palette.secondary.main,
@@ -36,7 +35,6 @@ export const useStyles = makeStyles(theme => ({
     '& $container:not(:last-child)::after': {
       content: '""',
       position: 'absolute',
-      left: -10,
       left: -10,
       top: -theme.spacing(1),
       width: 3,
@@ -64,7 +62,7 @@ export const useStyles = makeStyles(theme => ({
   taskHeader: {
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(0, 1),
+    padding: theme.spacing(0, 0.5),
     transition: theme.transitions.create(['background']),
     background: theme.palette.secondary.main,
     color: theme.palette.getContrastText(theme.palette.secondary.main),
@@ -87,10 +85,15 @@ export const useStyles = makeStyles(theme => ({
       textOverflow: 'ellipsis',
       overflow: 'hidden',
       whiteSpace: 'nowrap',
-      height: '100%',
-      lineHeight: `${theme.spacing(4)}px`,
+      padding: theme.spacing(0.5),
       cursor: 'pointer',
       color: theme.palette.getContrastText(theme.palette.secondary.main),
+
+      '&:not(.Mui-disabled)': {
+        color: theme.palette.getContrastText(theme.palette.background.paper),
+        background: theme.palette.background.paper,
+        borderRadius: theme.shape.borderRadius,
+      },
     },
   },
   taskPriority: {

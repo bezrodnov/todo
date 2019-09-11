@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useRef } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
@@ -13,6 +13,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import ExpandableContainer from './ExpandableContainer';
+
+import { useClickCallback } from '../../util/Hooks';
 
 import { useStyles } from './styles';
 
@@ -59,6 +61,8 @@ const TaskDetails = ({ task }) => {
 const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
   const classes = useStyles();
   const [priorityEl, setPriorityEl] = React.useState(null);
+  const [isTitleEditable, setTitleEditable] = React.useState(false);
+  const titleRef = useRef();
 
   const removeIconClass = clsx(classes.removeIcon, { [classes.invisible]: !onRemove });
 
@@ -81,10 +85,48 @@ const TaskHeader = ({ task, onToggleExpand, onRemove, onChange }) => {
     },
     [closePriorityMenu, onChange]
   );
+  const startTitleEditing = useCallback(e => {
+    setTitleEditable(true);
+    requestAnimationFrame(() => {
+      titleRef.current.focus();
+      const selectIdx = titleRef.current.value.length;
+      titleRef.current.setSelectionRange(selectIdx, selectIdx);
+    });
+  }, []);
+
+  const stopTitleEditing = useCallback(e => setTitleEditable(false), []);
+
+  const onTitleKeyDown = useCallback(e => {
+    if (e.keyCode === 13 || e.keyCode === 27) {
+      stopTitleEditing();
+    }
+  }, []);
+
+  const onTitleClick = useClickCallback(
+    isDoubleClick => {
+      if (!isTitleEditable) {
+        if (isDoubleClick) {
+          startTitleEditing();
+        } else {
+          onToggleExpand();
+        }
+      }
+    },
+    [isTitleEditable]
+  );
 
   return (
     <div className={classes.taskHeader}>
-      <InputBase className={classes.taskTitle} onClick={onToggleExpand} value={task.name} onChange={handleNameChange} />
+      <InputBase
+        className={classes.taskTitle}
+        value={task.name}
+        disabled={!isTitleEditable}
+        onClick={onTitleClick}
+        onBlur={stopTitleEditing}
+        onChange={handleNameChange}
+        onKeyDown={onTitleKeyDown}
+        inputProps={{ ref: titleRef }}
+      />
       <TaskPriority priority={task.priority} onClick={onPriorityClick} />
       <Arrow className={classes.expandIcon} onClick={onToggleExpand} />
       <span className={removeIconClass} onClick={onRemoveClick}>
@@ -137,7 +179,7 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
 
   const onRemoveChild = useCallback(id => dispatch({ type: 'REMOVE_SUBTASK', id }), []);
 
-  const onTaskChange = useCallback(task => dispatch({ type: 'UPDATE_TASK', task }));
+  const onTaskChange = useCallback(task => dispatch({ type: 'UPDATE_TASK', task }), []);
 
   const taskClass = clsx(classes.task, { [classes.expanded]: expanded });
 

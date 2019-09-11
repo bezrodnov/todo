@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
-import { useForm } from '../util/FormUtils';
+import { useForm } from '../../util/FormUtils';
 
 import { makeStyles } from '@material-ui/core/styles';
 import LoadingMask from '../LoadingMask';
