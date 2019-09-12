@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({ expanded, children }) => {
+export default React.memo(({ expanded, children }) => {
   const classes = useStyles();
   const [height, setHeight] = useState(expanded ? null : 0);
   const outerRef = useRef();
@@ -31,13 +31,15 @@ export default ({ expanded, children }) => {
     };
 
     outerDiv.style.height = (!expanded ? outerDiv.scrollHeight : 0) + 'px';
-    outerDiv.addEventListener('transitionend', onTransitionEnd);
-    setHeight(expanded ? outerDiv.scrollHeight : 0);
+    requestAnimationFrame(() => {
+      setHeight(expanded ? outerDiv.scrollHeight : 0);
+      outerDiv.addEventListener('transitionend', onTransitionEnd);
+    });
   }, [expanded]);
 
   return (
-    <div className={classes.outer} ref={outerRef} style={{ height }}>
+    <div className={classes.outer} ref={outerRef} style={{ height, pointerEvents: !expanded && 'none' }}>
       {children}
     </div>
   );
-};
+});

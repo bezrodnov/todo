@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import TaskTreeNode from './TaskTreeNode';
+import TaskTreeNode from './TaskTree/Node';
 
 const useStyles = makeStyles(theme => ({
   container: {
