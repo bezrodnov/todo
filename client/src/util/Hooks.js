@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 
 /**
  * Use this hook to distinguish double click and single clicks
@@ -23,4 +23,9 @@ export const useClickCallback = handler => {
     },
     [handler]
   );
+};
+
+export const useLogging = componentName => {
+  console.log(`rendering ${componentName}`);
+  useEffect(() => () => console.log(`unmounging ${componentName}`), [componentName]);
 };

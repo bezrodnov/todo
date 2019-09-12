@@ -18,11 +18,15 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 
 import ExpandableContainer from './ExpandableContainer';
 
-import { useClickCallback } from '../../util/Hooks';
+import { useClickCallback, useLogging } from '../../util/Hooks';
 
 import { useStyles } from './styles';
 
-const TaskPriority = ({ priority, ...other }) => {
+const PRIORITIES = ['high', 'medium', 'low', null];
+
+const TaskPriority = React.memo(({ priority, ...other }) => {
+  useLogging('TaskPriority');
+
   const { t } = useTranslation();
   const classes = useStyles();
   const className = clsx(classes.taskPriority, classes[`${priority || 'unset'}Priority`]);
@@ -31,21 +35,24 @@ const TaskPriority = ({ priority, ...other }) => {
       <span className={className} {...other} />
     </Tooltip>
   );
-};
+});
 
-const PriorityMenu = ({ anchorEl, onClose, onSelect }) => {
+const PriorityMenu = React.memo(({ anchorEl, onClose, onSelect }) => {
+  useLogging('PriorityMenu');
+
   return (
     <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose}>
-      {['high', 'medium', 'low', null].map(priority => (
+      {PRIORITIES.map(priority => (
         <MenuItem key={priority || 'unset'} onClick={() => onSelect(priority)}>
           <TaskPriority priority={priority} />
         </MenuItem>
       ))}
     </Menu>
   );
-};
+});
 
 const TaskDetails = ({ task, onChange }) => {
+  useLogging('TaskDetails');
   const { t } = useTranslation();
   const classes = useStyles();
   const onChangeCallback = useCallback(
@@ -54,6 +61,7 @@ const TaskDetails = ({ task, onChange }) => {
     },
     [onChange]
   );
+  const onEstimatedDateChange = useCallback(estimatedDate => onChange({ estimatedDate }), []);
 
   return (
     <div className={classes.taskDetails}>
@@ -61,7 +69,12 @@ const TaskDetails = ({ task, onChange }) => {
       <InputBase name="description" value={task.description} multiline onChange={onChangeCallback} />
 
       <InputLabel>{t('task.estimatedDate')}</InputLabel>
-      <KeyboardDatePicker name="estimatedDate" autoOk format="MM/dd/yyyy" onChange={onChangeCallback} />
+      <KeyboardDatePicker
+        value={task.estimatedDate || null}
+        autoOk
+        format="MM/dd/yyyy"
+        onChange={onEstimatedDateChange}
+      />
 
       <InputLabel>{t('task.notes')}</InputLabel>
       <InputBase name="notes" value={task.notes} multiline onChange={onChangeCallback} />
@@ -83,7 +96,9 @@ const TaskDetails = ({ task, onChange }) => {
   );
 };
 
-const TaskHeader = ({ task, onToggleExpand, onAddSubtask, onRemove, onChange }) => {
+const TaskHeader = React.memo(({ task, onToggleExpand, onAddSubtask, onRemove, onChange }) => {
+  useLogging('TaskHeader');
+
   const { t } = useTranslation();
   const classes = useStyles();
   const [priorityEl, setPriorityEl] = React.useState(null);
@@ -178,7 +193,7 @@ const TaskHeader = ({ task, onToggleExpand, onAddSubtask, onRemove, onChange }) 
       <PriorityMenu anchorEl={priorityEl} onClose={closePriorityMenu} onSelect={selectPriority} />
     </div>
   );
-};
+});
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -211,7 +226,9 @@ const reducer = (state, action) => {
   }
 };
 
-const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
+const TaskTreeNode = React.memo(({ onRemove, onUpdate, ...initialState }) => {
+  useLogging('TaskTreeNode');
+
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { id, task, subtasks = [], expanded } = state;
@@ -220,7 +237,7 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
 
   const removeSelf = useCallback(() => onRemove(id), [id, onRemove]);
 
-  const onAddSubtask = useCallback(id => dispatch({ type: 'ADD_SUBTASK' }), []);
+  const onAddSubtask = useCallback(() => dispatch({ type: 'ADD_SUBTASK' }), []);
   const onRemoveSubtask = useCallback(id => dispatch({ type: 'REMOVE_SUBTASK', id }), []);
 
   const onTaskChange = useCallback(task => dispatch({ type: 'UPDATE_TASK', task }), []);
@@ -252,6 +269,6 @@ const TaskTreeNode = ({ onRemove, onUpdate, ...initialState }) => {
       </ExpandableContainer>
     </div>
   );
-};
+});
 
 export default TaskTreeNode;

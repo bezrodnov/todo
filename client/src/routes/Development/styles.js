@@ -6,6 +6,7 @@ const taskFieldStyles = {
   overflow: 'hidden',
   padding: '0px 5px',
   borderRadius: 5,
+  height: 20,
 };
 
 export const useStyles = makeStyles(theme => ({
@@ -164,6 +165,13 @@ export const useStyles = makeStyles(theme => ({
       flex: 1,
       padding: 0,
     },
+    '& .MuiTextField-root': {
+      height: 20,
+    },
+    '& .MuiSelect-select': {
+      ...taskFieldStyles,
+      padding: '0 0 0 5px',
+    },
     '& input': {
       ...taskFieldStyles,
       whiteSpace: 'nowrap',
@@ -177,10 +185,6 @@ export const useStyles = makeStyles(theme => ({
       '&:focus': {
         background: theme.palette.background.paper,
       },
-    },
-    '& .MuiSelect-select': {
-      ...taskFieldStyles,
-      padding: 0,
     },
     '& label': {
       fontSize: 12,
