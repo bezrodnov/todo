@@ -18,15 +18,13 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 
 import ExpandableContainer from './ExpandableContainer';
 
-import { useClickCallback, useLogging } from '../../util/Hooks';
+import { useClickCallback } from '../../util/Hooks';
 
 import { useStyles } from './styles';
 
 const PRIORITIES = ['high', 'medium', 'low', null];
 
 const TaskPriority = React.memo(({ priority, ...other }) => {
-  useLogging('TaskPriority');
-
   const { t } = useTranslation();
   const classes = useStyles();
   const className = clsx(classes.taskPriority, classes[`${priority || 'unset'}Priority`]);
@@ -38,8 +36,6 @@ const TaskPriority = React.memo(({ priority, ...other }) => {
 });
 
 const PriorityMenu = React.memo(({ anchorEl, onClose, onSelect }) => {
-  useLogging('PriorityMenu');
-
   return (
     <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose}>
       {PRIORITIES.map(priority => (
@@ -52,7 +48,6 @@ const PriorityMenu = React.memo(({ anchorEl, onClose, onSelect }) => {
 });
 
 const TaskDetails = ({ task, onChange }) => {
-  useLogging('TaskDetails');
   const { t } = useTranslation();
   const classes = useStyles();
   const onChangeCallback = useCallback(
@@ -97,8 +92,6 @@ const TaskDetails = ({ task, onChange }) => {
 };
 
 const TaskHeader = React.memo(({ task, onToggleExpand, onAddSubtask, onRemove, onChange }) => {
-  useLogging('TaskHeader');
-
   const { t } = useTranslation();
   const classes = useStyles();
   const [priorityEl, setPriorityEl] = React.useState(null);
@@ -227,8 +220,6 @@ const reducer = (state, action) => {
 };
 
 const TaskTreeNode = React.memo(({ onRemove, onUpdate, ...initialState }) => {
-  useLogging('TaskTreeNode');
-
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { id, task, subtasks = [], expanded } = state;

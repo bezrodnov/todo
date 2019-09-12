@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default ({ expanded, children, ...other }) => {
+export default ({ expanded, children }) => {
   const classes = useStyles();
   const [height, setHeight] = useState(expanded ? null : 0);
   const outerRef = useRef();
@@ -32,9 +32,7 @@ export default ({ expanded, children, ...other }) => {
 
     outerDiv.style.height = (!expanded ? outerDiv.scrollHeight : 0) + 'px';
     outerDiv.addEventListener('transitionend', onTransitionEnd);
-    requestAnimationFrame(() => {
-      setHeight(expanded ? outerDiv.scrollHeight : 0);
-    });
+    setHeight(expanded ? outerDiv.scrollHeight : 0);
   }, [expanded]);
 
   return (
