@@ -158,7 +158,7 @@ export const useStyles = makeStyles(theme => ({
     display: 'grid',
     gridTemplateColumns: '80px 1fr 130px 105px',
     gridColumnGap: theme.spacing(1),
-    alignItems: 'baseline',
+    alignItems: 'flex-start',
 
     '& .MuiInputBase-root': {
       flex: 1,
