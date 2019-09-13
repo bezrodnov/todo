@@ -10,7 +10,7 @@ import InputBase from '@material-ui/core/InputBase';
 
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { useClickCallback } from '../../../util/Hooks';
+import { useClickCallback } from '../../util/Hooks';
 
 import { useStyles } from './styles';
 

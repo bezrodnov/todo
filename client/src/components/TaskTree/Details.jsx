@@ -20,7 +20,7 @@ const Details = ({ task, onChange }) => {
     [onChange]
   );
 
-  const onEstimatedDateChange = useCallback(estimatedDate => onChange({ estimatedDate }), []);
+  const onEstimatedDateChange = useCallback(estimatedDate => onChange({ estimatedDate }), [onChange]);
 
   return (
     <div className={classes.taskDetails}>
