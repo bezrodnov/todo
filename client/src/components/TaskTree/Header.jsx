@@ -95,7 +95,7 @@ const TaskHeader = ({ task, onToggleExpand, onAddSubtask, onRemove, onChange }) 
       </Tooltip>
       <InputBase
         className={classes.taskTitle}
-        value={task.name}
+        value={task.name || ''}
         disabled={!isTitleEditable}
         onClick={onTitleClick}
         onBlur={stopTitleEditing}

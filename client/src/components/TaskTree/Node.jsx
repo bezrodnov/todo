@@ -40,7 +40,7 @@ const reducer = (state, action) => {
   }
 };
 
-const Node = React.memo(({ onRemove, onUpdate, ...initialState }) => {
+const Node = ({ onRemove, ...initialState }) => {
   const classes = useStyles();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { id, task, subtasks = [], expanded } = state;
@@ -73,13 +73,14 @@ const Node = React.memo(({ onRemove, onUpdate, ...initialState }) => {
         <TransitionGroup className={classes.subtasks}>
           {subtasks.map(subtask => (
             <CSSTransition key={subtask.id} classNames="task" timeout={500}>
-              <Node {...subtask} onAddSubtask={onAddSubtask} onRemove={onRemoveSubtask} />
+              <MemoizedNode {...subtask} onAddSubtask={onAddSubtask} onRemove={onRemoveSubtask} />
             </CSSTransition>
           ))}
         </TransitionGroup>
       </ExpandableContainer>
     </div>
   );
-});
+};
 
-export default Node;
+const MemoizedNode = React.memo(Node);
+export default MemoizedNode;
