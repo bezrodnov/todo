@@ -17,8 +17,8 @@ const taskTree = {
   id: uuid(),
   expanded: true,
   task: {
-    name: 'Implement SPRUD project',
-    description: 'SPRUD project should increase your performance',
+    name: 'Implement TODO project',
+    description: 'TODO project should increase your performance',
   },
   subtasks: [
     {
@@ -27,7 +27,7 @@ const taskTree = {
         name: 'Keep session alive',
         priority: 'low',
         description:
-          'Whenever user performs some action on the SPRUD pages - refresh user session so that user is not auto logged out',
+          'Whenever user performs some action on the TODO pages - refresh user session so that user is not auto logged out',
       },
     },
     {
