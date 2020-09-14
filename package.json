@@ -1,7 +1,7 @@
 {
-  "name": "sprud-server",
+  "name": "todo-server",
   "version": "1.0.0",
-  "description": "sprud-server",
+  "description": "todo-server",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
